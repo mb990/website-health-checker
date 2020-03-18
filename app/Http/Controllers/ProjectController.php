@@ -19,7 +19,7 @@ class ProjectController extends Controller
 
         $projects = $this->projectService->index();
 
-        return view('welcome')->with('projects', $projects);
+        return view('projects.show-all')->with('projects', $projects);
     }
 
     public function show($slug) {
@@ -46,13 +46,16 @@ class ProjectController extends Controller
     public function edit($slug) {
 
         $project = $this->projectService->read($slug);
+//        dd($project);
 
         return view('projects.edit')->with('project', $project);
     }
 
     public function update(ProjectRequest $request, $slug) {
 
-        $this->projectService->update($request, $slug);
+        $attributes = $request->except('_method', '_token');
+
+        $this->projectService->update($attributes, $slug);
 
         return redirect('/projects/' . $slug);
     }

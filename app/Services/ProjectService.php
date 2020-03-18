@@ -24,13 +24,12 @@ class ProjectService
     }
 
     public function read($slug) {
+//        {{dd($this->project->find($slug));}}
 
         return $this->project->find($slug);
     }
 
-    public function update(Request $request, $slug) {
-
-        $attributes = $request->all();
+    public function update($attributes, $slug) {
 
         return $this->project->update($slug, $attributes);
     }

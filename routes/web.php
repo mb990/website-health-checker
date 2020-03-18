@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', 'ProjectController@index');
+Route::get('/projects', 'ProjectController@index');
+Route::get('/projects/{slug}', 'ProjectController@show');
 Route::get('/projects/new', 'ProjectController@create')->name('create.project');
 Route::post('/projects/new/submit', 'ProjectController@store')->name('store.project');
-Route::get('/projects/{slug}/edit', 'ProjectController@read')->name('edit.project');
+Route::get('/projects/{slug}/edit', 'ProjectController@edit')->name('edit.project');
 Route::put('/projects/{slug}/update', 'ProjectController@update')->name('update.project');
 Route::delete('/projects/{slug}/delete', 'ProjectController@delete')->name('delete.project');
 

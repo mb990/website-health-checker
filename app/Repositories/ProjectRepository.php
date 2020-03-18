@@ -28,21 +28,21 @@ class ProjectRepository
 
     public function all() {
 
-        return $this->project->all();
+        return $this->project->paginate(10);
     }
 
-    public function find($slug) {
-
-        return $this->project->find($slug);
+    public function find($slug)
+    {
+        return $this->project->where('slug', '=', $slug)->first();
     }
 
     public function update($slug, array $attributes) {
 
-        return $this->project->find($slug)->update($attributes);
+        return $this->project->where('slug', '=', $slug)->update($attributes);
     }
 
     public function delete($slug) {
 
-        return $this->project->find($slug)->delete();
+        return $this->project->where('slug', '=', $slug)->delete();
     }
 }
