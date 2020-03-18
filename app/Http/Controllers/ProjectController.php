@@ -15,7 +15,7 @@ class ProjectController extends Controller
         $this->projectService = $projectService;
     }
 
-    public function index() {
+    public function all() {
 
         $projects = $this->projectService->index();
 
@@ -57,13 +57,13 @@ class ProjectController extends Controller
 
         $this->projectService->update($attributes, $slug);
 
-        return redirect('/projects/' . $slug);
+        return redirect('/projects');
     }
 
     public function delete($slug) {
 
         $this->projectService->delete($slug);
 
-        return redirect('/');
+        return redirect('/projects');
     }
 }

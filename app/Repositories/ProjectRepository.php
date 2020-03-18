@@ -38,7 +38,12 @@ class ProjectRepository
 
     public function update($slug, array $attributes) {
 
-        return $this->project->where('slug', '=', $slug)->update($attributes);
+        $project = $this->project->where('slug', '=', $slug)->first();
+
+        $project->slug = null;
+        $project->save();
+
+        return $project->update($attributes);
     }
 
     public function delete($slug) {

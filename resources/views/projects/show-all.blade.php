@@ -25,7 +25,12 @@
                 <div class="col-md-4">
 
                     <p class="lead">Name:</p>
-                    <p class="lead">{{$project->name}}</p><hr>
+
+                    <a href="/projects/{{$project->slug}}">
+
+                        <p class="lead">{{ucfirst($project->name)}}</p><hr>
+
+                    </a>
 
                 </div>
 

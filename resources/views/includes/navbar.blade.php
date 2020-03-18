@@ -30,8 +30,7 @@
 
                 @endauth
 
-                <li><a class="nav-link {{ Request::is('educators') ? 'active' : '' }}" href="/educators">Predavači</a></li>&nbsp | &nbsp
-                <li><a class="nav-link {{ Request::is('courses') ? 'active' : '' }}" href="/courses">Kursevi</a></li>
+                <li><a class="nav-link {{ Request::is('projects') ? 'active' : '' }}" href="/projects">Projects</a></li>&nbsp | &nbsp
 
             </ul>
 

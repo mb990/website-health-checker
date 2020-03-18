@@ -16,7 +16,7 @@ class CreateProjectUrlsTable extends Migration
         Schema::create('project_urls', function (Blueprint $table) {
             $table->id();
             $table->string('url');
-            $table->integer('project_id')->unsigned();
+            $table->bigInteger('project_id')->unsigned();
             $table->timestamps();
         });
     }

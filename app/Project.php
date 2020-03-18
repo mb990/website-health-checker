@@ -10,6 +10,8 @@ class Project extends Model
 {
     use Sluggable;
 
+    protected $fillable = ['name'];
+
     public function sluggable()
     {
         return [
