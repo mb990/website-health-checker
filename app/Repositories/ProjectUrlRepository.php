@@ -29,6 +29,7 @@ class ProjectUrlRepository
 
     public function find($id)
     {
+//        dd($id);
         return $this->projectUrl->find($id);
     }
 
@@ -43,5 +44,4 @@ class ProjectUrlRepository
 
         return $this->projectUrl->find($id)->delete();
     }
-
 }

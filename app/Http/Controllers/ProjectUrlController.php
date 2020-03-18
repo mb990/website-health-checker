@@ -16,7 +16,7 @@ class ProjectUrlController extends Controller
         $this->projectUrlService = $projectUrlService;
     }
 
-    public function store(ProjectUrlRequest $request, $slug) {
+    public function store(ProjectUrlRequest $request, $slug, $id) {
 
         $attributes = $request->all();
 
@@ -25,7 +25,7 @@ class ProjectUrlController extends Controller
         return redirect()->back();
     }
 
-    public function edit($id) {
+    public function edit($slug, $id) {
 
         $url = $this->projectUrlService->read($id);
 //dd($url);
