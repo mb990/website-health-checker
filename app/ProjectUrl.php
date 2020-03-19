@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Project;
 
 class ProjectUrl extends Model
 {
@@ -12,5 +11,10 @@ class ProjectUrl extends Model
     public function project() {
 
         return $this->belongsTo(Project::class);
+    }
+
+    public function checks() {
+
+        return $this->hasMany(Check::class);
     }
 }
