@@ -23,25 +23,42 @@ class ProjectUrlRepository
 
         $url->url = $attributes['url'];
         $url->project_id = $project->id;
+        $url->check_frequency_id = 5;
 
         $url->save();
     }
 
     public function find($id)
     {
-//        dd($id);
         return $this->projectUrl->find($id);
     }
 
-    public function update(array $attributes, $id) {
-
+    public function update($attributes, $id) {
+//        {{dd($attributes);}}
         $url = ProjectUrl::find($id);
+//        dd($url);
+//        $arrAttributes = $attributes->toArray();
+//        dd($arrAttributes['check_frequency_id']);
+//        $url->check_frequency = $attributes['check_frequency'];
 
-        return $url->update($attributes);
+//        $url->save();
+
+        return $url->update(['check_frequency_id' => intval($attributes['check_frequency_id'])]);
     }
 
     public function delete($id) {
 
         return $this->projectUrl->find($id)->delete();
+    }
+
+    public function status($id) {
+
+        $url = $this->projectUrl->find($id);
+
+        $warning = $url->checks->where('response_code', '!=', range(200,299))
+            ->latest()
+            ->first();
+
+        return $warning;
     }
 }

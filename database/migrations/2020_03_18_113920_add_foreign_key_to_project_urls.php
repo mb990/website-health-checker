@@ -15,6 +15,7 @@ class AddForeignKeyToProjectUrls extends Migration
     {
         Schema::table('project_urls', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->foreign('check_frequency_id')->references('id')->on('frequencies')->onDelete('cascade');
         });
     }
 

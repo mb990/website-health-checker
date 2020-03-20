@@ -15,9 +15,11 @@ class CheckRepository
         $this->check = $check;
     }
 
-    public function all() {
+    public function allByTime($url) {
 
-        return $this->check->all();
+        return $this->check->latest()
+            ->where('url_id', '=', $url)
+            ->get();
     }
 
     public function find($id) {

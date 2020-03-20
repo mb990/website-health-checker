@@ -13,4 +13,14 @@ class CheckService
         $this->check = $check;
     }
 
+    public function allByTime($url) {
+
+        return $this->check->allByTime($url);
+    }
+
+    public function read($id) {
+
+        return $this->check->find($id);
+    }
+
 }

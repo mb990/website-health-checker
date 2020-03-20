@@ -1,0 +1,1 @@
+php D:\xampp\htdocs\website-health-checker\artisan schedule:run

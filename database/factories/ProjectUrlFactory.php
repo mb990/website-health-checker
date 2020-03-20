@@ -4,17 +4,18 @@
 
 use App\ProjectUrl;
 use App\Project;
+use App\Frequency;
 use Faker\Generator as Faker;
 
 $factory->define(ProjectUrl::class, function (Faker $faker) {
 
     $projects = Project::all()->pluck('id')->toArray();
 
-    $frequencies = [60, 300, 900, 1800, 3600, 43200, 86400];
+    $frequencies = Frequency::all()->pluck('id')->toArray();
 
     return [
         'url' => $faker->url,
-        'check_frequency' => $faker->randomElement($frequencies),
+        'check_frequency_id' => $faker->randomElement($frequencies),
         'project_id' => $faker->randomElement($projects),
     ];
 });

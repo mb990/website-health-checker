@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectUrl extends Model
 {
-    protected $fillable = ['url'];
+    protected $fillable = ['url', 'check_frequency_id'];
 
     public function project() {
 
@@ -16,5 +16,10 @@ class ProjectUrl extends Model
     public function checks() {
 
         return $this->hasMany(Check::class);
+    }
+
+    public function checkFrequency() {
+
+        return $this->belongsTo(Frequency::class);
     }
 }

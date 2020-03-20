@@ -11,6 +11,6 @@ class ProjectUrlsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\ProjectUrl::class, 25)->create();
+        factory(App\ProjectUrl::class, 5)->create();
     }
 }

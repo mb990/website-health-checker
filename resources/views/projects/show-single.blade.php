@@ -19,6 +19,9 @@
 
             <p class="lead">Name: {{$project->name}}</p>
 
+{{--            <?php use Carbon\Carbon; ?>--}}
+{{--            {{Carbon::now()->diffInSeconds($project->created_at)}}--}}
+
             <p class="lead">URLS:</p>
 
         </div>
@@ -29,19 +32,19 @@
 
                 @foreach($project->urls as $url)
 
-                    <div class="offset-4 col-md-4">
+                    <div class="col-md-8">
 
-                        <p class="lead">{{$url->url}}</p><hr>
+                        <a href="/projects/{{$project->slug}}/{{$url->id}}/checks"><p class="lead">{{$url->url}}</p></a><hr>
 
                     </div>
 
-                    <div class="offset-1 col-md-1">
+                    <div class="col-md-2">
 
                         <a href="/projects/{{$project->slug}}/{{$url->id}}/edit"><button class="btn btn-success" type="submit">Edit</button></a>
 
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-2">
 
                         <form action="{{action('ProjectUrlController@delete', $url->id)}}" method="POST" xmlns="http://www.w3.org/1999/html">
                             @method('DELETE')

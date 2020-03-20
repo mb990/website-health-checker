@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCheckFrequencyToProjectUrls extends Migration
+class CreateFrequenciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddCheckFrequencyToProjectUrls extends Migration
      */
     public function up()
     {
-        Schema::table('project_urls', function (Blueprint $table) {
-            $table->integer('check_frequency');
+        Schema::create('frequencies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('value');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddCheckFrequencyToProjectUrls extends Migration
      */
     public function down()
     {
-        Schema::table('urls', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('frequencies');
     }
 }

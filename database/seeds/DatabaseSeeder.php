@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
              UsersTableSeeder::class,
              ProfilesTableSeeder::class,
              ProjectsTableSeeder::class,
+             FrequenciesTableSeeder::class,
              ProjectUrlsTableSeeder::class,
              ChecksTableSeeder::class
          ]);
