@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectUrl extends Model
 {
-    protected $fillable = ['url', 'check_frequency_id'];
+    protected $fillable = ['url', 'check_frequency_id', 'project_id'];
 
     public function project() {
 
@@ -23,3 +23,4 @@ class ProjectUrl extends Model
         return $this->belongsTo(Frequency::class);
     }
 }
+

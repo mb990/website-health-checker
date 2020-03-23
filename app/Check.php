@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Check extends Model
 {
-    protected $fillable = ['response_code', 'response_time'];
+    protected $fillable = ['response_code', 'response_time', 'url_id'];
 
     public function url() {
 

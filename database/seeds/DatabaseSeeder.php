@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
              ProjectsTableSeeder::class,
              FrequenciesTableSeeder::class,
              ProjectUrlsTableSeeder::class,
-             ChecksTableSeeder::class
+//             ChecksTableSeeder::class
          ]);
     }
 }

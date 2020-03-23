@@ -12,7 +12,7 @@ class FrequenciesTableSeeder extends Seeder
      */
     public function run()
     {
-        $frequencyValues = [60, 300, 900, 1800, 3600, 43200, 86400];
+        $frequencyValues = [59, 299, 899, 1799, 3599, 43199, 86399];
 
         $frequencyNames = ['1 minute', '5 minutes', '15 minutes', '30 minutes', '1 hour', '12 hours', 'a day'];
 

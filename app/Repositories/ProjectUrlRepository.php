@@ -51,14 +51,18 @@ class ProjectUrlRepository
         return $this->projectUrl->find($id)->delete();
     }
 
-    public function status($id) {
-
-        $url = $this->projectUrl->find($id);
-
-        $warning = $url->checks->where('response_code', '!=', range(200,299))
-            ->latest()
-            ->first();
-
-        return $warning;
-    }
+//    public function statusDown($id) {
+//
+//        $message = '';
+//
+//        $url = $this->projectUrl->find($id);
+//
+//        $lastCheck = $url->checks->latest()->first();
+//
+//        if ($lastCheck->status->response_code != range(200,299)) {
+//            $message = 'Url ' . $url->url . 'for your project was down at ' . $url->last_checked_at . '.';
+//        }
+//
+//        return $message;
+//    }
 }

@@ -52,10 +52,10 @@ class ProjectUrlController extends Controller
         return redirect()->back();
     }
 
-    public function status($id) {
-
-        $url = $this->projectUrlService->status($id);
-
-        return view('/')->with('url', $url);
-    }
+//    public function statusDown($id) {
+//
+//        $url = $this->projectUrlService->status($id);
+//
+//        return view('/')->with('url', $url);
+//    }
 }

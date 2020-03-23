@@ -36,4 +36,9 @@ class ProjectUrlService
 
         return $this->projectUrl->status($id);
     }
+
+//    public function statusDown($id) {
+//
+//        return $this->projectUrl->statusDown($id);
+//    }
 }

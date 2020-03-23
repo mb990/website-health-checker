@@ -24,13 +24,37 @@
 
                 <div class="col-md-4">
 
-                    <p class="lead">Name:</p>
+                    <div class="row">
 
-                    <a href="/projects/{{$project->slug}}">
+                        <div class="col-md-8">
 
-                        <p class="lead">{{ucfirst($project->name)}}</p><hr>
+                            <p class="lead">Name:</p>
 
-                    </a>
+                            <a href="/projects/{{$project->slug}}">
+
+                                <p class="lead">{{ucfirst($project->name)}}</p>
+
+                            </a>
+
+                        </div>
+
+                        @auth
+
+                            <div class="float-right col-md-4">
+
+                                @if(auth()->user()->id === $project->user_id)
+
+                                   <br><label class="btn btn-success">my</label>
+
+                                @endif
+
+                            </div>
+
+                        @endauth
+
+                    </div>
+
+                    <hr>
 
                 </div>
 

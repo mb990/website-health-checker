@@ -5,34 +5,49 @@
 @endsection
 
 @section('content')
-    <div class="row text-center">
+{{--    @dd(auth()->user()->id)--}}
+{{--{{dd($url->project->user_id)}}--}}
+    @auth
 
-        <div class="col-md-12">
+        @if(auth()->user()->id != $url->project->user_id)
 
-            <h2>Edit url</h2>
+            <h1>You dont have permissions.</h1>
 
-        </div>
+        @else
 
-    </div>
+            <div class="row text-center">
 
-    <div class="row text-center">
-{{--@dd($url->id)--}}
-        <div class="offset-4 col-md-4">
-            <form action="{{action('ProjectUrlController@update', $url->id)}}" method="POST" xmlns="http://www.w3.org/1999/html">
-                @method('PUT')
-                @csrf
+                <div class="col-md-12">
 
-                <label class="form-control" for="check_frequency_id">Change check frequency</label>
-                <select class="form-control" name="check_frequency_id" id="check_frequency_id">
-                    @foreach($frequencies as $frequency)
-                        <option @if ($frequency->id === $url->check_frequency_id) selected @endif value={{$frequency->id}}>{{$frequency->name}}</option>
-                    @endforeach
-                </select><br>
+                    <h2>Edit url</h2>
 
-                <button class="btn btn-success" type="submit">Change</button>
-            </form>
+                </div>
 
-        </div>
+            </div>
 
-    </div>
+            <div class="row text-center">
+        {{--@dd($url->id)--}}
+                <div class="offset-4 col-md-4">
+                    <form action="{{action('ProjectUrlController@update', $url->id)}}" method="POST" xmlns="http://www.w3.org/1999/html">
+                        @method('PUT')
+                        @csrf
+
+                        <label class="form-control" for="check_frequency_id">Change check frequency</label>
+                        <select class="form-control" name="check_frequency_id" id="check_frequency_id">
+                            @foreach($frequencies as $frequency)
+                                <option @if ($frequency->id === $url->check_frequency_id) selected @endif value={{$frequency->id}}>{{$frequency->name}}</option>
+                            @endforeach
+                        </select><br>
+
+                        <button class="btn btn-success" type="submit">Change</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        @endif
+
+    @endauth
+
 @endsection

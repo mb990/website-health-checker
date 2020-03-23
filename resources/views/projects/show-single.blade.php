@@ -8,6 +8,11 @@
     <div class="row justify-content-center">
 
         <h3 class="text-info">View project</h3>
+<!--        --><?php //use Illuminate\Support\Facades\Http; ?>
+{{--        {{$response = Http::get('www.gaghajkfhajkhfggjkahgf.com')}}--}}
+{{--        {{dd($response->status())}}--}}
+
+<!--        --><?php //$urls = \App\ProjectUrl::all(); dd($urls); ?>
 
     </div>
 
@@ -19,8 +24,8 @@
 
             <p class="lead">Name: {{$project->name}}</p>
 
-{{--            <?php use Carbon\Carbon; ?>--}}
-{{--            {{Carbon::now()->diffInSeconds($project->created_at)}}--}}
+            {{--            <?php use Carbon\Carbon; ?>--}}
+            {{--            {{Carbon::now()->diffInSeconds($project->created_at)}}--}}
 
             <p class="lead">URLS:</p>
 
@@ -34,26 +39,38 @@
 
                     <div class="col-md-8">
 
-                        <a href="/projects/{{$project->slug}}/{{$url->id}}/checks"><p class="lead">{{$url->url}}</p></a><hr>
+                        <a href="/projects/{{$project->slug}}/{{$url->id}}/checks"><p class="lead">{{$url->url}}</p></a>
+                        <hr>
 
                     </div>
 
-                    <div class="col-md-2">
+                    @auth
 
-                        <a href="/projects/{{$project->slug}}/{{$url->id}}/edit"><button class="btn btn-success" type="submit">Edit</button></a>
+                        @if(auth()->user()->id === $project->user_id)
 
-                    </div>
+                            <div class="col-md-2">
 
-                    <div class="col-md-2">
+                                <a href="/projects/{{$project->slug}}/{{$url->id}}/edit">
+                                    <button class="btn btn-success" type="submit">Edit</button>
+                                </a>
 
-                        <form action="{{action('ProjectUrlController@delete', $url->id)}}" method="POST" xmlns="http://www.w3.org/1999/html">
-                            @method('DELETE')
-                            @csrf
+                            </div>
 
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
+                            <div class="col-md-2">
 
-                    </div>
+                                <form action="{{action('ProjectUrlController@delete', $url->id)}}" method="POST"
+                                      xmlns="http://www.w3.org/1999/html">
+                                    @method('DELETE')
+                                    @csrf
+
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+
+                            </div>
+
+                        @endif
+
+                    @endauth
 
                 @endforeach
 
@@ -67,29 +84,39 @@
 
     </div>
 
-    <div class="row text-center">
+    @auth
 
-        <div class="col-md-12">
+        @if(auth()->user()->id === $project->user_id)
 
-            <form action="{{action('ProjectUrlController@store', $project->slug)}}" method="POST" xmlns="http://www.w3.org/1999/html">
-                @csrf
+            <div class="row text-center">
 
-                <input name="url" type="text" placeholder="Add url here">
+                <div class="col-md-12">
 
-                <button class="btn btn-primary" type="submit">Add</button>
-            </form>
+                    <form action="{{action('ProjectUrlController@store', $project->slug)}}" method="POST"
+                          xmlns="http://www.w3.org/1999/html">
+                        @csrf
 
-            <br>
+                        <input name="url" type="text" placeholder="Add url here">
 
-            <form action="{{action('ProjectController@delete', $project->slug)}}" method="POST" xmlns="http://www.w3.org/1999/html">
-                @method('DELETE')
-                @csrf
+                        <button class="btn btn-primary" type="submit">Add</button>
+                    </form>
 
-                <button class="btn btn-danger" type="submit">Delete project</button>
-            </form>
+                    <br>
 
-        </div>
+                    <form action="{{action('ProjectController@delete', $project->slug)}}" method="POST"
+                          xmlns="http://www.w3.org/1999/html">
+                        @method('DELETE')
+                        @csrf
 
-    </div>
+                        <button class="btn btn-danger" type="submit">Delete project</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        @endif
+
+    @endauth
 
 @endsection

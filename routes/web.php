@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//Route::get('/', 'PageController@index');
-Route::get('/', 'ProjectUrlController@status');
+Route::get('/', 'PageController@index');
+//Route::get('/', 'ProjectUrlController@status');
 Route::get('/dashboard', 'PageController@dashboard');
 Route::get('/projects', 'ProjectController@all');
 Route::get('/projects/{slug}', 'ProjectController@show');
