@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailtrapExample;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,12 @@ Route::delete('/projects/{slug}/url/delete', 'ProjectUrlController@delete');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('send', 'UserController@email');
+
+Route::get('/send-mails', function () {
+
+    Mail::to('example@gmail.com')->send(new MailtrapExample());
+
+    return 'A message has been sent to Mailtrap!';
+});

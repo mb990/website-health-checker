@@ -12,6 +12,5 @@ $factory->define(Project::class, function (Faker $faker) {
     return [
         'user_id' => $faker->randomElement($users),
         'name' => $faker->name,
-
     ];
 });

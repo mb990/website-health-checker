@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\ProjectService;
 use App\Http\Requests\ProjectRequest;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
 
 class ProjectController extends Controller
 {
+
+    use Notifiable;
+
     protected $projectService;
 
     public function __construct(ProjectService $projectService)
@@ -66,4 +71,9 @@ class ProjectController extends Controller
 
         return redirect('/projects');
     }
+
+//    public function downNotification() {
+//
+//
+//    }
 }

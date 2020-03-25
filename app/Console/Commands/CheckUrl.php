@@ -3,14 +3,19 @@
 namespace App\Console\Commands;
 
 use App\Check;
+use App\Notifications\projectDownEmail;
+use App\Notifications\projectUpEmail;
 use App\ProjectUrl;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Exception;
+use Illuminate\Notifications\Notifiable;
 
 class CheckUrl extends Command
 {
+
+    use Notifiable;
     /**
      * The name and signature of the console command.
      *
@@ -23,7 +28,7 @@ class CheckUrl extends Command
      *
      * @var string
      */
-    protected $description = 'Check url and save the stats';
+    protected $description = 'Check url and save stats';
 
     /**
      * Create a new command instance.
@@ -55,8 +60,7 @@ class CheckUrl extends Command
                 try {
                     $response = Http::get($url->url);
                     $check->response_code = $response->status();
-                }
-                catch (Exception $e){
+                } catch (Exception $e) {
                     $check->response_code = 0;
                 }
 
@@ -69,6 +73,21 @@ class CheckUrl extends Command
 
                 $url->save();
                 $check->save();
+
+                if (!in_array($check->response_code, range(200, 299)) && $url->project->up == 1) {
+
+                    $url->project->creator->notify(new projectDownEmail());
+                    $url->project->up = 0;
+
+                    $url->project->save();
+                }
+
+                else if($url->project->up != 1 && in_array($check->response_code, range(200, 299))) {
+
+                    $url->project->creator->notify(new projectUpEmail());
+                    $url->project->up = 1;
+                    $url->project->save();
+                }
             }
         }
     }

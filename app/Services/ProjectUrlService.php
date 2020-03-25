@@ -32,13 +32,8 @@ class ProjectUrlService
         return $this->projectUrl->delete($id);
     }
 
-    public function status($id) {
-
-        return $this->projectUrl->status($id);
-    }
-
-//    public function statusDown($id) {
+//    public function checkStatus($id) {
 //
-//        return $this->projectUrl->statusDown($id);
+//        return $this->projectUrl->checkStatus($id);
 //    }
 }

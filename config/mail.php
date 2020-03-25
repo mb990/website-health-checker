@@ -24,8 +24,8 @@ return [
     | their respective settings. Several examples have been configured for
     | you and you are free to add your own as your application requires.
     |
-    | Laravel supports a variety of mail "transport" drivers to be used while
-    | sending an e-mail. You will specify which one you are using for your
+    | Laravel supports a variety of mails "transport" drivers to be used while
+    | sending an e-mails. You will specify which one you are using for your
     | mailers below. You are free to add additional mailers as required.
     |
     | Supported: "smtp", "sendmail", "mailgun", "ses",
@@ -33,34 +33,34 @@ return [
     |
     */
 
-    'mailers' => [
-        'smtp' => [
-            'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-        ],
-
-        'ses' => [
-            'transport' => 'ses',
-        ],
-
-        'sendmail' => [
-            'transport' => 'sendmail',
-            'path' => '/usr/sbin/sendmail -bs',
-        ],
-
-        'log' => [
-            'transport' => 'log',
-            'channel' => env('MAIL_LOG_CHANNEL'),
-        ],
-
-        'array' => [
-            'transport' => 'array',
-        ],
-    ],
+//    'mailers' => [
+//        'smtp' => [
+//            'transport' => 'smtp',
+//            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+//            'port' => env('MAIL_PORT', 465),
+//            'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+//            'username' => env('MAIL_USERNAME'),
+//            'password' => env('MAIL_PASSWORD'),
+//        ],
+//
+//        'ses' => [
+//            'transport' => 'ses',
+//        ],
+//
+//        'sendmail' => [
+//            'transport' => 'sendmail',
+//            'path' => '/usr/sbin/sendmail -bs',
+//        ],
+//
+//        'log' => [
+//            'transport' => 'log',
+//            'channel' => env('MAIL_LOG_CHANNEL'),
+//        ],
+//
+//        'array' => [
+//            'transport' => 'array',
+//        ],
+//    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -73,10 +73,10 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
-    ],
+//    'from' => [
+//        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+//        'name' => env('MAIL_FROM_NAME', 'Example'),
+//    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -93,8 +93,19 @@ return [
         'theme' => 'default',
 
         'paths' => [
-            resource_path('views/vendor/mail'),
+            resource_path('views/vendor/mails'),
         ],
     ],
+
+        "driver" => "smtp",
+        "host" => "smtp.mailtrap.io",
+        "port" => 2525,
+        "from" => array(
+            "address" => "admin@website-health-checker.com",
+            "name" => "Website-Health-Checker"
+        ),
+        "username" => "f2d4274d378946",
+        "password" => "fb3a6aae695aa4",
+        "sendmail" => "/usr/sbin/sendmail -bs"
 
 ];

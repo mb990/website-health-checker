@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class projectDownEmail extends Notification
+class projectUpEmail extends Notification
 {
     use Queueable;
 
@@ -41,13 +41,12 @@ class projectDownEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->error()
-                    ->subject('Your project is down')
-                    ->greeting('Hello!')
-                    ->line('Something went wrong and your project is down.')
-                    ->action('See project', url('http://website-health-checker.test/dashboard'))
-                    ->line('Thank you for using our application!')
-                    ->from('admin@website-health-checker.com', 'Admin');
+            ->subject('Your project is up')
+            ->greeting('Hello!')
+            ->line('Your project is up again!')
+            ->action('See project', url('http://website-health-checker.test/dashboard'))
+            ->line('Thank you for using our application!')
+            ->from('admin@website-health-checker.com', 'Admin');
     }
 
     /**

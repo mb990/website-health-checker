@@ -3,7 +3,10 @@
 
 namespace App\Repositories;
 
+use App\Notifications\projectDownEmail;
 use App\Project;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
 
 class ProjectRepository
 {
