@@ -29,13 +29,13 @@ class MailtrapExample extends Mailable
         public function build()
         {
 //            app('view')->addNamespace('mails', resource_path('views') . '/mails');
-
-            return $this->markdown('mails.exmpl')
-                ->from('admin@website-health-checker.com', 'Mailtrap')
-                ->subject('Mailtrap Confirmation')
-                ->with([
-                    'name' => 'New Mailtrap User',
-                    'link' => 'https://mailtrap.io/inboxes'
-                ]);
+//
+//            return $this->markdown('mails.exmpl')
+//                ->from('admin@website-health-checker.com', 'Mailtrap')
+//                ->subject('Mailtrap Confirmation')
+//                ->with([
+//                    'name' => 'New Mailtrap User',
+//                    'link' => 'https://mailtrap.io/inboxes'
+//                ]);
         }
 }

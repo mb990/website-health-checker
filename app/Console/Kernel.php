@@ -30,7 +30,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:urlCheck')
             ->appendOutputTo('task_errors.txt')
             ->everyMinute();
-//            ->appendOutputTo('d:\test\test.txt');
     }
 
     /**

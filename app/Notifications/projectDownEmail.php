@@ -29,11 +29,11 @@ class projectDownEmail extends Notification
      */
     public function via($notifiable)
     {
-        return ['mails'];
+        return ['mail'];
     }
 
     /**
-     * Get the mails representation of the notification.
+     * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
@@ -41,13 +41,13 @@ class projectDownEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->error()
-                    ->subject('Your project is down')
-                    ->greeting('Hello!')
-                    ->line('Something went wrong and your project is down.')
-                    ->action('See project', url('http://website-health-checker.test/dashboard'))
-                    ->line('Thank you for using our application!')
-                    ->from('admin@website-health-checker.com', 'Admin');
+            ->error()
+            ->subject('Your project is down')
+            ->greeting('Hello!')
+            ->line('Something went wrong and your project is down.')
+            ->action('See project', url('http://website-health-checker.test/dashboard'))
+            ->line('Thank you for using our application!')
+            ->from('admin@website-health-checker.com', 'Admin');
     }
 
     /**

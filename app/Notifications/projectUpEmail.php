@@ -29,11 +29,11 @@ class projectUpEmail extends Notification
      */
     public function via($notifiable)
     {
-        return ['mails'];
+        return ['mail'];
     }
 
     /**
-     * Get the mails representation of the notification.
+     * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage

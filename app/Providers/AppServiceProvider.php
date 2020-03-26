@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            'D:\xampp\htdocs\website-health-checker\vendor\laravel\framework\src\Illuminate\Notifications\resources\views' => public_path('vendor/email-views'),
+        ], 'public');
     }
 }
