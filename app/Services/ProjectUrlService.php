@@ -37,8 +37,8 @@ class ProjectUrlService
         return $this->projectUrl->delete($id);
     }
 
-//    public function checkStatus($id) {
-//
-//        return $this->projectUrl->checkStatus($id);
-//    }
+    public function shouldCheck($id) {
+
+        return $this->projectUrl->shouldCheck($id);
+    }
 }

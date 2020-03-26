@@ -5,14 +5,18 @@ namespace App\Repositories;
 
 use App\ProjectUrl;
 use App\Project;
+use App\Services\CheckService;
+use Carbon\Carbon;
 
 class ProjectUrlRepository
 {
     protected $projectUrl;
+    protected $checkService;
 
-    public function __construct(ProjectUrl $projectUrl)
+    public function __construct(ProjectUrl $projectUrl, CheckService $checkService)
     {
         $this->projectUrl = $projectUrl;
+        $this->checkService = $checkService;
     }
 
     public function store($attributes, $slug) {
@@ -56,14 +60,15 @@ class ProjectUrlRepository
         return $this->projectUrl->find($id)->delete();
     }
 
-//    public function checkStatus($id) {
-//
-//        $url = $this->projectUrl->find($id);
-//
-//        $lastCheck = $url->checks->latest()->first();
-//
-//        if ($lastCheck->response_code != range(200,299)) {
-//            return $url;
-//        }
-//    }
+    public function shouldCheck($id) {
+
+       $url = $this->projectUrl->find($id);
+
+        if (Carbon::now()->diffInSeconds($url->last_checked_at) > $url->checkFrequency->value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

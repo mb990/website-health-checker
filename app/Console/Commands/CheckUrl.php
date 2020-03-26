@@ -56,7 +56,7 @@ class CheckUrl extends Command
 
         foreach ($urls as $url) {
 
-            if (Carbon::now()->diffInSeconds($url->last_checked_at) > $url->checkFrequency->value) {
+            if ($this->projectUrlService->shouldCheck($url->id)) {
 
                 $check = new Check();
 
@@ -79,13 +79,13 @@ class CheckUrl extends Command
                 $url->save();
                 $check->save();
 
-                if ($this->checkService->successful($check->id) == false && $this->projectService->active($url->id)) {
+                if (!$this->checkService->successful($check->id) && $this->projectService->active($url->id)) {
 
                     $this->projectService->notificationDown($url->project->creator->id);
                     $this->projectService->setProjectDown($url->id);
                 }
 
-                else if($this->projectService->active($url->id) == false && $this->checkService->successful($check->id)) {
+                else if(!$this->projectService->active($url->id) && $this->checkService->successful($check->id)) {
 
                     $this->projectService->notificationUp($url->project->creator->id);
                     $this->projectService->setProjectUp($url->id);

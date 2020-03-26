@@ -1,0 +1,2 @@
+^CPHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 262144 bytes) in D:\xampp\htdocs\website-health-checker\app\Services\ProjectUrlService.php on line 42
+PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
