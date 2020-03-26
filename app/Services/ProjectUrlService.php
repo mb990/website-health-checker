@@ -22,6 +22,11 @@ class ProjectUrlService
         return $this->projectUrl->find($id);
     }
 
+    public function all() {
+
+        return $this->projectUrl->all();
+    }
+
     public function update($attributes, $id) {
 
         return $this->projectUrl->update($attributes, $id);

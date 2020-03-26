@@ -33,6 +33,11 @@ class ProjectUrlRepository
         return $this->projectUrl->find($id);
     }
 
+    public function all() {
+
+        return $this->projectUrl->all();
+    }
+
     public function update($attributes, $id) {
 //        {{dd($attributes);}}
         $url = ProjectUrl::find($id);

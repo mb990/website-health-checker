@@ -14,8 +14,13 @@ class UserRepository
         $this->user = $user;
     }
 
-    public function createdProjects() {
-        dd($this->user->createdProjects());
-        return $this->user->createdProjects();
+    public function find($id) {
+
+        return $this->user->find($id);
     }
+
+//    public function createdProjects() {
+//        dd($this->user->createdProjects());
+//        return $this->user->createdProjects();
+//    }
 }

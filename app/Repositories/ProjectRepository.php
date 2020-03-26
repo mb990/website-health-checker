@@ -4,17 +4,25 @@
 namespace App\Repositories;
 
 use App\Notifications\projectDownEmail;
+use App\Notifications\projectUpEmail;
 use App\Project;
+use App\Services\UserService;
+use App\Services\ProjectUrlService;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\Notification;
 
 class ProjectRepository
 {
-    protected $project;
+    use Notifiable;
 
-    public function __construct(Project $project)
+    protected $project;
+    protected $userService;
+    protected $projectUrlService;
+
+    public function __construct(Project $project, UserService $userService, ProjectUrlService $projectUrlService)
     {
         $this->project = $project;
+        $this->userService = $userService;
+        $this->projectUrlService = $projectUrlService;
     }
 
     public function store($attributes) {
@@ -52,5 +60,49 @@ class ProjectRepository
     public function delete($slug) {
 
         return $this->project->where('slug', '=', $slug)->delete();
+    }
+
+    public function notificationDown($id) {
+
+        $user = $this->userService->find($id);
+
+        $user->notify(new ProjectDownEmail());
+    }
+
+    public function setProjectDown($id) {
+
+        $url = $this->projectUrlService->read($id);
+
+        $url->project->up = 0;
+
+        $url->project->save();
+    }
+
+    public function notificationUp($id) {
+
+        $user = $this->userService->find($id);
+
+        $user->notify(new ProjectUpEmail());
+    }
+
+    public function setProjectUp($id) {
+
+        $url = $this->projectUrlService->read($id);
+
+        $url->project->up = 1;
+
+        $url->project->save();
+    }
+
+    public function active($id) {
+
+        $url = $this->projectUrlService->read($id);
+
+        if ($url->project->up == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

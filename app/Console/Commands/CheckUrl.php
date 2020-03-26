@@ -3,19 +3,17 @@
 namespace App\Console\Commands;
 
 use App\Check;
-use App\Notifications\projectDownEmail;
-use App\Notifications\projectUpEmail;
+use App\Services\ProjectService;
+use App\Services\CheckService;
+use App\Services\ProjectUrlService;
 use App\ProjectUrl;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Exception;
-use Illuminate\Notifications\Notifiable;
 
 class CheckUrl extends Command
 {
-
-    use Notifiable;
     /**
      * The name and signature of the console command.
      *
@@ -35,9 +33,16 @@ class CheckUrl extends Command
      *
      * @return void
      */
-    public function __construct()
+    protected $projectService;
+    protected $checkService;
+    protected $projectUrlService;
+
+    public function __construct(ProjectService $projectService, CheckService $checkService, ProjectUrlService $projectUrlService)
     {
         parent::__construct();
+        $this->projectService = $projectService;
+        $this->checkService = $checkService;
+        $this->projectUrlService = $projectUrlService;
     }
 
     /**
@@ -47,7 +52,7 @@ class CheckUrl extends Command
      */
     public function handle()
     {
-        $urls = ProjectUrl::all();
+        $urls = $this->projectUrlService->all();
 
         foreach ($urls as $url) {
 
@@ -74,19 +79,16 @@ class CheckUrl extends Command
                 $url->save();
                 $check->save();
 
-                if (!in_array($check->response_code, range(200, 299)) && $url->project->up == 1) {
+                if ($this->checkService->successful($check->id) == false && $this->projectService->active($url->id)) {
 
-                    $url->project->creator->notify(new projectDownEmail());
-                    $url->project->up = 0;
-
-                    $url->project->save();
+                    $this->projectService->notificationDown($url->project->creator->id);
+                    $this->projectService->setProjectDown($url->id);
                 }
 
-                else if($url->project->up != 1 && in_array($check->response_code, range(200, 299))) {
+                else if($this->projectService->active($url->id) == false && $this->checkService->successful($check->id)) {
 
-                    $url->project->creator->notify(new projectUpEmail());
-                    $url->project->up = 1;
-                    $url->project->save();
+                    $this->projectService->notificationUp($url->project->creator->id);
+                    $this->projectService->setProjectUp($url->id);
                 }
             }
         }
