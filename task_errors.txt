@@ -1,2 +1,863 @@
 ^CPHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 262144 bytes) in D:\xampp\htdocs\website-health-checker\app\Services\ProjectUrlService.php on line 42
 PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()
+
+   Error 
+
+  Call to undefined method App\Repositories\UserRepository::find()
+
+  at D:\xampp\htdocs\website-health-checker\app\Services\UserService.php:18
+    14|     }
+    15| 
+    16|     public function findById($id) {
+    17| 
+  > 18|         return $this->user->find($id);
+    19|     }
+    20| 
+    21|     public function findBySlug($slug) {
+    22|
+
+  1   D:\xampp\htdocs\website-health-checker\app\Services\ProjectService.php:72
+      App\Services\UserService::findById()
+
+  2   D:\xampp\htdocs\website-health-checker\app\Console\Commands\CheckUrl.php:92
+      App\Services\ProjectService::notificationUp()

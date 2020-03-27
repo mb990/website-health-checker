@@ -6,7 +6,6 @@ use App\Check;
 use App\Services\ProjectService;
 use App\Services\CheckService;
 use App\Services\ProjectUrlService;
-use App\ProjectUrl;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -81,8 +80,11 @@ class CheckUrl extends Command
 
                 if (!$this->checkService->successful($check->id) && $this->projectService->active($url->id)) {
 
-                    $this->projectService->notificationDown($url->project->creator->id);
-                    $this->projectService->setProjectDown($url->id);
+//                    foreach ($this->projectService->usersToNotify() as $user) {
+
+                        $this->projectService->notificationDown($user->id);
+                        $this->projectService->setProjectDown($url->id);
+//                    }
                 }
 
                 else if(!$this->projectService->active($url->id) && $this->checkService->successful($check->id)) {

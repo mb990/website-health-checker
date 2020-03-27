@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
              ProjectsTableSeeder::class,
              FrequenciesTableSeeder::class,
              ProjectUrlsTableSeeder::class,
+             NotificationTypesSeeder::class
 //             ChecksTableSeeder::class
          ]);
     }

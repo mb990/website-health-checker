@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 use App\User;
+use function foo\func;
 
 class UserRepository
 {
@@ -14,13 +15,20 @@ class UserRepository
         $this->user = $user;
     }
 
-    public function find($id) {
+    public function findById($id) {
 
         return $this->user->find($id);
     }
 
-//    public function createdProjects() {
-//        dd($this->user->createdProjects());
-//        return $this->user->createdProjects();
-//    }
+    public function findBySlug($slug) {
+
+        return $this->user->where('slug', '=', $slug)->first();
+    }
+
+    public function hasNotification($name) {
+
+        return $this->user->whereHas('notifications', function ($q) use ($name) {
+            $q->whereHas('notification_type_id', '=', $name);
+        })->first();
+    }
 }

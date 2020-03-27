@@ -5,18 +5,15 @@ namespace App\Repositories;
 
 use App\ProjectUrl;
 use App\Project;
-use App\Services\CheckService;
 use Carbon\Carbon;
 
 class ProjectUrlRepository
 {
     protected $projectUrl;
-    protected $checkService;
 
-    public function __construct(ProjectUrl $projectUrl, CheckService $checkService)
+    public function __construct(ProjectUrl $projectUrl)
     {
         $this->projectUrl = $projectUrl;
-        $this->checkService = $checkService;
     }
 
     public function store($attributes, $slug) {
@@ -44,7 +41,7 @@ class ProjectUrlRepository
 
     public function update($attributes, $id) {
 //        {{dd($attributes);}}
-        $url = ProjectUrl::find($id);
+        $url = $this->find($id);
 //        dd($url);
 //        $arrAttributes = $attributes->toArray();
 //        dd($arrAttributes['check_frequency_id']);

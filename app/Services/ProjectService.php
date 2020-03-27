@@ -3,14 +3,27 @@
 
 namespace App\Services;
 
+use App\Notifications\projectDownEmail;
+use App\Notifications\projectUpEmail;
 use App\Repositories\ProjectRepository;
 use Illuminate\Http\Request;
+use App\Services\UserService;
+use App\Services\ProjectUrlService;
+use App\Services\NotificationSettingService;
 
 class ProjectService
 {
-    public function __construct(ProjectRepository $project)
+    protected $userService;
+    protected $projectUrlService;
+    protected $notificationSettingService;
+
+    public function __construct(ProjectRepository $project, UserService $userService, ProjectUrlService $projectUrlService,
+                                NotificationSettingService $notificationSettingService)
     {
         $this->project = $project;
+        $this->userService = $userService;
+        $this->projectUrlService = $projectUrlService;
+        $this->notificationSettingService = $notificationSettingService;
     }
 
     public function index() {
@@ -19,12 +32,15 @@ class ProjectService
     }
 
     public function store($attributes) {
+        $project = $this->project->store($attributes);
 
-        return $this->project->store($attributes);
+        $user = $this->userService->findById(auth()->user()->id);
+
+        $this->notificationSettingService->subscribeUserToNotifications($user, $project);
+
     }
 
     public function read($slug) {
-//        {{dd($this->project->find($slug));}}
 
         return $this->project->find($slug);
     }
@@ -39,28 +55,45 @@ class ProjectService
         return $this->project->delete($slug);
     }
 
+    public function usersToNotify() {
+
+        return $this->project->usersToNotify();
+    }
+
     public function notificationDown($id) {
 
-        return $this->project->notificationDown($id);
+        $user = $this->userService->findById($id);
+
+        $user->notify(new ProjectDownEmail());
     }
 
     public function notificationUp($id) {
 
-        return $this->project->notificationUp($id);
+        $user = $this->userService->findById($id);
+
+        if ($this->userService->hasNotification($user)) {
+            $user->notify(new ProjectUpEmail());
+        }
     }
 
     public function setProjectDown($id) {
 
-        return $this->project->setProjectDown($id);
+        $url = $this->projectUrlService->read($id);
+
+        $this->project->setProjectDown($url);
     }
 
     public function setProjectUp($id) {
 
-        return $this->project->setProjectUp($id);
+        $url = $this->projectUrlService->read($id);
+
+        $this->project->setProjectUp($url);
     }
 
     public function active($id) {
 
-        return $this->project->active($id);
+        $url = $this->projectUrlService->read($id);
+
+        $this->project->active($url);
     }
 }

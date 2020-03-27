@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Check;
 
 class CheckRepository

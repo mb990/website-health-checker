@@ -3,11 +3,8 @@
 
 namespace App\Repositories;
 
-use App\Notifications\projectDownEmail;
-use App\Notifications\projectUpEmail;
 use App\Project;
-use App\Services\UserService;
-use App\Services\ProjectUrlService;
+use App\User;
 use Illuminate\Notifications\Notifiable;
 
 class ProjectRepository
@@ -15,14 +12,10 @@ class ProjectRepository
     use Notifiable;
 
     protected $project;
-    protected $userService;
-    protected $projectUrlService;
 
-    public function __construct(Project $project, UserService $userService, ProjectUrlService $projectUrlService)
+    public function __construct(Project $project)
     {
         $this->project = $project;
-        $this->userService = $userService;
-        $this->projectUrlService = $projectUrlService;
     }
 
     public function store($attributes) {
@@ -34,7 +27,7 @@ class ProjectRepository
 
         $project->save();
 
-//        return $this->project->create($attributes);
+        return $project;
     }
 
     public function all() {
@@ -62,41 +55,30 @@ class ProjectRepository
         return $this->project->where('slug', '=', $slug)->delete();
     }
 
-    public function notificationDown($id) {
+    public function usersToNotify() {
 
-        $user = $this->userService->find($id);
+        $users = User::whereHas('notificationSettings', function ($q) {
+            $q->where('active', '=', true);
+        })->get();
 
-        $user->notify(new ProjectDownEmail());
+        return $users;
     }
 
-    public function setProjectDown($id) {
-
-        $url = $this->projectUrlService->read($id);
+    public function setProjectDown($url) {
 
         $url->project->up = 0;
 
         $url->project->save();
     }
 
-    public function notificationUp($id) {
-
-        $user = $this->userService->find($id);
-
-        $user->notify(new ProjectUpEmail());
-    }
-
-    public function setProjectUp($id) {
-
-        $url = $this->projectUrlService->read($id);
+    public function setProjectUp($url) {
 
         $url->project->up = 1;
 
         $url->project->save();
     }
 
-    public function active($id) {
-
-        $url = $this->projectUrlService->read($id);
+    public function active($url) {
 
         if ($url->project->up == 1) {
             return true;

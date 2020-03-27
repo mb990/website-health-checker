@@ -22,7 +22,7 @@ Route::get('/dashboard', 'PageController@dashboard');
 Route::get('/projects', 'ProjectController@all');
 Route::get('/projects/{slug}', 'ProjectController@show');
 Route::get('/projects/{slug}/{url}/checks', 'CheckController@all');
-Route::get('/projects/new', 'ProjectController@create')->name('create.project');
+Route::get('/projects/create/new', 'ProjectController@create')->name('create.project');
 Route::post('/projects/new/submit', 'ProjectController@store')->name('store.project');
 Route::get('/projects/{slug}/edit', 'ProjectController@edit')->name('edit.project');
 Route::put('/projects/{slug}/update', 'ProjectController@update')->name('update.project');

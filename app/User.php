@@ -57,4 +57,9 @@ class User extends Authenticatable
 
         return $this->hasMany(Project::class);
     }
+
+    public function notificationSettings() {
+
+        return $this->hasMany(NotificationSetting::class);
+    }
 }

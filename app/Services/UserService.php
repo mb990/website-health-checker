@@ -13,9 +13,14 @@ class UserService
         $this->user = $user;
     }
 
-    public function find($id) {
+    public function findById($id) {
 
         return $this->user->find($id);
+    }
+
+    public function findBySlug($slug) {
+
+        return $this->user->findBySlug($slug);
     }
 
 //    public function createdProjects() {
