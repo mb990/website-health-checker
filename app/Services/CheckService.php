@@ -22,10 +22,4 @@ class CheckService
 
         return $this->check->find($id);
     }
-
-    public function successful($id) {
-
-        return $this->check->successful($id);
-    }
-
 }

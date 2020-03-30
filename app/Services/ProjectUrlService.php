@@ -33,12 +33,17 @@ class ProjectUrlService
     }
 
     public function delete($id) {
-//dd($id);
+
         return $this->projectUrl->delete($id);
     }
 
     public function shouldCheck($id) {
 
         return $this->projectUrl->shouldCheck($id);
+    }
+
+    public function createCheck($url) {
+
+        return $this->projectUrl->createCheck($url);
     }
 }

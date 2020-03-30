@@ -35,7 +35,7 @@ class ProjectRepository
         return $this->project->paginate(10);
     }
 
-    public function find($slug)
+    public function findBySlug($slug)
     {
         return $this->project->where('slug', '=', $slug)->first();
     }
@@ -55,11 +55,9 @@ class ProjectRepository
         return $this->project->where('slug', '=', $slug)->delete();
     }
 
-    public function usersToNotify() {
+    public function usersToNotify($project) {
 
-        $users = User::whereHas('notificationSettings', function ($q) {
-            $q->where('active', '=', true);
-        })->get();
+        $users = $project->members;
 
         return $users;
     }
@@ -78,7 +76,7 @@ class ProjectRepository
         $url->project->save();
     }
 
-    public function active($url) {
+    public function isActive($url) {
 
         if ($url->project->up == 1) {
             return true;

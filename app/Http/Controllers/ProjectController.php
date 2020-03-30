@@ -29,7 +29,7 @@ class ProjectController extends Controller
 
     public function show($slug) {
 
-        $project = $this->projectService->read($slug);
+        $project = $this->projectService->readBySlug($slug);
 
         return view('projects.show-single')->with('project', $project);
     }
@@ -50,7 +50,7 @@ class ProjectController extends Controller
 
     public function edit($slug) {
 
-        $project = $this->projectService->read($slug);
+        $project = $this->projectService->readBySlug($slug);
 //        dd($project);
 
         return view('projects.edit')->with('project', $project);

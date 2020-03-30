@@ -4,7 +4,6 @@
 namespace App\Repositories;
 
 use App\User;
-use function foo\func;
 
 class UserRepository
 {
@@ -25,10 +24,17 @@ class UserRepository
         return $this->user->where('slug', '=', $slug)->first();
     }
 
-    public function hasNotification($name) {
-
-        return $this->user->whereHas('notifications', function ($q) use ($name) {
-            $q->whereHas('notification_type_id', '=', $name);
-        })->first();
-    }
+//    public function hasNotification($user, $type)
+//    {
+//        $notification = $user->whereHas('notificationSettings', function ($q) use ($type) {
+//            $q->where('name', '=', $type);
+//            })->first();
+//
+//        if ($notification->active) {
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
+//    }
 }

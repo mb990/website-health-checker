@@ -2,14 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Check;
 use App\Services\ProjectService;
-use App\Services\CheckService;
 use App\Services\ProjectUrlService;
-use Carbon\Carbon;
+use App\Services\HttpService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use Exception;
 
 class CheckUrl extends Command
 {
@@ -33,15 +30,15 @@ class CheckUrl extends Command
      * @return void
      */
     protected $projectService;
-    protected $checkService;
     protected $projectUrlService;
+    protected $httpService;
 
-    public function __construct(ProjectService $projectService, CheckService $checkService, ProjectUrlService $projectUrlService)
+    public function __construct(ProjectService $projectService, ProjectUrlService $projectUrlService, HttpService $httpService)
     {
         parent::__construct();
         $this->projectService = $projectService;
-        $this->checkService = $checkService;
         $this->projectUrlService = $projectUrlService;
+        $this->httpService = $httpService;
     }
 
     /**
@@ -55,43 +52,18 @@ class CheckUrl extends Command
 
         foreach ($urls as $url) {
 
-            if ($this->projectUrlService->shouldCheck($url->id)) {
+            $check = $this->projectUrlService->createCheck($url);
 
-                $check = new Check();
+            if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url->id)) {
 
-                $timeBefore = Carbon::now();
+                $this->projectService->notifyMembersProjectDown($url);
+                $this->projectService->setProjectDown($url->id);
+            }
 
-                try {
-                    $response = Http::get($url->url);
-                    $check->response_code = $response->status();
-                } catch (Exception $e) {
-                    $check->response_code = 0;
-                }
+            else if (!$this->projectService->isActive($url->id) && $this->httpService->requestSuccessful($check)) {
 
-                $timeAfter = Carbon::now();
-
-                $check->url_id = $url->id;
-                $check->response_time = $timeAfter->diffInMilliseconds($timeBefore);
-
-                $url->last_checked_at = Carbon::now();
-
-                $url->save();
-                $check->save();
-
-                if (!$this->checkService->successful($check->id) && $this->projectService->active($url->id)) {
-
-//                    foreach ($this->projectService->usersToNotify() as $user) {
-
-                        $this->projectService->notificationDown($user->id);
-                        $this->projectService->setProjectDown($url->id);
-//                    }
-                }
-
-                else if(!$this->projectService->active($url->id) && $this->checkService->successful($check->id)) {
-
-                    $this->projectService->notificationUp($url->project->creator->id);
-                    $this->projectService->setProjectUp($url->id);
-                }
+                $this->projectService->notifyMembersProjectUp($url);
+                $this->projectService->setProjectUp($url->id);
             }
         }
     }

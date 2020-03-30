@@ -25,16 +25,4 @@ class CheckRepository
 
         return $this->check->find($id);
     }
-
-    public function successful($id) {
-
-        $check = $this->check->find($id);
-
-        if (in_array($check->response_code, range(200, 299))) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 }

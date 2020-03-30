@@ -5,12 +5,16 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 use App\User;
+use App\Services\NotificationSettingServiceService;
 
 class UserService
 {
-    public function __construct(UserRepository $user)
+    protected $notificationTypeService;
+
+    public function __construct(UserRepository $user, NotificationSettingService $notificationSettingService)
     {
         $this->user = $user;
+        $this->notificationSettingService = $notificationSettingService;
     }
 
     public function findById($id) {
@@ -23,8 +27,15 @@ class UserService
         return $this->user->findBySlug($slug);
     }
 
-//    public function createdProjects() {
-//dd($this->user->createdProjects());
-//        return $this->user->createdProjects();
-//    }
+    public function hasNotificationActive($user, $type) {
+
+        $notification = $this->notificationSettingService->findByUserAndType($user, $type);
+
+        if ($notification->active) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
