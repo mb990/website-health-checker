@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\NotificationSetting;
 use App\Http\Requests\NotificationSettingRequest;
+use App\User;
 
 class NotificationSettingRepository
 {
@@ -15,20 +16,18 @@ class NotificationSettingRepository
         $this->notificationSetting = $notificationSetting;
     }
 
+    public function all() {
+
+        return $this->notificationSetting->all();
+    }
+
     public function findById($id) {
 
         return $this->notificationSetting->find($id);
     }
 
-    public function findByUser($user) {
-
-        $notifications = NotificationSetting::where('user_id', '=', $user->id);
-
-        return $notifications;
-    }
-
     public function findByUserAndType($user, $type) {
-
+//        dd($user['id']);
         return $this->notificationSetting->where('user_id', '=', $user->id)
             ->where('notification_type_id', '=', $type->id)
             ->first();

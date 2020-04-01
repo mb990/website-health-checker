@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function memberInProjects() {
 
-        return $this->belongsToMany(Project::class)->withTimestamps();
+        return $this->belongsToMany(Project::class, 'project_users')->withTimestamps();
     }
 
     public function notificationSettings() {

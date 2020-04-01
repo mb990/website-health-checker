@@ -19,8 +19,7 @@ class ProjectUrlRepository
         $this->projectUrl = $projectUrl;
     }
 
-    public function store($attributes, $slug)
-    {
+    public function store($attributes, $slug) {
 
         $project = Project::where('slug', '=', $slug)->first();
 
@@ -38,14 +37,12 @@ class ProjectUrlRepository
         return $this->projectUrl->find($id);
     }
 
-    public function all()
-    {
+    public function all() {
 
         return $this->projectUrl->all();
     }
 
-    public function update($attributes, $id)
-    {
+    public function update($attributes, $id) {
 //        {{dd($attributes);}}
         $url = $this->find($id);
 //        dd($url);
@@ -58,23 +55,23 @@ class ProjectUrlRepository
         return $url->update(['check_frequency_id' => intval($attributes['check_frequency_id'])]);
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
 
-        return $this->find($id)->delete();
+        return $this->projectUrl->find($id)->delete();
     }
 
-    public function shouldCheck($id)
-    {
+    public function shouldCheck($id) {
 
-        $url = $this->find($id);
+        $url = $this->projectUrl->find($id);
 
         if (Carbon::now()->diffInSeconds($url->last_checked_at) > $url->checkFrequency->value) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
+
 
     public function createCheck(ProjectUrl $url)
     {

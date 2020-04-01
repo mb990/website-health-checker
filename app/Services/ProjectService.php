@@ -6,26 +6,28 @@ namespace App\Services;
 use App\Notifications\projectDownEmail;
 use App\Notifications\projectUpEmail;
 use App\Repositories\ProjectRepository;
+use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\ProjectUrlService;
 use App\Services\NotificationSettingService;
-use App\Services\HttpService;
+use Illuminate\Notifications\Notifiable;
 
 class ProjectService
 {
+    use Notifiable;
+
     protected $userService;
     protected $projectUrlService;
     protected $notificationSettingService;
-    protected $httpService;
+    protected $project;
 
     public function __construct(ProjectRepository $project, UserService $userService, ProjectUrlService $projectUrlService,
-                                NotificationSettingService $notificationSettingService, HttpService $httpService)
+                                NotificationSettingService $notificationSettingService)
     {
         $this->project = $project;
         $this->userService = $userService;
         $this->projectUrlService = $projectUrlService;
         $this->notificationSettingService = $notificationSettingService;
-        $this->httpService = $httpService;
     }
 
     public function index() {
@@ -39,11 +41,12 @@ class ProjectService
         $user = $this->userService->findById(auth()->user()->id);
 
         $this->notificationSettingService->subscribeUserToNotifications($user, $project);
+
     }
 
-    public function readBySlug($slug) {
+    public function read($slug) {
 
-        return $this->project->findBySlug($slug);
+        return $this->project->find($slug);
     }
 
     public function update($attributes, $slug) {
@@ -56,28 +59,44 @@ class ProjectService
         return $this->project->delete($slug);
     }
 
-    public function usersToNotify($slug) {
+    public function usersToNotify($project) {
 
-        $project = $this->readBySlug($slug);
+        $project = $this->project->find($project->slug);
 
         return $this->project->usersToNotify($project);
     }
 
-    public function notificationDown($id) {
-
-        $user = $this->userService->findById($id);
+    public function notificationDown($user) {
 
         $user->notify(new ProjectDownEmail());
     }
 
-    public function notificationUp($id) {
+    public function notificationUp($user) {
 
-        $user = $this->userService->findById($id);
+        $user->notify(new ProjectUpEmail());
+    }
 
-        $type = 'url_up';
+    public function notifyMembersProjectDown($url) {
 
-        if ($this->userService->hasNotification($user, $type)) {
-            $user->notify(new ProjectUpEmail());
+        foreach ($this->usersToNotify($url->project) as $user) {
+
+            if ($this->userService->hasNotificationActive($user, 'url_down')) {
+
+                $this->notificationDown($user);
+
+            }
+        }
+    }
+
+    public function notifyMembersProjectUp($url) {
+
+        foreach ($this->usersToNotify($url->project) as $user) {
+
+            if ($this->userService->hasNotificationActive($user, 'url_up')) {
+
+                $this->notificationUp($user);
+
+            }
         }
     }
 
@@ -95,34 +114,12 @@ class ProjectService
         $this->project->setProjectUp($url);
     }
 
-    public function isActive($id) {
+    public function isActive($url) {
 
-        $url = $this->projectUrlService->read($id);
-
-        $this->project->isActive($url);
-    }
-
-    public function notifyMembersProjectDown($url) {
-
-        foreach ($this->usersToNotify($url->project->slug) as $user) {
-
-            if ($this->userService->hasNotificationActive($user, 'url_down')) {
-
-                $this->notificationDown($user->id);
-
-            }
+        if ($url->project->up == 1) {
+            return true;
         }
-    }
 
-    public function notifyMembersProjectUp($url) {
-
-        foreach ($this->usersToNotify($url->project->slug) as $user) {
-
-            if ($this->userService->hasNotificationActive($user, 'url_up')) {
-
-                $this->notificationUp($user->id);
-
-            }
-        }
+        return false;
     }
 }

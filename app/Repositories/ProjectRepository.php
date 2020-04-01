@@ -35,7 +35,7 @@ class ProjectRepository
         return $this->project->paginate(10);
     }
 
-    public function findBySlug($slug)
+    public function find($slug)
     {
         return $this->project->where('slug', '=', $slug)->first();
     }
@@ -59,6 +59,8 @@ class ProjectRepository
 
         $users = $project->members;
 
+        $users[] = $project->creator;
+
         return $users;
     }
 
@@ -74,15 +76,5 @@ class ProjectRepository
         $url->project->up = 1;
 
         $url->project->save();
-    }
-
-    public function isActive($url) {
-
-        if ($url->project->up == 1) {
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 }

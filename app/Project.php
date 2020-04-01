@@ -28,7 +28,7 @@ class Project extends Model
 
     public function members() {
 
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class, 'project_users')->withTimestamps();
     }
 
     public function urls() {

@@ -17,8 +17,8 @@ class NotificationTypeService
         return $this->notificationType->all();
     }
 
-    public function findByType($type) {
+    public function findByName($name) {
 
-        return $this->findByType($type);
+        return $this->notificationType->findByName($name);
     }
 }

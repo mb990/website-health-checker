@@ -17,7 +17,6 @@ use App\Mail\MailtrapExample;
 */
 
 Route::get('/', 'PageController@index');
-//Route::get('/', 'ProjectUrlController@status');
 Route::get('/dashboard', 'PageController@dashboard');
 Route::get('/settings/{slug}', 'NotificationSettingController@edit');
 Route::put('/settings/{slug}/update', 'NotificationSettingController@update');
@@ -47,3 +46,5 @@ Route::get('/send-mails', function () {
 
     return 'A message has been sent to Mailtrap!';
 });
+
+Route::get('/test', 'PageController@test');

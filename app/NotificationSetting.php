@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NotificationSetting extends Model
 {
-    protected $fillable = ['active'];
+    protected $fillable = ['active', 'user_id', 'project_id', 'notification_type_id'];
 
     public function user() {
 

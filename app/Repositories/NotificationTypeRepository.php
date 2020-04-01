@@ -19,8 +19,8 @@ class NotificationTypeRepository
         return $this->notificationType->all();
     }
 
-    public function findByType($type) {
+    public function findByName($name) {
 
-        return $this->notificationType->where('name', '=', $type);
+        return $this->notificationType->where('name', '=', $name)->first();
     }
 }

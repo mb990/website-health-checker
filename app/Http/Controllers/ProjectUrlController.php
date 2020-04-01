@@ -45,15 +45,11 @@ class ProjectUrlController extends Controller
         return redirect('/');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
 //dd($id);
         $this->projectUrlService->delete($id);
 
         return redirect()->back();
     }
-
-//    public function checkStatus($id) {
-//
-//        $this->projectUrlService->checkStatus($id);
-//    }
 }

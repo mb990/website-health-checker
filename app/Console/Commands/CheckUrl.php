@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Services\HttpService;
 use App\Services\ProjectService;
 use App\Services\ProjectUrlService;
-use App\Services\HttpService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -30,15 +30,15 @@ class CheckUrl extends Command
      * @return void
      */
     protected $projectService;
-    protected $projectUrlService;
     protected $httpService;
+    protected $projectUrlService;
 
-    public function __construct(ProjectService $projectService, ProjectUrlService $projectUrlService, HttpService $httpService)
+    public function __construct(ProjectService $projectService, HttpService $httpService, ProjectUrlService $projectUrlService)
     {
         parent::__construct();
         $this->projectService = $projectService;
-        $this->projectUrlService = $projectUrlService;
         $this->httpService = $httpService;
+        $this->projectUrlService = $projectUrlService;
     }
 
     /**
@@ -54,13 +54,14 @@ class CheckUrl extends Command
 
             $check = $this->projectUrlService->createCheck($url);
 
-            if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url->id)) {
+            if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url)) {
 
                 $this->projectService->notifyMembersProjectDown($url);
                 $this->projectService->setProjectDown($url->id);
+
             }
 
-            else if (!$this->projectService->isActive($url->id) && $this->httpService->requestSuccessful($check)) {
+            else if(!$this->projectService->isActive($url) && $this->httpService->requestSuccessful($check)) {
 
                 $this->projectService->notifyMembersProjectUp($url);
                 $this->projectService->setProjectUp($url->id);

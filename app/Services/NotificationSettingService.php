@@ -6,19 +6,20 @@ namespace App\Services;
 use App\Http\Requests\NotificationSettingRequest;
 use App\Repositories\NotificationSettingRepository;
 use App\Services\NotificationTypeService;
-use App\Services\UserService;
 
 class NotificationSettingService
 {
     protected $notificationTypeService;
-    protected $userService;
 
-    public function __construct(NotificationSettingRepository $notificationSetting, NotificationTypeService $notificationTypeService,
-                        UserService $userService)
+    public function __construct(NotificationSettingRepository $notificationSetting, NotificationTypeService $notificationTypeService)
     {
         $this->notificationSetting = $notificationSetting;
         $this->notificationTypeService = $notificationTypeService;
-        $this->userService = $userService;
+    }
+
+    public function all() {
+
+        return $this->notificationSetting->all();
     }
 
     public function findById($id) {
@@ -26,14 +27,9 @@ class NotificationSettingService
         return $this->notificationSetting->findById($id);
     }
 
-    public function findByUser($slug) {
+    public function findByUserAndType($user, $name) {
 
-        $user = $this->userService->findBySlug($slug);
-
-        return $this->notificationSetting->findByUser($user);
-    }
-
-    public function findByUserAndType($user, $type) {
+        $type = $this->notificationTypeService->findByName($name);
 
         return $this->notificationSetting->findByUserAndType($user, $type);
     }
