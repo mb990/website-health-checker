@@ -26,9 +26,16 @@ class CheckService
 
     public function getResponseCode($response) {
 
-        try {
+//        try {
+//            $responseCode = $response->status();
+//        } catch (Exception $e) {
+//            $responseCode = 0;
+//        }
+
+        if ($response) {
             $responseCode = $response->status();
-        } catch (Exception $e) {
+        }
+        else {
             $responseCode = 0;
         }
 

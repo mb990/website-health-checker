@@ -3,21 +3,26 @@
 
 namespace App\Services;
 
-use App\Services\CheckService;
 use Illuminate\Support\Facades\Http;
+use Exception;
 
 class HttpService
 {
-    protected $checkService;
 
-    public function __construct(CheckService $checkService)
+    public function __construct()
     {
-        $this->checkService = $checkService;
+        //
     }
 
     public function get($url) {
 
-        return Http::get($url);
+        try {
+            $response = Http::get($url);
+            return $response;
+        }
+        catch (Exception $e) {
+            return false;
+        }
     }
 
     public function requestSuccessful($check) {

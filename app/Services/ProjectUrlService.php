@@ -4,14 +4,20 @@
 namespace App\Services;
 
 use App\Repositories\ProjectUrlRepository;
+use App\Services\HttpService;
+use App\Services\CheckService;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Http;
 
 class ProjectUrlService
 {
-    public function __construct(ProjectUrlRepository $projectUrl)
+    protected $httpService;
+    protected $checkService;
+
+    public function __construct(ProjectUrlRepository $projectUrl, HttpService $httpService, CheckService $checkService)
     {
         $this->projectUrl = $projectUrl;
+        $this->httpService = $httpService;
+        $this->checkService = $checkService;
     }
 
     public function store($attributes, $slug) {
@@ -53,7 +59,17 @@ class ProjectUrlService
 
         if ($this->shouldCheck($url)) {
 
-            return $this->projectUrl->createCheck($url);
+            $requestStart = Carbon::now();
+            $response = $this->httpService->get($url->url);
+            $requestEnd = Carbon::now();
+
+            $responseTime = $this->checkService->measureResponseTime($requestStart, $requestEnd);
+
+            $responseCode = $this->checkService->getResponseCode($response);
+
+            $lastCheckedAt = Carbon::now();
+
+            return $this->projectUrl->createCheck($url, $responseTime, $responseCode, $lastCheckedAt);
         }
     }
 }

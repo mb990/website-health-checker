@@ -59,7 +59,7 @@ class ProjectService
         return $this->project->delete($slug);
     }
 
-    public function projectMembers($project) {
+    public function projectUsers($project) {
 
         $users = $project->members;
 
@@ -70,7 +70,7 @@ class ProjectService
 
     public function usersToNotify($project) {
 
-        return $this->projectMembers($project);
+        return $this->projectUsers($project);
     }
 
     public function notificationDown($user) {

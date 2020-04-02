@@ -60,26 +60,15 @@ class ProjectUrlRepository
         return $this->projectUrl->find($id)->delete();
     }
 
-    public function createCheck(ProjectUrl $url)
+    public function createCheck($url, $responseTime, $responseCode, $lastCheckedAt)
     {
-
         $check = new Check();
 
-        $timeBefore = Carbon::now();
-
-        try {
-            $response = Http::get($url->url);
-            $check->response_code = $response->status();
-        } catch (Exception $e) {
-            $check->response_code = 0;
-        }
-
-        $timeAfter = Carbon::now();
-
+        $check->response_time = $responseTime;
+        $check->response_code = $responseCode;
         $check->url_id = $url->id;
-        $check->response_time = $timeAfter->diffInMilliseconds($timeBefore);
 
-        $url->last_checked_at = Carbon::now();
+        $url->last_checked_at = $lastCheckedAt;
 
         $url->save();
         $check->save();
