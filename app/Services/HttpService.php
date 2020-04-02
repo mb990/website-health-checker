@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Services\CheckService;
+use Illuminate\Support\Facades\Http;
 
 class HttpService
 {
@@ -12,6 +13,11 @@ class HttpService
     public function __construct(CheckService $checkService)
     {
         $this->checkService = $checkService;
+    }
+
+    public function get($url) {
+
+        return Http::get($url);
     }
 
     public function requestSuccessful($check) {
