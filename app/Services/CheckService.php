@@ -35,4 +35,10 @@ class CheckService
         return $responseCode;
     }
 
+    public function measureResponseTime($requestStart, $requestEnd) {
+
+        $responseTime = $requestEnd->diffInMilliseconds($requestStart);
+
+        return $responseTime;
+    }
 }

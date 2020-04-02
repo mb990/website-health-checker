@@ -9,6 +9,7 @@ use App\Services\NotificationSettingService;
 use App\Services\HttpService;
 use App\Services\CheckService;
 use App\Repositories\ProjectRepository;
+use Carbon\Carbon;
 
 class PageController extends Controller
 {
@@ -51,26 +52,15 @@ class PageController extends Controller
 
         foreach ($urls as $url) {
 
+//            $response = $this->httpService->get($url->url);
+
+            $requestStart = Carbon::now();
             $response = $this->httpService->get($url->url);
+            $requestEnd = Carbon::now();
 
-//            dd($response);
+            $responseTime = $this->checkService->measureResponseTime($requestStart, $requestEnd);
 
-            dd($this->checkService->getResponseCode($response));
-//            $check = $this->projectUrlService->createCheck($url);
-//
-//            dd($check->id);
-
-//            dd($check['id']);
-
-//            dd($url->project);
-
-//            $notification = $this->notificationSettingService->findByUserAndType($url->project->creator, 'url_down');
-//
-//            dd($notification);  // vraca setting
-
-//            $this->userService->hasNotificationActive($url->project->creator, 'url_down'); // okej
-
-//            dd($this->projectService->isActive($url)); // radi
+            dd($responseTime);
         }
 
 //        $notifications = $this->notificationSettingService->all();
