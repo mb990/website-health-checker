@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Repositories\CheckRepository;
+use Exception;
 
 class CheckService
 {
@@ -22,4 +23,16 @@ class CheckService
 
         return $this->check->find($id);
     }
+
+    public function getResponseCode($response) {
+
+        try {
+            $responseCode = $response->status();
+        } catch (Exception $e) {
+            $responseCode = 0;
+        }
+
+        return $responseCode;
+    }
+
 }

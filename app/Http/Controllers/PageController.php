@@ -6,6 +6,8 @@ use App\Services\UserService;
 use App\Services\ProjectService;
 use App\Services\ProjectUrlService;
 use App\Services\NotificationSettingService;
+use App\Services\HttpService;
+use App\Services\CheckService;
 use App\Repositories\ProjectRepository;
 
 class PageController extends Controller
@@ -15,15 +17,20 @@ class PageController extends Controller
     protected $userService;
     protected $notificationSettingService;
     protected $projectRepository;
+    protected $httpService;
+    protected $checkService;
 
     public function __construct(ProjectService $projectService, UserService $userService, ProjectUrlService $projectUrlService,
-                                NotificationSettingService $notificationSettingService, ProjectRepository $projectRepository)
+                                NotificationSettingService $notificationSettingService, ProjectRepository $projectRepository,
+                                HttpService $httpService, CheckService $checkService)
     {
         $this->projectService = $projectService;
         $this->userService = $userService;
         $this->projectUrlService = $projectUrlService;
         $this->notificationSettingService = $notificationSettingService;
         $this->projectRepository = $projectRepository;
+        $this->httpService = $httpService;
+        $this->checkService = $checkService;
     }
 
     public function index() {
@@ -44,9 +51,14 @@ class PageController extends Controller
 
         foreach ($urls as $url) {
 
-            $check = $this->projectUrlService->createCheck($url);
+            $response = $this->httpService->get($url->url);
 
-            dd($check->id);
+//            dd($response);
+
+            dd($this->checkService->getResponseCode($response));
+//            $check = $this->projectUrlService->createCheck($url);
+//
+//            dd($check->id);
 
 //            dd($check['id']);
 
