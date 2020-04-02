@@ -11,6 +11,12 @@
 
             <h1>Update your settings</h1>
 
+            @foreach($settings as $setting)
+
+                {{$setting->id}} <br>
+
+            @endforeach
+
         </div>
 
     </div>

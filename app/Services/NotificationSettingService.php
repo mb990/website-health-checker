@@ -27,6 +27,11 @@ class NotificationSettingService
         return $this->notificationSetting->findById($id);
     }
 
+    public function findByUser($user) {
+
+        return $this->notificationSetting->findByUser($user);
+    }
+
     public function findByUserAndType($user, $name) {
 
         $type = $this->notificationTypeService->findByName($name);
