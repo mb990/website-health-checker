@@ -59,11 +59,18 @@ class ProjectService
         return $this->project->delete($slug);
     }
 
+    public function projectMembers($project) {
+
+        $users = $project->members;
+
+        $users[] = $project->creator;
+
+        return $users;
+    }
+
     public function usersToNotify($project) {
 
-        $project = $this->project->find($project->slug);
-
-        return $this->project->usersToNotify($project);
+        return $this->projectMembers($project);
     }
 
     public function notificationDown($user) {
