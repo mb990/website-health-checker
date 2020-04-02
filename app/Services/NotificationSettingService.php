@@ -32,6 +32,11 @@ class NotificationSettingService
         return $this->notificationSetting->findByUser($user);
     }
 
+    public function findByUserAndProject($user, $project) {
+
+        return $this->notificationSetting->findByUserAndProject($user, $project);
+    }
+
     public function findByUserAndType($user, $name) {
 
         $type = $this->notificationTypeService->findByName($name);
@@ -49,10 +54,10 @@ class NotificationSettingService
         }
     }
 
-    public function update(NotificationSettingRequest $request, $id) {
+    public function updateSingleProject(NotificationSettingRequest $request, $id) {
 
-        $notificationSetting = $this->notificationSetting->find($id);
+        $notificationSetting = $this->findById($id);
 
-        $this->notificationSetting->update($request, $notificationSetting);
+        $this->notificationSetting->updateSingleProject($request, $notificationSetting);
     }
 }

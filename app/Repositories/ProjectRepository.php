@@ -35,7 +35,7 @@ class ProjectRepository
         return $this->project->paginate(10);
     }
 
-    public function find($slug)
+    public function findBySlug($slug)
     {
         return $this->project->where('slug', '=', $slug)->first();
     }

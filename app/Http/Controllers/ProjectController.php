@@ -49,7 +49,6 @@ class ProjectController extends Controller
     public function edit($slug) {
 
         $project = $this->projectService->readBySlug($slug);
-//        dd($project);
 
         return view('projects.edit')->with('project', $project);
     }

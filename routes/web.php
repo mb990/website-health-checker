@@ -18,7 +18,9 @@ use App\Mail\MailtrapExample;
 
 Route::get('/', 'PageController@index');
 Route::get('/dashboard', 'PageController@dashboard');
-Route::get('/settings/{slug}', 'NotificationSettingController@all');
+Route::get('/settings/{slug}', 'NotificationSettingController@editAll');
+Route::get('/projects/{slug}/settings', 'NotificationSettingController@editSingleProject');
+Route::put('/projects/{slug}/settings/update', 'NotificationSettingController@updateSingleProject');
 Route::get('/projects', 'ProjectController@all');
 Route::get('/projects/{slug}', 'ProjectController@show');
 Route::get('/projects/{slug}/{url}/checks', 'CheckController@all');

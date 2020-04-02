@@ -55,13 +55,17 @@ class PageController extends Controller
 //            $response = $this->httpService->get($url->url);
 
 //            $requestStart = Carbon::now();
-            $response = $this->httpService->get('https://www.lynch.com/pariatur-rem-nihil-adipisci-omnis-cupiditate-dolor-dolorem');
+//            $response = $this->httpService->get('https://www.lynch.com/pariatur-rem-nihil-adipisci-omnis-cupiditate-dolor-dolorem');
 //            $requestEnd = Carbon::now();
 
 //            $responseTime = $this->checkService->measureResponseTime($requestStart, $requestEnd);
 
-            dd($response);
+//            dd($response);
         }
+
+//        $setting = $this->notificationSettingService->findById(1);
+//
+//        dd($setting->type->name);
 
 //        $notifications = $this->notificationSettingService->all();
 //
