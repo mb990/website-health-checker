@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Repositories\ProjectUrlRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class ProjectUrlService
@@ -38,13 +39,21 @@ class ProjectUrlService
         return $this->projectUrl->delete($id);
     }
 
-    public function shouldCheck($id) {
+    public function shouldCheck($url) {
 
-        return $this->projectUrl->shouldCheck($id);
+        if (Carbon::now()->diffInSeconds($url->last_checked_at) > $url->checkFrequency->value) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public function createCheck($url) {
 
-        return $this->projectUrl->createCheck($url);
+        if ($this->shouldCheck($url)) {
+
+            return $this->projectUrl->createCheck($url);
+        }
     }
 }

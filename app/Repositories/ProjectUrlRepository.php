@@ -60,46 +60,30 @@ class ProjectUrlRepository
         return $this->projectUrl->find($id)->delete();
     }
 
-    public function shouldCheck($id) {
-
-        $url = $this->projectUrl->find($id);
-
-        if (Carbon::now()->diffInSeconds($url->last_checked_at) > $url->checkFrequency->value) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-
     public function createCheck(ProjectUrl $url)
     {
 
-        if ($this->shouldCheck($url->id)) {
+        $check = new Check();
 
-            $check = new Check();
+        $timeBefore = Carbon::now();
 
-            $timeBefore = Carbon::now();
-
-            try {
-                $response = Http::get($url->url);
-                $check->response_code = $response->status();
-            } catch (Exception $e) {
-                $check->response_code = 0;
-            }
-
-            $timeAfter = Carbon::now();
-
-            $check->url_id = $url->id;
-            $check->response_time = $timeAfter->diffInMilliseconds($timeBefore);
-
-            $url->last_checked_at = Carbon::now();
-
-            $url->save();
-            $check->save();
-
-            return $check;
+        try {
+            $response = Http::get($url->url);
+            $check->response_code = $response->status();
+        } catch (Exception $e) {
+            $check->response_code = 0;
         }
+
+        $timeAfter = Carbon::now();
+
+        $check->url_id = $url->id;
+        $check->response_time = $timeAfter->diffInMilliseconds($timeBefore);
+
+        $url->last_checked_at = Carbon::now();
+
+        $url->save();
+        $check->save();
+
+        return $check;
     }
 }

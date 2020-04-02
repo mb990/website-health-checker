@@ -46,6 +46,8 @@ class PageController extends Controller
 
             $check = $this->projectUrlService->createCheck($url);
 
+            dd($check->id);
+
 //            dd($check['id']);
 
 //            dd($url->project);
@@ -56,7 +58,7 @@ class PageController extends Controller
 
 //            $this->userService->hasNotificationActive($url->project->creator, 'url_down'); // okej
 
-            dd($this->projectService->isActive($url)); // radi
+//            dd($this->projectService->isActive($url)); // radi
         }
 
 //        $notifications = $this->notificationSettingService->all();
