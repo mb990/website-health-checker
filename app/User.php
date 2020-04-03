@@ -63,6 +63,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Project::class, 'project_users')->withTimestamps();
     }
 
+    public function notificationTypes() {
+
+        return $this->belongsToMany(NotificationType::class, 'notification_type_user')
+            ->withPivot('active')
+            ->withTimestamps();
+    }
+
     public function notificationSettings() {
 
         return $this->hasMany(NotificationSetting::class);

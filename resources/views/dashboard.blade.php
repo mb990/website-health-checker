@@ -6,20 +6,34 @@
 
 @section('content')
 
-    <h2>My created projects</h2>
+    <div class="row text-center">
 
-   @if(count($projects))
+        <div class="col-md-8">
 
-       @foreach($projects as $project)
+            <h2>My created projects</h2>
 
-           <a href="/projects/{{$project->slug}}"><p class="lead">{{$project->name}}</p></a>
+            @if(count($projects))
 
-       @endforeach
+                @foreach($projects as $project)
 
-    @else
+                    <a href="/projects/{{$project->slug}}"><p class="lead">{{$project->name}}</p></a>
 
-       You dont have projects.
+                @endforeach
 
-    @endif
+            @else
+
+                You dont have projects.
+
+            @endif
+
+        </div>
+
+        <div class="col-md-4">
+
+            <a href="/settings/{{auth()->user()->slug}}"><button class="btn btn-primary">Global notification settings</button></a>
+
+        </div>
+
+    </div>
 
 @endsection

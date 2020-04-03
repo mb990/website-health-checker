@@ -18,22 +18,23 @@ use App\Mail\MailtrapExample;
 
 Route::get('/', 'PageController@index');
 Route::get('/dashboard', 'PageController@dashboard');
-Route::get('/settings/{slug}', 'NotificationSettingController@editAll');
+Route::get('/settings/{slug}', 'NotificationSettingController@editGlobal');
+Route::put('/settings/{slug}/update', 'NotificationSettingController@updateGlobal')->name('update.global.notificationSettings');
 Route::get('/projects/{slug}/settings', 'NotificationSettingController@editSingleProject');
-Route::put('/projects/{slug}/settings/update', 'NotificationSettingController@updateSingleProject')->name('updateSingleProjectNotificationSettings');
+Route::put('/projects/{slug}/settings/update', 'NotificationSettingController@updateSingleProject')->name('update.singleProject.notificationSettings');
 Route::get('/projects', 'ProjectController@all');
 Route::get('/projects/{slug}', 'ProjectController@show');
 Route::get('/projects/{slug}/{url}/checks', 'CheckController@all');
 Route::get('/projects/create/new', 'ProjectController@create')->name('create.project');
-Route::post('/projects/new/submit', 'ProjectController@store')->name('store.project')->name('storeProject');
+Route::post('/projects/new/submit', 'ProjectController@store')->name('store.project');
 Route::get('/projects/{slug}/edit', 'ProjectController@edit')->name('edit.project');
-Route::put('/projects/{slug}/update', 'ProjectController@update')->name('update.project')->name('updateProject');
-Route::delete('/projects/{slug}/delete', 'ProjectController@delete')->name('delete.project')->name('deleteProject');
+Route::put('/projects/{slug}/update', 'ProjectController@update')->name('update.project');
+Route::delete('/projects/{slug}/delete', 'ProjectController@delete')->name('delete.project');
 
-Route::post('/projects/{slug}/url/submit', 'ProjectUrlController@store')->name('storeProjectUrl');
+Route::post('/projects/{slug}/url/submit', 'ProjectUrlController@store')->name('store.projectUrl');
 Route::get('/projects/{slug}/{id}/edit', 'ProjectUrlController@edit');
-Route::put('/projects/url/{id}/update', 'ProjectUrlController@update')->name('updateProjectUrl');
-Route::delete('/projects/{slug}/url/delete', 'ProjectUrlController@delete')->name('deleteProjectUrl');
+Route::put('/projects/url/{id}/update', 'ProjectUrlController@update')->name('update.projectUrl');
+Route::delete('/projects/{slug}/url/delete', 'ProjectUrlController@delete')->name('delete.projectUrl');
 
 Auth::routes();
 

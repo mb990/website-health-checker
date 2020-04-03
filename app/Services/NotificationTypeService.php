@@ -21,4 +21,9 @@ class NotificationTypeService
 
         return $this->notificationType->findByName($name);
     }
+
+    public function findById($id) {
+
+        return $this->notificationType->findById($id);
+    }
 }

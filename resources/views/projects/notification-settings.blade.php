@@ -26,10 +26,10 @@
 
                     <div class="col-md-12">
 
-                        <form action="{{route('updateSingleProjectNotificationSettings', $project->slug)}}" method="POST" xmlns="http://www.w3.org/1999/html">
+                        <form action="{{route('update.singleProject.notificationSettings', $project->slug)}}" method="POST" xmlns="http://www.w3.org/1999/html">
                             @method('PUT')
                             @csrf
-
+{{--@dd($settings)--}}
                             @foreach($settings as $setting)
                                 <label for="active-{{$setting->id}}">{{$setting->type->name}}</label>&nbsp &nbsp &nbsp &nbsp
                                 <input class="form-check-input" @if ($setting->active == 1) checked @endif name="active-{{$setting->id}}" type="checkbox" id="active"><br>

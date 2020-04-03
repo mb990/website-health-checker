@@ -15,7 +15,7 @@
 <!--        --><?php //$urls = \App\ProjectUrl::all(); dd($urls); ?>
 
     </div>
-
+{{--@dd($project->members)--}}
     <br>
 
     <div class="row text-center">
@@ -58,7 +58,7 @@
 
                             <div class="col-md-2">
 
-                                <form action="{{route('deleteProjectUrl', $url->id)}}" method="POST"
+                                <form action="{{route('delete.projectUrl', $url->id)}}" method="POST"
                                       xmlns="http://www.w3.org/1999/html">
                                     @method('DELETE')
                                     @csrf
@@ -92,7 +92,7 @@
 
                 <div class="col-md-12">
 
-                    <form action="{{route('storeProjectUrl', $project->slug)}}" method="POST"
+                    <form action="{{route('store.projectUrl', $project->slug)}}" method="POST"
                           xmlns="http://www.w3.org/1999/html">
                         @csrf
 
@@ -103,7 +103,7 @@
 
                     <br>
 
-                    <form action="{{route('deleteProject', $project->slug)}}" method="POST"
+                    <form action="{{route('delete.project', $project->slug)}}" method="POST"
                           xmlns="http://www.w3.org/1999/html">
                         @method('DELETE')
                         @csrf

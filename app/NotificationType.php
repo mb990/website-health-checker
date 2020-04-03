@@ -13,8 +13,10 @@ class NotificationType extends Model
         return $this->hasMany(NotificationSetting::class);
     }
 
-    public function notifications() {
+    public function users() {
 
-        return $this->hasMany(Notification::class);
+        return $this->belongsToMany(User::class, 'notification_type_user')
+            ->withPivot('active')
+            ->withTimestamps();
     }
 }

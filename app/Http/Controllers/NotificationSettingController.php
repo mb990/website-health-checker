@@ -2,23 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\NotificationType;
 use App\Services\NotificationSettingService;
 use App\Services\UserService;
 use App\Services\ProjectService;
+use App\Services\NotificationTypeService;
 use App\Http\Requests\NotificationSettingRequest;
+use App\User;
 
 class NotificationSettingController extends Controller
 {
     protected $notificationSettingService;
     protected $userService;
     protected $projectService;
+    protected $notificationTypeService;
 
     public function __construct(NotificationSettingService $notificationSettingService,  UserService $userService,
-                                ProjectService $projectService)
+                                ProjectService $projectService, NotificationTypeService $notificationTypeService)
     {
         $this->notificationSettingService = $notificationSettingService;
         $this->userService = $userService;
         $this->projectService = $projectService;
+        $this->notificationTypeService = $notificationTypeService;
     }
 
     public function all($slug) {
@@ -54,13 +59,35 @@ class NotificationSettingController extends Controller
         return redirect('/projects/' . $slug . '/settings');
     }
 
-    public function editAll($slug) {
+    public function editGlobal($slug) {
 
+        $user = $this->userService->findBySlug($slug);
 
+        $settings = $this->notificationSettingService->editGlobal($user);
+
+        return view('notification-settings.settings')
+            ->with('settings', $settings)
+            ->with('user', $user);
     }
 
-    public function updateAll(NotificationSettingRequest $request, $slug) {
+    public function updateGlobal(NotificationSettingRequest $request, $slug) {
 
+        $user = $this->userService->findBySlug($slug);
 
+        $types = $this->notificationTypeService->all();
+
+        foreach ($types as $type) {
+
+            $notificationSettings = $this->notificationSettingService->findByUserAndType($user, $type->name);
+
+            $this->notificationSettingService->updateSingleProject($request, $notificationSettings);
+        }
+
+//        $globalSettings = $user->notificationTypes;
+//
+//        foreach ($globalSettings as $globalSetting) {
+//
+//            $this->notificationSettingService;
+//        }
     }
 }

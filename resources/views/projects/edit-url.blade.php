@@ -28,7 +28,7 @@
             <div class="row text-center">
         {{--@dd($url->id)--}}
                 <div class="offset-4 col-md-4">
-                    <form action="{{route('updateProjectUrl', $url->id)}}" method="POST" xmlns="http://www.w3.org/1999/html">
+                    <form action="{{route('update.projectUrl', $url->id)}}" method="POST" xmlns="http://www.w3.org/1999/html">
                         @method('PUT')
                         @csrf
 

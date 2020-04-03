@@ -24,7 +24,7 @@
 
                         <div class="panel-body">
 
-                            <form action="{{route('updateProject', $project->slug)}}" method="POST" xmlns="http://www.w3.org/1999/html">
+                            <form action="{{route('update.project', $project->slug)}}" method="POST" xmlns="http://www.w3.org/1999/html">
                                 @method('PUT')
                                 @csrf
                                 <label for="project_name">Name</label>

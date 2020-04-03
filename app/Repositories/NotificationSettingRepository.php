@@ -47,7 +47,7 @@ class NotificationSettingRepository
 //        dd($user['id']);
         return $this->notificationSetting->where('user_id', '=', $user->id)
             ->where('notification_type_id', '=', $type->id)
-            ->first();
+            ->get();
     }
 
     public function subscribeUserToNotifications($user, $project, $type) {
@@ -62,7 +62,12 @@ class NotificationSettingRepository
     }
 
     public function updateSingleProject($checked, $setting) {
-
+//        dd($checked);
         $setting->update(['active' => $checked]);
     }
+
+//    public function updateGlobal($checked, $setting) {
+////dd($checked);
+//        $this->updateSingleProject($checked, $setting);
+//    }
 }

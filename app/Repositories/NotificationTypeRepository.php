@@ -23,4 +23,9 @@ class NotificationTypeRepository
 
         return $this->notificationType->where('name', '=', $name)->first();
     }
+
+    public function findById($id) {
+
+        return $this->notificationType->where('id', '=', $id)->first();
+    }
 }

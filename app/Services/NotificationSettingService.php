@@ -17,39 +17,46 @@ class NotificationSettingService
         $this->notificationTypeService = $notificationTypeService;
     }
 
-    public function all() {
+    public function all()
+    {
 
         return $this->notificationSetting->all();
     }
 
-    public function findById($id) {
+    public function findById($id)
+    {
 
         return $this->notificationSetting->findById($id);
     }
 
-    public function findByUser($user) {
+    public function findByUser($user)
+    {
 
         return $this->notificationSetting->findByUser($user);
     }
 
-    public function findByProject($project) {
+    public function findByProject($project)
+    {
 
         return $this->notificationSetting->findByProject($project);
     }
 
-    public function findByUserAndProject($user, $project) {
+    public function findByUserAndProject($user, $project)
+    {
 
         return $this->notificationSetting->findByUserAndProject($user, $project);
     }
 
-    public function findByUserAndType($user, $name) {
+    public function findByUserAndType($user, $name)
+    {
 
         $type = $this->notificationTypeService->findByName($name);
 
         return $this->notificationSetting->findByUserAndType($user, $type);
     }
 
-    public function subscribeUserToNotifications($user, $project) {
+    public function subscribeUserToNotifications($user, $project)
+    {
 
         $notificationTypes = $this->notificationTypeService->all();
 
@@ -59,21 +66,38 @@ class NotificationSettingService
         }
     }
 
-    public function updateSingleProject(NotificationSettingRequest $request, $settings) {
+    public function updateSingleProject(NotificationSettingRequest $request, $settings)
+    {
 
         foreach ($settings as $setting) {
-
+//dd($request->input('active-' . $setting->id));
             if (!$request->input('active-' . $setting->id) == null) {
 
                 $checked = 1;
-            }
-            else {
+            } else {
 
                 $checked = 0;
             }
-
+//dd($checked);
             $this->notificationSetting->updateSingleProject($checked, $setting);
         }
+    }
+
+    public function editGlobal($user)
+    {
+
+        $settings = [];
+
+        foreach ($user->notificationTypes as $type) {
+
+            $setting = $this->notificationTypeService->findById($type->id);
+            $settings[$setting->id] = $setting;
+        }
+
+        return $settings;
+    }
+
+    public function updateGlobal($request, $settings) {
 
 
     }
