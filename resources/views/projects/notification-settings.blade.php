@@ -20,11 +20,13 @@
 
                         <h3 class="text-info">Edit your notification settings</h3>
 
-                    </div><br>
+                        <h4>Project: {{$project->name}}</h4>
+
+                    </div><hr>
 
                     <div class="col-md-12">
 
-                        <form action="{{action('NotificationSettingController@updateSingleProject', $project->slug)}}" method="POST" xmlns="http://www.w3.org/1999/html">
+                        <form action="{{route('updateSingleProjectNotificationSettings', $project->slug)}}" method="POST" xmlns="http://www.w3.org/1999/html">
                             @method('PUT')
                             @csrf
 

@@ -58,7 +58,7 @@
 
                             <div class="col-md-2">
 
-                                <form action="{{action('ProjectUrlController@delete', $url->id)}}" method="POST"
+                                <form action="{{route('deleteProjectUrl', $url->id)}}" method="POST"
                                       xmlns="http://www.w3.org/1999/html">
                                     @method('DELETE')
                                     @csrf
@@ -92,7 +92,7 @@
 
                 <div class="col-md-12">
 
-                    <form action="{{action('ProjectUrlController@store', $project->slug)}}" method="POST"
+                    <form action="{{route('storeProjectUrl', $project->slug)}}" method="POST"
                           xmlns="http://www.w3.org/1999/html">
                         @csrf
 
@@ -103,7 +103,7 @@
 
                     <br>
 
-                    <form action="{{action('ProjectController@delete', $project->slug)}}" method="POST"
+                    <form action="{{route('deleteProject', $project->slug)}}" method="POST"
                           xmlns="http://www.w3.org/1999/html">
                         @method('DELETE')
                         @csrf

@@ -16,7 +16,7 @@
 
                 <div class="panel-body">
 
-                    <form action="{{action('ProjectController@store')}}" method="POST" xmlns="http://www.w3.org/1999/html">
+                    <form action="{{route('storeProject')}}" method="POST" xmlns="http://www.w3.org/1999/html">
                         @csrf
                         <label for="project_name">Name</label>
                         <input class="form-control" name="name" type="text" id="project_name" placeholder="Project name"><br>
