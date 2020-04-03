@@ -110,6 +110,7 @@
 
                         <button class="btn btn-danger" type="submit">Delete project</button>
                     </form>
+                    <a href="/projects/{{$project->slug}}/settings"><button class="btn btn-primary">Project settings</button></a>
 
                 </div>
 

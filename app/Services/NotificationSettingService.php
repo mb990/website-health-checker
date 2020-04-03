@@ -32,6 +32,11 @@ class NotificationSettingService
         return $this->notificationSetting->findByUser($user);
     }
 
+    public function findByProject($project) {
+
+        return $this->notificationSetting->findByProject($project);
+    }
+
     public function findByUserAndProject($user, $project) {
 
         return $this->notificationSetting->findByUserAndProject($user, $project);
@@ -54,10 +59,22 @@ class NotificationSettingService
         }
     }
 
-    public function updateSingleProject(NotificationSettingRequest $request, $id) {
+    public function updateSingleProject(NotificationSettingRequest $request, $settings) {
 
-        $notificationSetting = $this->findById($id);
+        foreach ($settings as $setting) {
 
-        $this->notificationSetting->updateSingleProject($request, $notificationSetting);
+            if (!$request->input('active-' . $setting->id) == null) {
+
+                $checked = 1;
+            }
+            else {
+
+                $checked = 0;
+            }
+
+            $this->notificationSetting->updateSingleProject($checked, $setting);
+        }
+
+
     }
 }

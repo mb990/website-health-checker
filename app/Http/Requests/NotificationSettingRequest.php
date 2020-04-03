@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationSettingRequest extends FormRequest
 {
@@ -13,7 +14,8 @@ class NotificationSettingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+//        return false;
+        return Auth::check();
     }
 
     /**

@@ -31,6 +31,11 @@ class NotificationSettingRepository
         return $this->notificationSetting->where('user_id', '=', $user->id)->get();
     }
 
+    public function findByProject($project) {
+
+        return $this->notificationSetting->where('project_id', '=', $project->id)->get();
+    }
+
     public function findByUserAndProject($user, $project) {
 
         return $this->notificationSetting->where('user_id', '=', $user->id)
@@ -56,8 +61,8 @@ class NotificationSettingRepository
         $notificationSetting->save();
     }
 
-    public function updateSingleProject(NotificationSettingRequest $request, $setting) {
+    public function updateSingleProject($checked, $setting) {
 
-        $setting->update(['active' => $request['active']]);
+        $setting->update(['active' => $checked]);
     }
 }

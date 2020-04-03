@@ -45,7 +45,13 @@ class NotificationSettingController extends Controller
 
     public function updateSingleProject (NotificationSettingRequest $request, $slug) {
 
+        $project = $this->projectService->readBySlug($slug);
 
+        $settings = $this->notificationSettingService->findByProject($project);
+
+        $this->notificationSettingService->updateSingleProject($request, $settings);
+
+        return redirect('/projects/' . $slug . '/settings');
     }
 
     public function editAll($slug) {
