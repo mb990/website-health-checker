@@ -61,11 +61,7 @@ class ProjectService
 
     public function projectUsers($project) {
 
-        $users = $project->members;
-
-        $users[] = $project->creator;
-
-        return $users;
+        return $this->project->projectUsers($project);
     }
 
     public function usersToNotify($project) {

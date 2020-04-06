@@ -55,6 +55,15 @@ class ProjectRepository
         return $this->project->where('slug', '=', $slug)->delete();
     }
 
+    public function projectUsers($project) {
+
+        $users = $project->members;
+
+        $users[] = $project->creator;
+
+        return $users;
+    }
+
     public function setProjectDown($url) {
 
         $url->project->up = 0;
