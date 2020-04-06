@@ -63,10 +63,7 @@ class NotificationSettingController extends Controller
 
         $user = $this->userService->findBySlug($slug);
 
-        $settings = $this->notificationSettingService->editGlobal($user);
-
         return view('notification-settings.settings')
-            ->with('settings', $settings)
             ->with('user', $user);
     }
 
@@ -74,20 +71,17 @@ class NotificationSettingController extends Controller
 
         $user = $this->userService->findBySlug($slug);
 
-        $types = $this->notificationTypeService->all();
+        $types = $user->notificationTypes;
 
         foreach ($types as $type) {
 
-            $notificationSettings = $this->notificationSettingService->findByUserAndType($user, $type->name);
+            $notificationSettings = $this->notificationSettingService->findByUserAndType($user, $type);
 
-            $this->notificationSettingService->updateSingleProject($request, $notificationSettings);
+            $this->notificationSettingService->updateForType($request, $notificationSettings);
         }
 
-//        $globalSettings = $user->notificationTypes;
-//
-//        foreach ($globalSettings as $globalSetting) {
-//
-//            $this->notificationSettingService;
-//        }
+        $this->notificationSettingService->updateGlobal($request, $types);
+
+        return redirect('/settings/' . $slug);
     }
 }

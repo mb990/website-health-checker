@@ -44,7 +44,7 @@ class NotificationSettingRepository
     }
 
     public function findByUserAndType($user, $type) {
-//        dd($user['id']);
+//dd($type);
         return $this->notificationSetting->where('user_id', '=', $user->id)
             ->where('notification_type_id', '=', $type->id)
             ->get();
@@ -61,13 +61,8 @@ class NotificationSettingRepository
         $notificationSetting->save();
     }
 
-    public function updateSingleProject($checked, $setting) {
-//        dd($checked);
+    public function updateSetting($checked, $setting) {
+
         $setting->update(['active' => $checked]);
     }
-
-//    public function updateGlobal($checked, $setting) {
-////dd($checked);
-//        $this->updateSingleProject($checked, $setting);
-//    }
 }

@@ -31,6 +31,7 @@
                             @csrf
 {{--@dd($settings)--}}
                             @foreach($settings as $setting)
+                                @dd($setting->id)
                                 <label for="active-{{$setting->id}}">{{$setting->type->name}}</label>&nbsp &nbsp &nbsp &nbsp
                                 <input class="form-check-input" @if ($setting->active == 1) checked @endif name="active-{{$setting->id}}" type="checkbox" id="active"><br>
                             @endforeach

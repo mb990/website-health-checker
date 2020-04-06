@@ -32,8 +32,8 @@
                                 @csrf
 
                                 @foreach($user->notificationTypes as $type)
-{{--                                    @dd($type->pivot->notification_type_id)--}}
-                                    <label for="active-{{$type->pivot->notification_type_id}}">{{$settings[$type->pivot->notification_type_id]->name}}</label> &nbsp &nbsp &nbsp &nbsp
+{{--                                    @dd($user->notificationTypes)--}}
+                                    <label for="active-{{$type->id}}">{{$user->notificationTypes[$type->pivot->notification_type_id -1]->name}}</label> &nbsp &nbsp &nbsp &nbsp
                                     <input class="form-check-input" @if ($type->pivot->active == 1) checked @endif name="active-{{$type->id}}" type="checkbox" id="active"><br>
                                 @endforeach
                                 <button class="btn btn-primary" type="submit">Submit</button>

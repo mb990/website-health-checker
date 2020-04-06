@@ -51,7 +51,7 @@ class NotificationSettingService
     {
 
         $type = $this->notificationTypeService->findByName($name);
-
+//dd($type);
         return $this->notificationSetting->findByUserAndType($user, $type);
     }
 
@@ -66,39 +66,60 @@ class NotificationSettingService
         }
     }
 
+public function isSettingChecked(NotificationSettingRequest $request, $id) {
+
+    if (!$request->input('active-' . $id) == null) {
+
+        $checked = 1;
+
+    } else {
+
+        $checked = 0;
+    }
+
+    return $checked;
+}
+
     public function updateSingleProject(NotificationSettingRequest $request, $settings)
     {
+        foreach ($settings as $setting) {
+
+            $checked = $this->isSettingChecked($request, $setting->id);
+
+            $this->notificationSetting->updateSetting($checked, $setting);
+        }
+    }
+
+//    public function editGlobal($user)
+//    {
+//        $types = [];
+//
+//        foreach ($user->notificationTypes as $type) {
+//
+//            $nType = $this->notificationTypeService->findById($type->id);
+//            $types[$nType->id] = $nType;
+//        }
+//dd($types);
+//        return $types;
+//    }
+
+    public function updateForType(NotificationSettingRequest $request, $settings) {
 
         foreach ($settings as $setting) {
-//dd($request->input('active-' . $setting->id));
-            if (!$request->input('active-' . $setting->id) == null) {
 
-                $checked = 1;
-            } else {
+            $checked = $this->isSettingChecked($request, $setting->notification_type_id);
 
-                $checked = 0;
-            }
-//dd($checked);
-            $this->notificationSetting->updateSingleProject($checked, $setting);
+            $this->notificationSetting->updateSetting($checked, $setting);
         }
     }
 
-    public function editGlobal($user)
-    {
+    public function updateGlobal(NotificationSettingRequest $request, $types) {
 
-        $settings = [];
+        foreach ($types as $type) {
 
-        foreach ($user->notificationTypes as $type) {
+            $checked = $this->isSettingChecked($request, $type->id);
 
-            $setting = $this->notificationTypeService->findById($type->id);
-            $settings[$setting->id] = $setting;
+            $this->notificationSetting->updateSetting($checked, $type->pivot);
         }
-
-        return $settings;
-    }
-
-    public function updateGlobal($request, $settings) {
-
-
     }
 }
