@@ -11,17 +11,21 @@
 
             <h1>Invite member to your team</h1>
 {{--            @dd($users)--}}
-            <form action="{{route('invite', $project->slug)}}"></form>
+            <form action="{{route('process', $project->slug)}}">
 
-            <select id="user" name="user">
+                <select id="user" name="user">
 
-                @foreach($users as $user)
-{{--                    @dd($user)--}}
-                    <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
+                    @foreach($users as $user)
+    {{--                    @dd($user)--}}
+                        <option class="form-control" name="user" value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
 
-                @endforeach
+                    @endforeach
 
-            </select>
+                </select><br><br>
+
+                <button class="btn btn-success" type="submit" value="Submit">Submit</button>
+
+            </form>
 
         </div>
 

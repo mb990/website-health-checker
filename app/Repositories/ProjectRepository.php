@@ -64,11 +64,6 @@ class ProjectRepository
         return $users;
     }
 
-    public function usersNotInProject($project) {
-
-
-    }
-
     public function setProjectDown($url) {
 
         $url->project->up = 0;

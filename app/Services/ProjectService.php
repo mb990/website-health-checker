@@ -71,11 +71,11 @@ class ProjectService
 
         $projectUsers = $this->projectUsers($project)->pluck('id')->toArray();
 
-        $usersId = array_diff($allUsers, $projectUsers);
+        $usersIds = array_diff($allUsers, $projectUsers);
 
         $users = [];
 
-        foreach ($usersId as $id) {
+        foreach ($usersIds as $id) {
 
             $user = $this->userService->findById($id);
 
