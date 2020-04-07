@@ -73,8 +73,8 @@ class ProjectController extends Controller
 
         $project = $this->projectService->readBySlug($slug);
 
-        $users = [];
-
+        $users = $this->projectService->usersNotInProject($project);
+//dd($users);
         return view('teams.invite')
             ->with('project', $project)
             ->with('users', $users);

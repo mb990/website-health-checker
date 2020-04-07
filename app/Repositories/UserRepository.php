@@ -15,6 +15,11 @@ class UserRepository
         $this->user = $user;
     }
 
+    public function all() {
+
+        return $this->user->all();
+    }
+
     public function findById($id) {
 
         return $this->user->find($id);

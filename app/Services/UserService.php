@@ -15,6 +15,11 @@ class UserService
         $this->notificationSettingService = $notificationSettingService;
     }
 
+    public function all() {
+
+        return $this->user->all();
+    }
+
     public function findById($id) {
 
         return $this->user->findById($id);

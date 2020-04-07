@@ -11,6 +11,7 @@ use App\Services\UserService;
 use App\Services\ProjectUrlService;
 use App\Services\NotificationSettingService;
 use Illuminate\Notifications\Notifiable;
+use phpDocumentor\Reflection\Types\Collection;
 
 class ProjectService
 {
@@ -62,6 +63,28 @@ class ProjectService
     public function projectUsers($project) {
 
         return $this->project->projectUsers($project);
+    }
+
+    public function usersNotInProject($project) {
+
+        $allUsers = $this->userService->all()->pluck('id')->toArray();
+
+        $projectUsers = $this->projectUsers($project)->pluck('id')->toArray();
+
+        $usersId = array_diff($allUsers, $projectUsers);
+
+        $users = [];
+
+        foreach ($usersId as $id) {
+
+            $user = $this->userService->findById($id);
+
+            $users[] = $user;
+        }
+
+//        $users = collect($users);
+
+        return $users;
     }
 
     public function usersToNotify($project) {
