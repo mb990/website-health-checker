@@ -40,9 +40,4 @@ class Project extends Model
 
         return $this->hasMany(NotificationSetting::class);
     }
-
-    public function notifications() {
-
-        return $this->hasMany(Notification::class);
-    }
 }

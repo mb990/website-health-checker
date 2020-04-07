@@ -37,7 +37,9 @@ Route::put('/projects/url/{id}/update', 'ProjectUrlController@update')->name('up
 Route::delete('/projects/{slug}/url/delete', 'ProjectUrlController@delete')->name('delete.projectUrl');
 
 Route::get('/projects/{slug}/invite', 'InviteController@invite')->name('invite');
-Route::get('/projects/{slug}/process', 'InviteController@process')->name('process');
+Route::post('/projects/{slug}/process', 'InviteController@process')->name('process');
+Route::get('/invitation', 'InviteController@viewInvitation')->name('view.invitation');
+Route::get('/invitation/accept/{token}', 'InviteController@accept')->name('accept');
 
 Auth::routes();
 

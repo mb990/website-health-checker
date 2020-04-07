@@ -38,4 +38,11 @@ class InviteController extends Controller
 
         return redirect('/projects/' . $slug);
     }
+
+    public function view($token) {
+
+        $this->inviteService->view($token);
+
+        return view('teams.view-invitation');
+    }
 }

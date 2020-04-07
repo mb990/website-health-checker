@@ -11,8 +11,8 @@
 
             <h1>Invite member to your team</h1>
 {{--            @dd($users)--}}
-            <form action="{{route('process', $project->slug)}}">
-
+            <form action="{{route('process', $project->slug)}}" method="POST">
+                @csrf
                 <select id="user" name="user">
 
                     @foreach($users as $user)

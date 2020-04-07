@@ -92,6 +92,11 @@ class ProjectService
         return $this->projectUsers($project);
     }
 
+    public function addUserToProject($project, $user) {
+
+       return $this->project->addUserToProject($project, $user);
+    }
+
     public function notificationDown($user) {
 
         $user->notify(new ProjectDownEmail());

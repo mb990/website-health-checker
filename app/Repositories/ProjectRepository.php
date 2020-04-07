@@ -64,6 +64,11 @@ class ProjectRepository
         return $users;
     }
 
+    public function addUserToProject($project, $user) {
+
+        $project->members[] = $user;
+    }
+
     public function setProjectDown($url) {
 
         $url->project->up = 0;
