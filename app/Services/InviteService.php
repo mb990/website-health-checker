@@ -38,31 +38,14 @@ class InviteService
     }
 
     public function findByToken($token) {
-//dd($token);
+
         return $this->invite->findByToken($token);
     }
 
-//    public function inviteUser($user, $project) {
-//
-//        $users = $this->projectService->usersNotInProject($project);
-//
-//        if (($key = array_search($user, $users)) !== false) {
-//            unset($users[$key]);
-//        }
-//
-//        dd($users);
-//
-//        return $users;
-//    }
+    public function findByProject($project) {
 
-//    public function invitedUsers($project) {
-//
-//        $users = [];
-//
-//        $users[$project->id] = $this->inviteUser()
-//
-//        return $users;
-//    }
+        return $this->invite->findByProject($project);
+    }
 
     public function process(Request $request, $slug) {
 
@@ -79,8 +62,6 @@ class InviteService
         $projectInvitationData['token'] = $token;
 
         $this->store($user, $project, $token);
-
-//        $this->inviteUser($user, $project);
 
         Mail::to($user->email)->send(new InviteCreated($projectInvitationData));
 

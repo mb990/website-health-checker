@@ -28,6 +28,11 @@ class InviteRepository
         return $this->invite->where('token', '=', $token)->delete();
     }
 
+    public function findByProject($project) {
+
+        return $this->invite->where('project_id', '=', $project->id)->get();
+    }
+
     public function findByToken($token) {
 
         return $this->invite->where('token', '=', $token)->first();
