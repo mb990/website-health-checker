@@ -39,10 +39,36 @@ class InviteController extends Controller
         return redirect('/projects/' . $slug);
     }
 
-    public function view($token) {
+    public function view($projectSlug, $userSlug, $token) {
 
-        $this->inviteService->view($token);
+        $project = $this->projectService->readBySlug($projectSlug);
 
-        return view('teams.view-invitation');
+        $user = $this->userService->findBySlug($userSlug);
+
+        $this->inviteService->ifTokenExists($token);
+
+        return view('teams.view-invitation')
+            ->with('token', $token)
+            ->with('user', $user)
+            ->with('project', $project);
+    }
+
+    public function accept($projectSlug, $userSlug, $token) {
+
+        $project = $this->projectService->readBySlug($projectSlug);
+
+        $user = $this->userService->findBySlug($userSlug);
+
+        $this->inviteService->accept($project, $user, $token);
+
+        return view('teams.accepted-invitation')
+            ->with('project', $project);
+    }
+
+    public function reject($token) {
+
+        $this->inviteService->reject($token);
+
+        return redirect('/dashboard');
     }
 }

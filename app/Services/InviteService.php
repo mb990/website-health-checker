@@ -27,6 +27,43 @@ class InviteService
         $this->notificationSettingService = $notificationSettingService;
     }
 
+    public function store($token, $email) {
+
+        return $this->invite->store($token, $email);
+    }
+
+    public function delete($token) {
+
+        return $this->invite->delete($token);
+    }
+
+    public function findByToken($token) {
+//dd($token);
+        return $this->invite->findByToken($token);
+    }
+
+//    public function inviteUser($user, $project) {
+//
+//        $users = $this->projectService->usersNotInProject($project);
+//
+//        if (($key = array_search($user, $users)) !== false) {
+//            unset($users[$key]);
+//        }
+//
+//        dd($users);
+//
+//        return $users;
+//    }
+
+//    public function invitedUsers($project) {
+//
+//        $users = [];
+//
+//        $users[$project->id] = $this->inviteUser()
+//
+//        return $users;
+//    }
+
     public function process(Request $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
@@ -39,9 +76,13 @@ class InviteService
 
         $token = $this->generateToken();
 
-        $this->invite->store($token, $projectInvitationData['recipientEmail']);
+        $projectInvitationData['token'] = $token;
 
-        Mail::to($projectInvitationData['recipientEmail'])->send(new InviteCreated($projectInvitationData));
+        $this->store($token, $user->email);
+
+//        $this->inviteUser($user, $project);
+
+        Mail::to($user->email)->send(new InviteCreated($projectInvitationData));
 
         return $projectInvitationData;
     }
@@ -62,23 +103,35 @@ class InviteService
             'senderEmail' => $project->creator->email,
             'senderName' => ucfirst($project->creator->first_name) . ' ' . ucfirst($project->creator->last_name),
             'projectName' => $project->name,
-//            'projectSlug' => $project->slug,
+            'projectSlug' => $project->slug,
             'recipientEmail' => $user->email,
-            'recipientName' => ucfirst($user->first_name) . ' ' . ucfirst($user->last_name)
+            'recipientName' => ucfirst($user->first_name) . ' ' . ucfirst($user->last_name),
+            'recipientSlug' => $user->slug,
+            'recipientId' => $user->id
         ];
 
         return $data;
     }
 
-    public function view($token, $project) {
+    public function ifTokenExists($token) {
 
-        if(!$this->invite->findByToken($token)) {
+        if(!$this->findByToken($token)) {
 
             abort(404);
         }
+    }
+
+    public function accept($project, $user, $token) {
 
         $this->projectService->addUserToProject($project, $user);
 
         $this->notificationSettingService->subscribeUserToNotifications($user, $project);
+
+        $this->delete($token);
+    }
+
+    public function reject($token) {
+
+        $this->delete($token);
     }
 }

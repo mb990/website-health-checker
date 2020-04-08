@@ -38,8 +38,9 @@ Route::delete('/projects/{slug}/url/delete', 'ProjectUrlController@delete')->nam
 
 Route::get('/projects/{slug}/invite', 'InviteController@invite')->name('invite');
 Route::post('/projects/{slug}/process', 'InviteController@process')->name('process');
-Route::get('/invitation', 'InviteController@viewInvitation')->name('view.invitation');
-Route::get('/invitation/accept/{token}', 'InviteController@accept')->name('accept');
+Route::get('/invitation/{projectSlug}/{userSlug}/{token}', 'InviteController@view')->name('view.invitation');
+Route::delete('/invitation/{projectSlug}/{userSlug}/{token}/accepted', 'InviteController@accept')->name('accept');
+Route::delete('/invitation/{token}/rejected', 'InviteController@reject')->name('reject');
 
 Auth::routes();
 

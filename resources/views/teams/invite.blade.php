@@ -10,13 +10,15 @@
         <div class="col-md-12">
 
             <h1>Invite member to your team</h1>
-{{--            @dd($users)--}}
+{{--            @foreach($users as $user)--}}
+{{--                @dd($user)--}}
+{{--            @endforeach--}}
             <form action="{{route('process', $project->slug)}}" method="POST">
                 @csrf
                 <select id="user" name="user">
 
                     @foreach($users as $user)
-    {{--                    @dd($user)--}}
+{{--                        @dd($users)--}}
                         <option class="form-control" name="user" value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
 
                     @endforeach

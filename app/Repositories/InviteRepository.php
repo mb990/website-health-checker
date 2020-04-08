@@ -22,6 +22,11 @@ class InviteRepository
         ]);
     }
 
+    public function delete($token) {
+
+        return $this->invite->where('token', '=', $token)->delete();
+    }
+
     public function findByToken($token) {
 
         return $this->invite->where('token', '=', $token)->first();

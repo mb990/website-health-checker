@@ -35,6 +35,8 @@ class InviteCreated extends Mailable
             ->to($this->projectInvitationData['recipientEmail'], $this->projectInvitationData['recipientName'])
 //            ->markdown('notifications:email')
 //            ->markdown($this->data['senderName'] . ' invited you to join project ' . $this->data['project'])
-            ->view('emails.project-invite');
+            ->view('emails.project-invite')
+//            ->view('teams.view-invitation')
+            ->with('projectInvitationData', $this->projectInvitationData);
     }
 }
