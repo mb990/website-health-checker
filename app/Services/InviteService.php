@@ -47,6 +47,18 @@ class InviteService
         return $this->invite->findByProject($project);
     }
 
+    public function invitedUsers($project) {
+
+        $users = $this->findByProject($project);
+
+        return $users;
+    }
+
+    public function invitableUsers($project) {
+
+        //
+    }
+
     public function process(Request $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
