@@ -14,10 +14,11 @@ class InviteRepository
         $this->invite = $invite;
     }
 
-    public function store($token, $email) {
+    public function store($user, $project, $token) {
 
         return $this->invite->create([
-            'email' => $email,
+            'user_id' => $user->id,
+            'project_id' => $project->id,
             'token' => $token
         ]);
     }

@@ -27,9 +27,9 @@ class InviteService
         $this->notificationSettingService = $notificationSettingService;
     }
 
-    public function store($token, $email) {
+    public function store($user, $project, $token) {
 
-        return $this->invite->store($token, $email);
+        return $this->invite->store($user, $project, $token);
     }
 
     public function delete($token) {
@@ -78,7 +78,7 @@ class InviteService
 
         $projectInvitationData['token'] = $token;
 
-        $this->store($token, $user->email);
+        $this->store($user, $project, $token);
 
 //        $this->inviteUser($user, $project);
 
