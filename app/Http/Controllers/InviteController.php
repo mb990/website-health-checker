@@ -26,7 +26,8 @@ class InviteController extends Controller
         $project = $this->projectService->readBySlug($slug);
 
         $users = $this->inviteService->invitableUsers($project);
-
+//        $users = $this->inviteService->deleteExpired();
+//dd($users);
         return view('teams.invite')
             ->with('project', $project)
             ->with('users', $users);

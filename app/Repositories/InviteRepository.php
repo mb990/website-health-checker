@@ -43,7 +43,7 @@ class InviteRepository
         return $this->invite->where('token', '=', $token)->first();
     }
 
-    public function checkForDeletion($invites, $time) {
+    public function deleteExpired($time) {
 
         return $this->invite->where('created_at', '<', $time)->delete();
     }

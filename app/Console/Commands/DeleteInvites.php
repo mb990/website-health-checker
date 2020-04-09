@@ -41,6 +41,6 @@ class DeleteInvites extends Command
      */
     public function handle()
     {
-        $this->inviteService->checkForDeletion();
+        $this->inviteService->deleteExpired();
     }
 }

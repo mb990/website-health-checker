@@ -53,13 +53,11 @@ class InviteService
         return $this->invite->findByProject($project);
     }
 
-    public function checkForDeletion() {
-
-        $invites = $this->all();
+    public function deleteExpired() {
 
         $time = Carbon::now()->subDays(5);
 
-        return $this->invite->checkForDeletion($invites, $time);
+        return $this->invite->deleteExpired($time);
     }
 
     public function invitedUsers($project) {
