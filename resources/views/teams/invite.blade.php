@@ -13,6 +13,7 @@
 {{--            @foreach($users as $user)--}}
 {{--                @dd($user)--}}
 {{--            @endforeach--}}
+{{--            @dd($users)--}}
             <form action="{{route('process', $project->slug)}}" method="POST">
                 @csrf
                 <select id="user" name="user">

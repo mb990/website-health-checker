@@ -21,7 +21,7 @@ class UserRepository
     }
 
     public function findById($id) {
-
+//dd($id);
         return $this->user->find($id);
     }
 
@@ -30,10 +30,10 @@ class UserRepository
         return $this->user->where('slug', '=', $slug)->first();
     }
 
-    public function hasNotification($name) {
-
-        return $this->user->whereHas('notifications', function ($q) use ($name) {
-            $q->whereHas('notification_type_id', '=', $name);
-        })->first();
-    }
+//    public function hasNotification($name) {
+//
+//        return $this->user->whereHas('notifications', function ($q) use ($name) {
+//            $q->whereHas('notification_type_id', '=', $name);
+//        })->first();
+//    }
 }

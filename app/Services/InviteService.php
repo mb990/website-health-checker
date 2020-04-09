@@ -49,14 +49,40 @@ class InviteService
 
     public function invitedUsers($project) {
 
-        $users = $this->findByProject($project);
+        $invites = $this->findByProject($project)->pluck('user_id')->toArray();
+
+        $users = [];
+
+        foreach ($invites as $invite) {
+
+            $user = $this->userService->findById($invite);
+
+            $users[] = $user;
+        }
+
+//        $users = collect($users);
 
         return $users;
     }
 
     public function invitableUsers($project) {
 
-        //
+        $usersNotInProject = $this->projectService->usersNotInProject($project);
+
+        $invitedUsers = $this->invitedUsers($project);
+
+        $usersIds = array_diff($usersNotInProject, $invitedUsers);
+
+        $invitableUsers = [];
+
+        foreach ($usersIds as $id) {
+
+            $user = $this->userService->findById($id['id']);
+
+            $invitableUsers[] = $user;
+        }
+
+        return $invitableUsers;
     }
 
     public function process(Request $request, $slug) {
