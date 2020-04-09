@@ -15,9 +15,9 @@ class UserRepository
         $this->user = $user;
     }
 
-    public function all() {
+    public function all($perPage) {
 
-        return $this->user->all();
+        return $this->user->paginate($perPage);
     }
 
     public function findById($id) {
@@ -30,10 +30,18 @@ class UserRepository
         return $this->user->where('slug', '=', $slug)->first();
     }
 
-//    public function hasNotification($name) {
-//
-//        return $this->user->whereHas('notifications', function ($q) use ($name) {
-//            $q->whereHas('notification_type_id', '=', $name);
-//        })->first();
-//    }
+    public function activate(User $user) {
+
+        $user->update(['active' => true]);
+    }
+
+    public function deactivate(User $user) {
+
+        $user->update(['active' => false]);
+    }
+
+    public function destroy(User $user) {
+
+        $user->forceDelete();
+    }
 }

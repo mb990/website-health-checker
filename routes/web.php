@@ -20,6 +20,11 @@ Route::get('/admin/projects', 'AdminProjectController@all');
 Route::put('/admin/projects/{slug}/deactivate', 'AdminProjectController@deactivate')->name('deactivate.project');
 Route::put('/admin/projects/{slug}/activate', 'AdminProjectController@activate')->name('activate.project');
 Route::delete('/admin/projects/{slug}/delete', 'AdminProjectController@destroy')->name('destroy.project');
+Route::get('/admin/users', 'AdminUserController@all');
+Route::put('/admin/users/{slug}/deactivate', 'AdminUserController@deactivate')->name('deactivate.user');
+Route::put('/admin/users/{slug}/activate', 'AdminUserController@activate')->name('activate.user');
+Route::delete('/admin/users/{slug}/delete', 'AdminUserController@destroy')->name('destroy.user');
+
 
 Route::get('/', 'PageController@index');
 Route::get('/dashboard', 'PageController@dashboard');

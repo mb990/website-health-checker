@@ -15,9 +15,9 @@ class UserService
         $this->notificationSettingService = $notificationSettingService;
     }
 
-    public function all() {
+    public function all($perPage) {
 
-        return $this->user->all();
+        return $this->user->all($perPage);
     }
 
     public function findById($id) {
@@ -28,6 +28,21 @@ class UserService
     public function findBySlug($slug) {
 
         return $this->user->findBySlug($slug);
+    }
+
+    public function activate($user) {
+
+        return $this->user->activate($user);
+    }
+
+    public function deactivate($user) {
+
+        return $this->user->deactivate($user);
+    }
+
+    public function destroy($user) {
+
+        return $this->user->destroy($user);
     }
 
     public function hasNotificationActive($user, $type)
