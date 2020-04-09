@@ -18,7 +18,12 @@ class ProjectRepository
         $this->project = $project;
     }
 
-    public function all($perPage) {
+    public function all() {
+
+        return $this->project->all();
+    }
+
+    public function allPaginated($perPage) {
 
         return $this->project->paginate($perPage);
     }

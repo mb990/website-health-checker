@@ -92,7 +92,11 @@ class InviteService
 
             $user = $this->userService->findById($id['id']);
 
-            $invitableUsers[] = $user;
+            if ($this->userService->checkIfActive($user)) {
+
+                $invitableUsers[] = $user;
+
+            }
         }
 
         return $invitableUsers;

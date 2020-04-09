@@ -15,7 +15,12 @@ class UserRepository
         $this->user = $user;
     }
 
-    public function all($perPage) {
+    public function all() {
+
+        return $this->user->all();
+    }
+
+    public function allPaginated($perPage) {
 
         return $this->user->paginate($perPage);
     }

@@ -16,7 +16,7 @@ class AdminUserController extends Controller
 
     public function all() {
 
-        $users = $this->userService->all(10);
+        $users = $this->userService->allPaginated(10);
 
         return view('admin.users.all')->with('users', $users);
     }

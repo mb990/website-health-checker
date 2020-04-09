@@ -16,7 +16,7 @@ class AdminProjectController extends Controller
 
     public function all() {
 
-        $projects = $this->projectService->all(10);
+        $projects = $this->projectService->allPaginated(10);
 
         return view('admin.projects.all')->with('projects', $projects);
     }

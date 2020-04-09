@@ -15,9 +15,14 @@ class UserService
         $this->notificationSettingService = $notificationSettingService;
     }
 
-    public function all($perPage) {
+    public function all() {
 
-        return $this->user->all($perPage);
+        return $this->user->all();
+    }
+
+    public function allPaginated($perPage) {
+
+        return $this->user->allPaginated($perPage);
     }
 
     public function findById($id) {
@@ -43,6 +48,14 @@ class UserService
     public function destroy($user) {
 
         return $this->user->destroy($user);
+    }
+
+    public function checkIfActive($user) {
+
+        if ($user->active) {
+            return true;
+        }
+        return false;
     }
 
     public function hasNotificationActive($user, $type)

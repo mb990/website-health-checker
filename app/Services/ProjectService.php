@@ -28,7 +28,12 @@ class ProjectService
         $this->notificationSettingService = $notificationSettingService;
     }
 
-    public function all($perPage) {
+    public function all() {
+
+        return $this->project->all();
+    }
+
+    public function allPaginated($perPage) {
 
         return $this->project->all($perPage);
     }
