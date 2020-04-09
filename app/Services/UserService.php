@@ -58,10 +58,10 @@ class UserService
         return false;
     }
 
-    public function hasNotificationActive($user, $type)
+    public function hasNotificationActive($user, $typeName, $project)
     {
 
-        $notification = $this->notificationSettingService->findByUserAndType($user, $type);
+        $notification = $this->notificationSettingService->findByUserTypeAndProject($user, $typeName, $project);
 //        dd($notification);
 
         if (isset($notification)) {

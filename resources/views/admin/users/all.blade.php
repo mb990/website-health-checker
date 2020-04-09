@@ -19,7 +19,7 @@
 
                     <a href="/admin/users/{{$user->slug}}">
 
-                        <p class="text-secondary"><strong>Predavač:</strong> {{$user->first_name}} {{$user->last_name}}</p>
+                        <p class="text-secondary"><strong>User:</strong> {{$user->first_name}} {{$user->last_name}}</p>
 
                     </a>
 
@@ -71,7 +71,7 @@
 
     @else
 
-        <p class="p-3 mb-2 bg-warning text-dark">Trenutno nema edukatora.</p>
+        <p class="p-3 mb-2 bg-warning text-dark">No users at the moment.</p>
 
     @endif
 

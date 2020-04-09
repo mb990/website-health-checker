@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\NotificationTypeService;
 use App\Services\UserService;
 use App\Services\ProjectService;
 use App\Services\ProjectUrlService;
@@ -20,10 +21,12 @@ class PageController extends Controller
     protected $projectRepository;
     protected $httpService;
     protected $checkService;
+    protected $notificationTypeService;
 
     public function __construct(ProjectService $projectService, UserService $userService, ProjectUrlService $projectUrlService,
                                 NotificationSettingService $notificationSettingService, ProjectRepository $projectRepository,
-                                HttpService $httpService, CheckService $checkService)
+                                HttpService $httpService, CheckService $checkService,
+                                NotificationTypeService $notificationTypeService)
     {
         $this->projectService = $projectService;
         $this->userService = $userService;
@@ -32,6 +35,7 @@ class PageController extends Controller
         $this->projectRepository = $projectRepository;
         $this->httpService = $httpService;
         $this->checkService = $checkService;
+        $this->notificationTypeService = $notificationTypeService;
     }
 
     public function index() {
@@ -48,37 +52,24 @@ class PageController extends Controller
 
     public function test() {
 
-        $urls = $this->projectUrlService->all();
-
-        foreach ($urls as $url) {
-
-//            $response = $this->httpService->get($url->url);
-
-//            $requestStart = Carbon::now();
-//            $response = $this->httpService->get('https://www.lynch.com/pariatur-rem-nihil-adipisci-omnis-cupiditate-dolor-dolorem');
-//            $requestEnd = Carbon::now();
-
-//            $responseTime = $this->checkService->measureResponseTime($requestStart, $requestEnd);
-
-//            dd($response);
-        }
-
-//        $setting = $this->notificationSettingService->findById(1);
+//        $types = $this->notificationTypeService->all();
 //
-//        dd($setting->type->name);
-
-//        $notifications = $this->notificationSettingService->all();
+//        foreach ($types as $type) {
 //
-//        foreach ($notifications as $setting) {
+//           $name = $this->notificationTypeService->findByName($type);
 //
-//            echo $setting->id . '<br>';
+//           echo $name->name . '<br>';
 //        }
 
+        $url = $this->projectUrlService->read(2);
 
+        $user = $this->userService->findById(1);
 
-//        $project = $this->projectService->read('deangelo-bernier');
-//
-//            dd($this->projectService->usersToNotify($project)); // vraca kreatora minimum
+//        $active = $this->userService->hasNotificationActive($user, 'url_up');
+
+        $active = $this->userService->hasNotificationActive($user, 'url_down', $url->project);
+
+//        dd($active);
 
         return view('test');
     }

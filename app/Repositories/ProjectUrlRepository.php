@@ -75,4 +75,18 @@ class ProjectUrlRepository
 
         return $check;
     }
+
+    public function setProjectDown($url) {
+
+        $url->project->up = 0;
+
+        $url->project->save();
+    }
+
+    public function setProjectUp($url) {
+
+        $url->project->up = 1;
+
+        $url->project->save();
+    }
 }

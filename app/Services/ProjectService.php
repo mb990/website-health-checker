@@ -35,7 +35,7 @@ class ProjectService
 
     public function allPaginated($perPage) {
 
-        return $this->project->all($perPage);
+        return $this->project->allPaginated($perPage);
     }
 
     public function store($attributes) {
@@ -128,7 +128,7 @@ class ProjectService
 
         foreach ($this->usersToNotify($url->project) as $user) {
 
-            if ($this->userService->hasNotificationActive($user, 'url_down')) {
+            if ($this->userService->hasNotificationActive($user, 'url_down', $url->project)) {
 
                 $this->notificationDown($user);
 
@@ -140,26 +140,12 @@ class ProjectService
 
         foreach ($this->usersToNotify($url->project) as $user) {
 
-            if ($this->userService->hasNotificationActive($user, 'url_up')) {
+            if ($this->userService->hasNotificationActive($user, 'url_up', $url->project)) {
 
                 $this->notificationUp($user);
 
             }
         }
-    }
-
-    public function setProjectDown($id) {
-
-        $url = $this->projectUrlService->read($id);
-
-        $this->project->setProjectDown($url);
-    }
-
-    public function setProjectUp($id) {
-
-        $url = $this->projectUrlService->read($id);
-
-        $this->project->setProjectUp($url);
     }
 
     public function isActive($url) {

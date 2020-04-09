@@ -51,6 +51,11 @@ class ProjectUrlService
 
     public function shouldCheck($url) {
 
+        if($url->last_checked_at == null) {
+
+            return true;
+        }
+
         if (Carbon::now()->diffInSeconds($url->last_checked_at) > $url->checkFrequency->value) {
             return true;
         }
@@ -74,6 +79,7 @@ class ProjectUrlService
             $lastCheckedAt = Carbon::now();
 
             return $this->projectUrl->createCheck($url, $responseTime, $responseCode, $lastCheckedAt);
+
         }
     }
 
@@ -88,15 +94,29 @@ class ProjectUrlService
             if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url)) {
 
                 $this->projectService->notifyMembersProjectDown($url);
-                $this->projectService->setProjectDown($url->id);
+                $this->setProjectDown($url->id);
 
             }
 
             else if(!$this->projectService->isActive($url) && $this->httpService->requestSuccessful($check)) {
 
                 $this->projectService->notifyMembersProjectUp($url);
-                $this->projectService->setProjectUp($url->id);
+                $this->setProjectUp($url->id);
             }
         }
+    }
+
+    public function setProjectDown($id) {
+
+        $url = $this->read($id);
+
+        $this->projectUrl->setProjectDown($url);
+    }
+
+    public function setProjectUp($id) {
+
+        $url = $this->read($id);
+
+        $this->projectUrl->setProjectUp($url);
     }
 }

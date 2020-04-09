@@ -25,13 +25,18 @@ class HttpService
         }
     }
 
-    public function requestSuccessful($check) {
+    public function requestSuccessful($check)
+    {
 
-        if (in_array($check->response_code, range(200, 299))) {
-            return true;
+        if (isset($check)) {
+
+            if (in_array($check->response_code, range(200, 299))) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
 }
