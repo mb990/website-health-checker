@@ -6,18 +6,22 @@ namespace App\Services;
 use App\Repositories\ProjectUrlRepository;
 use App\Services\HttpService;
 use App\Services\CheckService;
+use App\Services\ProjectService;
 use Carbon\Carbon;
 
 class ProjectUrlService
 {
     protected $httpService;
     protected $checkService;
+    protected $projectService;
 
-    public function __construct(ProjectUrlRepository $projectUrl, HttpService $httpService, CheckService $checkService)
+    public function __construct(ProjectUrlRepository $projectUrl, HttpService $httpService, CheckService $checkService,
+                                ProjectService $projectService)
     {
         $this->projectUrl = $projectUrl;
         $this->httpService = $httpService;
         $this->checkService = $checkService;
+        $this->projectService = $projectService;
     }
 
     public function store($attributes, $slug) {
@@ -70,6 +74,29 @@ class ProjectUrlService
             $lastCheckedAt = Carbon::now();
 
             return $this->projectUrl->createCheck($url, $responseTime, $responseCode, $lastCheckedAt);
+        }
+    }
+
+    public function checkUrl() {
+
+        $urls = $this->all();
+
+        foreach ($urls as $url) {
+
+            $check = $this->createCheck($url);
+
+            if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url)) {
+
+                $this->projectService->notifyMembersProjectDown($url);
+                $this->projectService->setProjectDown($url->id);
+
+            }
+
+            else if(!$this->projectService->isActive($url) && $this->httpService->requestSuccessful($check)) {
+
+                $this->projectService->notifyMembersProjectUp($url);
+                $this->projectService->setProjectUp($url->id);
+            }
         }
     }
 }

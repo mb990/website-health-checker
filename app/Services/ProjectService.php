@@ -8,7 +8,6 @@ use App\Notifications\projectUpEmail;
 use App\Repositories\ProjectRepository;
 use Illuminate\Http\Request;
 use App\Services\UserService;
-use App\Services\ProjectUrlService;
 use App\Services\NotificationSettingService;
 use Illuminate\Notifications\Notifiable;
 use phpDocumentor\Reflection\Types\Collection;
@@ -18,22 +17,20 @@ class ProjectService
     use Notifiable;
 
     protected $userService;
-    protected $projectUrlService;
     protected $notificationSettingService;
     protected $project;
 
-    public function __construct(ProjectRepository $project, UserService $userService, ProjectUrlService $projectUrlService,
+    public function __construct(ProjectRepository $project, UserService $userService,
                                 NotificationSettingService $notificationSettingService)
     {
         $this->project = $project;
         $this->userService = $userService;
-        $this->projectUrlService = $projectUrlService;
         $this->notificationSettingService = $notificationSettingService;
     }
 
-    public function index() {
+    public function all($perPage) {
 
-        return $this->project->all();
+        return $this->project->all($perPage);
     }
 
     public function store($attributes) {
@@ -58,6 +55,21 @@ class ProjectService
     public function delete($slug) {
 
         return $this->project->delete($slug);
+    }
+
+    public function activate($project) {
+
+        return $this->project->activate($project);
+    }
+
+    public function deactivate($project) {
+
+        return $this->project->deactivate($project);
+    }
+
+    public function destroy($project) {
+
+        return $this->project->destroy($project);
     }
 
     public function projectUsers($project) {

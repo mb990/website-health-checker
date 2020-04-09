@@ -10,7 +10,7 @@ class Project extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'up', 'active'];
 
     public function sluggable()
     {

@@ -20,7 +20,7 @@ class ProjectController extends Controller
 
     public function all() {
 
-        $projects = $this->projectService->index();
+        $projects = $this->projectService->all(10);
 
         return view('projects.show-all')->with('projects', $projects);
     }

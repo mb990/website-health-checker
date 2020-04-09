@@ -18,6 +18,11 @@ class ProjectRepository
         $this->project = $project;
     }
 
+    public function all($perPage) {
+
+        return $this->project->paginate($perPage);
+    }
+
     public function store($attributes) {
 
         $project = new Project();
@@ -28,11 +33,6 @@ class ProjectRepository
         $project->save();
 
         return $project;
-    }
-
-    public function all() {
-
-        return $this->project->paginate(10);
     }
 
     public function findBySlug($slug)
@@ -53,6 +53,21 @@ class ProjectRepository
     public function delete($slug) {
 
         return $this->project->where('slug', '=', $slug)->delete();
+    }
+
+    public function activate(Project $project) {
+
+        $project->update(['active' => true]);
+    }
+
+    public function deactivate(Project $project) {
+
+        $project->update(['active' => false]);
+    }
+
+    public function destroy(Project $project) {
+
+        $project->forceDelete();
     }
 
     public function projectUsers($project) {

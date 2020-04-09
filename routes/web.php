@@ -16,6 +16,11 @@ use App\Mail\MailtrapExample;
 |
 */
 
+Route::get('/admin/projects', 'AdminProjectController@all');
+Route::put('/admin/projects/{slug}/deactivate', 'AdminProjectController@deactivate')->name('deactivate.project');
+Route::put('/admin/projects/{slug}/activate', 'AdminProjectController@activate')->name('activate.project');
+Route::delete('/admin/projects/{slug}/delete', 'AdminProjectController@destroy')->name('destroy.project');
+
 Route::get('/', 'PageController@index');
 Route::get('/dashboard', 'PageController@dashboard');
 Route::get('/settings/{slug}', 'NotificationSettingController@editGlobal');
