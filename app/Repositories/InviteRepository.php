@@ -14,6 +14,11 @@ class InviteRepository
         $this->invite = $invite;
     }
 
+    public function all() {
+
+        return $this->invite->all();
+    }
+
     public function store($user, $project, $token) {
 
         return $this->invite->create([
@@ -36,5 +41,10 @@ class InviteRepository
     public function findByToken($token) {
 
         return $this->invite->where('token', '=', $token)->first();
+    }
+
+    public function checkForDeletion($invites, $time) {
+
+        return $this->invite->where('created_at', '<', $time)->delete();
     }
 }

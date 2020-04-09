@@ -11,6 +11,7 @@ use App\Mail\InviteCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class InviteService
 {
@@ -25,6 +26,11 @@ class InviteService
         $this->projectService = $projectService;
         $this->userService = $userService;
         $this->notificationSettingService = $notificationSettingService;
+    }
+
+    public function all() {
+
+        return $this->invite->all();
     }
 
     public function store($user, $project, $token) {
@@ -45,6 +51,15 @@ class InviteService
     public function findByProject($project) {
 
         return $this->invite->findByProject($project);
+    }
+
+    public function checkForDeletion() {
+
+        $invites = $this->all();
+
+        $time = Carbon::now()->subDays(5);
+
+        return $this->invite->checkForDeletion($invites, $time);
     }
 
     public function invitedUsers($project) {

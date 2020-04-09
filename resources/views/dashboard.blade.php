@@ -30,6 +30,8 @@
 
         <div class="col-md-4">
 
+            <a href="/projects/create/new"><button class="btn btn-primary">New project</button></a>
+
             <a href="/settings/{{auth()->user()->slug}}"><button class="btn btn-primary">Global notification settings</button></a>
 
         </div>

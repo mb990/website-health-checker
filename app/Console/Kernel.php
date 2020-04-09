@@ -27,6 +27,10 @@ class Kernel extends ConsoleKernel
 //        $schedule->command('command:urlCheck')
 //            ->everyMinute();
 
+        $schedule->command('command:deleteInvites')
+            ->appendOutputTo('deleteInvites_task.txt')
+            ->everyMinute();
+
         $schedule->command('command:urlCheck')
             ->appendOutputTo('task_errors.txt')
             ->everyMinute();
