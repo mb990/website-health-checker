@@ -5,16 +5,19 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 use App\Services\NotificationSettingService;
-use Illuminate\Support\Facades\Hash;
+use App\Services\RegisterService;
 
 class UserService
 {
     protected $notificationSettingService;
+    protected $registerService;
 
-    public function __construct(UserRepository $user, NotificationSettingService $notificationSettingService)
+    public function __construct(UserRepository $user, NotificationSettingService $notificationSettingService,
+                                RegisterService $registerService)
     {
         $this->user = $user;
         $this->notificationSettingService = $notificationSettingService;
+        $this->registerService = $registerService;
     }
 
     public function all() {
@@ -82,14 +85,9 @@ class UserService
 
     public function storeAdmin($request) {
 
-        $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => 'string|required|min:8|confirmed',
-        ]);
+        $this->registerService->validateRegistration($request);
 
-        $password = Hash::make($request['password']);
+        $password = $this->registerService->hashPassword($request['password']);
 
         return $this->user->storeAdmin($request, $password);
     }
