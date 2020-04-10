@@ -60,6 +60,11 @@ class NotificationSettingService
         return $this->notificationSetting->findByUserTypeAndProject($user, $type, $project);
     }
 
+    public function delete($setting) {
+
+        return $this->notificationSetting->delete($setting);
+    }
+
     public function subscribeUserToNotifications($user, $project)
     {
 
@@ -73,6 +78,16 @@ class NotificationSettingService
         if (!$this->isUserSubscribed($user)) {
 
             $this->subscribeUserToGlobalNotifications($user);
+        }
+    }
+
+    public function unsubscribeUserFromNotifications($user, $project) {
+
+        $settings = $this->findByUserAndProject($user, $project);
+
+        foreach ($settings as $setting) {
+
+            $this->delete($setting);
         }
     }
 

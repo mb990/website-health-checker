@@ -52,11 +52,9 @@ class PageController extends Controller
 
     public function test() {
 
-        $project = $this->projectService->readBySlug('snoop-project');
-//dd($project);
-        $users = $this->projectService->projectUsers($project);
-
-        dd($users);
+//        $setting = $this->notificationSettingService->findById(21);
+//
+//        $this->notificationSettingService->delete($setting);
 
 //        dd($users);
 

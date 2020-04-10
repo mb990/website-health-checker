@@ -136,6 +136,13 @@ class ProjectService
         $this->project->addUserToProject($project, $user);
     }
 
+    public function removeUserFromProject($project, $user) {
+
+        $this->project->removeUserFromProject($project, $user);
+
+        $this->notificationSettingService->unsubscribeUserFromNotifications($user, $project);
+    }
+
     public function notificationDown($user) {
 
         $user->notify(new ProjectDownEmail());

@@ -88,4 +88,9 @@ class ProjectRepository
 
         $project->members()->attach($user);
     }
+
+    public function removeUserFromProject($project, $user) {
+
+        $project->members()->detach($user);
+    }
 }

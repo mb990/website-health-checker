@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ProjectService;
+use App\Services\UserService;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Notifications\Notifiable;
 
@@ -12,10 +13,12 @@ class ProjectController extends Controller
     use Notifiable;
 
     protected $projectService;
+    protected $userService;
 
-    public function __construct(ProjectService $projectService)
+    public function __construct(ProjectService $projectService, UserService $userService)
     {
         $this->projectService = $projectService;
+        $this->userService = $userService;
     }
 
     public function all() {
@@ -67,5 +70,27 @@ class ProjectController extends Controller
         $this->projectService->delete($slug);
 
         return redirect('/projects');
+    }
+
+    public function members($slug) {
+
+        $project = $this->projectService->readBySlug($slug);
+
+        $members = $this->projectService->projectUsers($project);
+
+        return view('teams.project-members')
+            ->with('project', $project)
+            ->with('members', $members);
+    }
+
+    public function removeMember($projectSlug, $userSlug) {
+
+        $project = $this->projectService->readBySlug($projectSlug);
+
+        $user = $this->userService->findBySlug($userSlug);
+
+        $this->projectService->removeUserFromProject($project, $user);
+
+        return redirect('/projects/' . $projectSlug . '/members');
     }
 }

@@ -58,6 +58,11 @@ class NotificationSettingRepository
             ->first();
     }
 
+    public function delete(NotificationSetting $setting) {
+
+        $setting->delete();
+    }
+
     public function subscribeUserToNotifications($user, $project, $type) {
 
         $notificationSetting = new NotificationSetting();

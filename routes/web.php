@@ -36,6 +36,8 @@ Route::get('/projects/{slug}/settings', 'NotificationSettingController@editSingl
 Route::put('/projects/{slug}/settings/update', 'NotificationSettingController@updateSingleProject')->name('update.singleProject.notificationSettings');
 Route::get('/projects', 'ProjectController@all');
 Route::get('/projects/{slug}', 'ProjectController@show');
+Route::get('/projects/{slug}/members', 'ProjectController@members');
+Route::get('/projects/{projectSlug}/members/{userSlug}/remove', 'ProjectController@removeMember')->name('remove.member');
 Route::get('/projects/{slug}/{url}/checks', 'CheckController@all');
 Route::get('/projects/create/new', 'ProjectController@create')->name('create.project');
 Route::post('/projects/new/submit', 'ProjectController@store')->name('store.project');
