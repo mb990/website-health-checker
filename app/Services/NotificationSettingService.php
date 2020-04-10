@@ -47,6 +47,11 @@ class NotificationSettingService
         return $this->notificationSetting->findByUserAndProject($user, $project);
     }
 
+    public function findByUserAndType($user, $type) {
+
+        return $this->notificationSetting->findByUserAndType($user, $type);
+    }
+
     public function findByUserTypeAndProject($user, $typeName, $project)
     {
 //dd($typeName);

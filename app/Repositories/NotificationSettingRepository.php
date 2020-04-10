@@ -43,6 +43,13 @@ class NotificationSettingRepository
             ->get();
     }
 
+    public function findByUserAndType($user, $type) {
+
+        return $this->notificationSetting->where('user_id', '=', $user->id)
+            ->where('notification_type_id', '=', $type->id)
+            ->get();
+    }
+
     public function findByUserTypeAndProject($user, $type, $project) {
 
         return $this->notificationSetting->where('user_id', '=', $user->id)
