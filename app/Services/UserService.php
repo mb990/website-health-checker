@@ -5,6 +5,8 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 use App\Services\NotificationSettingService;
+use Illuminate\Support\Facades\Hash;
+
 class UserService
 {
     protected $notificationSettingService;
@@ -76,5 +78,19 @@ class UserService
     public function assignRole($user, $role) {
 
         return $this->user->assignRole($user, $role);
+    }
+
+    public function storeAdmin($request) {
+
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => 'string|required|min:8|confirmed',
+        ]);
+
+        $password = Hash::make($request['password']);
+
+        return $this->user->storeAdmin($request, $password);
     }
 }

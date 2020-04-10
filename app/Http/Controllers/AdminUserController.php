@@ -47,4 +47,18 @@ class AdminUserController extends Controller
 
         return redirect('/admin/users');
     }
+
+    public function createAdmin() {
+
+        return view('admin.users.create-admin');
+    }
+
+    public function storeAdmin(Request $request) {
+
+        $admin = $this->userService->storeAdmin($request);
+
+        $this->userService->assignRole($admin, 'admin');
+
+        return redirect('/admin/users');
+    }
 }

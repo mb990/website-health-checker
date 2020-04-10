@@ -113,7 +113,7 @@ class ProjectService
 
     public function addUserToProject($project, $user) {
 
-//        $this->notificationSettingService->subscribeUserToNotifications($user, $project);
+        $this->notificationSettingService->subscribeUserToNotifications($user, $project);
 
         $this->userService->assignRole($user, 'viewer');
 

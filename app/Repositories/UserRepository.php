@@ -56,4 +56,16 @@ class UserRepository
 
         $user->assignRole($role);
     }
+
+    public function storeAdmin ($attributes, $password) {
+
+        $admin = $this->user->create([
+            'first_name' => $attributes['first_name'],
+            'last_name' => $attributes['last_name'],
+            'email' => $attributes['email'],
+            'password' => $password
+        ]);
+
+        return $admin;
+    }
 }

@@ -161,8 +161,6 @@ class InviteService
 
         $this->projectService->addUserToProject($project, $user);
 
-        $this->notificationSettingService->subscribeUserToNotifications($user, $project);
-
         $this->delete($token);
     }
 
