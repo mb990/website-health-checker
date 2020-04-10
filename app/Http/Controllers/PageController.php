@@ -51,18 +51,14 @@ class PageController extends Controller
     }
 
     public function test() {
-$user = $this->userService->findById(2);
 
-dd($this->notificationSettingService->isUserSubscribed($user));
-//dd($this->notificationTypeService->findByUser($user));
-//        $types = $this->notificationTypeService->all();
-//
-//        foreach ($types as $type) {
-//dd($type);
-//           $name = $this->notificationTypeService->findByName($type);
-//
-//           echo $name->name . '<br>';
-//        }
+        $project = $this->projectService->readBySlug('snoop-project');
+//dd($project);
+        $users = $this->projectService->projectUsers($project);
+
+        dd($users);
+
+//        dd($users);
 
         $url = $this->projectUrlService->read(2);
 

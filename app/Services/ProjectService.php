@@ -79,9 +79,25 @@ class ProjectService
         return $this->project->destroy($project);
     }
 
-    public function projectUsers($project) {
+    public function projectUsers($project)
+    {
 
-        return $this->project->projectUsers($project);
+        $projectUsers = $this->project->projectUsers($project)->pluck('id')->toArray();
+
+        $inactiveUsers = $this->userService->inactiveUsers()->pluck('id')->toArray();
+
+        $usersIds = array_diff($projectUsers, $inactiveUsers);
+
+        $users = [];
+
+        foreach ($usersIds as $id) {
+
+            $user = $this->userService->findById($id);
+
+            $users[] = $user;
+        }
+
+        return collect($users);
     }
 
     public function usersNotInProject($project) {

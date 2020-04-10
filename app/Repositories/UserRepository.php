@@ -22,9 +22,26 @@ class UserRepository
         return $this->user->all();
     }
 
+    public function admins() {
+
+        return $this->user->role('admin')->get();
+    }
+
     public function allPaginated($perPage) {
 
         return $this->user->paginate($perPage);
+    }
+
+    public function activeUsers() {
+
+        return $this->user->where('active', '=', 1)
+            ->get();
+    }
+
+    public function inactiveUsers() {
+
+        return $this->user->where('active', '=', 0)
+            ->get();
     }
 
     public function findById($id) {

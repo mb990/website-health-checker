@@ -20,14 +20,44 @@ class UserService
         $this->registerService = $registerService;
     }
 
-    public function all() {
+    public function all() { // without admins
 
-        return $this->user->all();
+        $all = $this->user->all()->pluck('id')->toArray();
+
+        $admins = $this->admins()->pluck('id')->toArray();
+
+        $usersIds = array_diff($all, $admins);
+
+        $withoutAdmins = [];
+
+        foreach ($usersIds as $id) {
+
+            $user = $this->findById($id);
+
+            $withoutAdmins[] = $user;
+        }
+
+        return collect($withoutAdmins);
     }
 
-    public function allPaginated($perPage) {
+    public function allPaginated($perPage) { // without admins
 
         return $this->user->allPaginated($perPage);
+    }
+
+    public function activeUsers() {
+
+        return $this->user->activeUsers();
+    }
+
+    public function inactiveUsers() {
+
+        return $this->user->inactiveUsers();
+    }
+
+    public function admins() {
+
+        return $this->user->admins();
     }
 
     public function findById($id) {
