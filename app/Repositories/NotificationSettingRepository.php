@@ -62,6 +62,11 @@ class NotificationSettingRepository
         $notificationSetting->save();
     }
 
+    public function subscribeUserToGlobalNotifications($user, $type) {
+
+        $user->notificationTypes()->attach($type);
+    }
+
     public function updateSetting($checked, $setting) {
 
         $setting->update(['active' => $checked]);

@@ -63,7 +63,13 @@ class NotificationSettingService
         foreach ($notificationTypes as $type) {
 
             $this->notificationSetting->subscribeUserToNotifications($user, $project, $type);
+            $this->subscribeUserToGlobalNotifications($user, $type);
         }
+    }
+
+    public function subscribeUserToGlobalNotifications($user, $type) {
+
+        return $this->notificationSetting->subscribeUserToGlobalNotifications($user, $type);
     }
 
 public function isSettingChecked(NotificationSettingRequest $request, $id) {
