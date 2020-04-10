@@ -12,9 +12,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\CreatedInvite;
 
 class InviteService
 {
+    use Notifiable;
+
     protected $projectService;
     protected $userService;
     protected $notificationSettingService;
@@ -118,7 +122,7 @@ class InviteService
 
         $this->store($user, $project, $token);
 
-        Mail::to($user->email)->send(new InviteCreated($projectInvitationData));
+        $user->notify(new CreatedInvite($projectInvitationData));
 
         return $projectInvitationData;
     }
