@@ -68,13 +68,36 @@ class NotificationSettingService
         foreach ($notificationTypes as $type) {
 
             $this->notificationSetting->subscribeUserToNotifications($user, $project, $type);
-            $this->subscribeUserToGlobalNotifications($user, $type);
+        }
+
+        if (!$this->isUserSubscribed($user)) {
+
+            $this->subscribeUserToGlobalNotifications($user);
         }
     }
 
-    public function subscribeUserToGlobalNotifications($user, $type) {
+    public function subscribeUserToGlobalNotifications($user) {
 
-        return $this->notificationSetting->subscribeUserToGlobalNotifications($user, $type);
+        $types = $this->notificationTypeService->all();
+
+        foreach ($types as $type) {
+
+            $this->notificationSetting->subscribeUserToGlobalNotifications($user, $type);
+        }
+    }
+
+    public function isUserSubscribed($user) {
+
+        $types = $this->notificationTypeService->all();
+
+        $pivotTypes = $this->notificationTypeService->findByUser($user);
+
+        $diff = $types->diff($pivotTypes);
+
+        if ($diff->isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
 public function isSettingChecked(NotificationSettingRequest $request, $id) {

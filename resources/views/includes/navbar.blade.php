@@ -15,16 +15,12 @@
 
                     @if(auth()->user()->hasRole('admin'))
 
-                        <li><a class="nav-link {{ Request::is('admin/educators') ? 'active' : '' }}"
-                               href="/admin/educators">Predavači-admin</a></li>&nbsp | &nbsp
-                        <li><a class="nav-link {{ Request::is('admin/courses') ? 'active' : '' }}"
-                               href="/admin/courses">Kursevi-admin</a></li>&nbsp | &nbsp
-                        <li><a class="nav-link {{ Request::is('admin/students') ? 'active' : '' }}"
-                               href="/admin/students">Studenti</a></li>&nbsp | &nbsp
                         <li><a class="nav-link {{ Request::is('admin/users') ? 'active' : '' }}"
-                               href="/admin/users">Svi korisnici</a></li>&nbsp | &nbsp
+                               href="/admin/users">Users</a></li>&nbsp | &nbsp
+                        <li><a class="nav-link {{ Request::is('admin/projects') ? 'active' : '' }}"
+                               href="/admin/projects">Projects-admin</a></li>&nbsp | &nbsp
                         <li><a class="nav-link {{ Request::is('admin/new') ? 'active' : '' }}"
-                               href="/admin/new">Napravi admina</a></li>&nbsp | &nbsp
+                               href="/admin/new">Create admin</a></li>&nbsp | &nbsp
 
                     @endif
 

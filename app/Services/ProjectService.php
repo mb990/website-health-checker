@@ -39,12 +39,14 @@ class ProjectService
     }
 
     public function store($attributes) {
+
         $project = $this->project->store($attributes);
 
         $user = $this->userService->findById(auth()->user()->id);
 
         $this->notificationSettingService->subscribeUserToNotifications($user, $project);
 
+        $this->userService->assignRole($user, 'creator');
     }
 
     public function readBySlug($slug) {
@@ -111,7 +113,11 @@ class ProjectService
 
     public function addUserToProject($project, $user) {
 
-       return $this->project->addUserToProject($project, $user);
+//        $this->notificationSettingService->subscribeUserToNotifications($user, $project);
+
+        $this->userService->assignRole($user, 'viewer');
+
+        $this->project->addUserToProject($project, $user);
     }
 
     public function notificationDown($user) {

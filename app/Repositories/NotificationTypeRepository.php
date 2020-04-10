@@ -29,10 +29,10 @@ class NotificationTypeRepository
         return $this->notificationType->where('id', '=', $id)->first();
     }
 
-//    public function findByUser($user) {
-//
-//        return $this->notificationType->whereHas('users', function ($q) use ($user) {
-//            $q->where('user_id', '=', $user->id);
-//        })->get();
-//    }
+    public function findByUser($user) {
+
+        return $this->notificationType->whereHas('users', function ($q) use ($user) {
+            $q->where('user_id', '=', $user->id);
+        })->get();
+    }
 }

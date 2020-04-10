@@ -27,8 +27,9 @@ class NotificationTypeService
         return $this->notificationType->findById($id);
     }
 
-//    public function findByUser($user) {
-//
-//        return $this->notificationType->findByUser($user);
-//    }
+    public function findByUser($user) {
+
+        return $this->notificationType->findByUser($user);
+    }
+
 }

@@ -4,10 +4,12 @@
 namespace App\Repositories;
 
 use App\User;
-use function foo\func;
+use Spatie\Permission\Traits\HasRoles;
 
 class UserRepository
 {
+    use HasRoles;
+
     protected $user;
 
     public function __construct(User $user)
@@ -48,5 +50,10 @@ class UserRepository
     public function destroy(User $user) {
 
         $user->forceDelete();
+    }
+
+    public function assignRole(User $user, $role) {
+
+        $user->assignRole($role);
     }
 }

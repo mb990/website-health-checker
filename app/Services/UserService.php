@@ -72,4 +72,9 @@ class UserService
 
         return false;
     }
+
+    public function assignRole($user, $role) {
+
+        return $this->user->assignRole($user, $role);
+    }
 }
