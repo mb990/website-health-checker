@@ -9,6 +9,7 @@ use App\Repositories\ProjectRepository;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\NotificationSettingService;
+use App\Services\ProjectRoleService;
 use Illuminate\Notifications\Notifiable;
 use phpDocumentor\Reflection\Types\Collection;
 
@@ -19,13 +20,15 @@ class ProjectService
     protected $userService;
     protected $notificationSettingService;
     protected $project;
+    protected $projectRole;
 
     public function __construct(ProjectRepository $project, UserService $userService,
-                                NotificationSettingService $notificationSettingService)
+                                NotificationSettingService $notificationSettingService, ProjectRoleService $projectRole)
     {
         $this->project = $project;
         $this->userService = $userService;
         $this->notificationSettingService = $notificationSettingService;
+        $this->projectRole = $projectRole;
     }
 
     public function all() {
@@ -46,7 +49,7 @@ class ProjectService
 
         $this->notificationSettingService->subscribeUserToNotifications($user, $project);
 
-        $this->userService->assignRole($user, 'creator');
+        $this->projectRole->assignProjectRole($user, $project, 'creator');
     }
 
     public function readBySlug($slug) {
@@ -131,7 +134,7 @@ class ProjectService
 
         $this->notificationSettingService->subscribeUserToNotifications($user, $project);
 
-        $this->userService->assignRole($user, 'viewer');
+        $this->projectRole->assignProjectRole($user, $project, 'viewer');
 
         $this->project->addUserToProject($project, $user);
     }
