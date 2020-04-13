@@ -52,21 +52,9 @@ class PageController extends Controller
 
     public function test() {
 
-//        $setting = $this->notificationSettingService->findById(21);
-//
-//        $this->notificationSettingService->delete($setting);
-
-//        dd($users);
-
-        $url = $this->projectUrlService->read(2);
-
-        $user = $this->userService->findById(1);
-
-//        $active = $this->userService->hasNotificationActive($user, 'url_up');
-
-        $active = $this->userService->hasNotificationActive($user, 'url_down', $url->project);
-
-//        dd($active);
+        if (auth()->user()->hasRole('admin')) {
+            echo 'ima role';
+        }
 
         return view('test');
     }

@@ -6,7 +6,7 @@ use App\Services\ProjectService;
 use App\Services\UserService;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Support\Facades\Route;
 class ProjectController extends Controller
 {
 
@@ -19,6 +19,11 @@ class ProjectController extends Controller
     {
         $this->projectService = $projectService;
         $this->userService = $userService;
+
+        $slug = Route::current()->parameter('slug');
+
+        $this->middleware('projectRole:' . $slug . ',creator')->except('all', 'show');
+        $this->middleware('checkIfInProject:' . $slug)->only('show');
     }
 
     public function all() {

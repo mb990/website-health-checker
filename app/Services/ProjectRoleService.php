@@ -17,10 +17,27 @@ class ProjectRoleService
         $this->projectRoleType = $projectRoleType;
     }
 
+    public function find($user, $project) {
+
+        return $this->projectRole->find($user, $project);
+    }
+
     public function assignProjectRole($user, $project, $type) {
 
         $projectRole = $this->projectRoleType->findByName($type);
 
         return $this->projectRole->store($user, $project, $projectRole);
+    }
+
+    public function hasRole($user, $project, $role) {
+
+        $projectRole = $this->projectRoleType->findByName($role);
+
+        if ($this->projectRole->hasRole($user, $project, $projectRole)) {
+
+            return true;
+        }
+
+        return false;
     }
 }

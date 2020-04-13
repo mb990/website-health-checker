@@ -14,6 +14,11 @@ class ProjectRoleTypeRepository
         $this->projectRoleType = $projectRoleType;
     }
 
+    public function all() {
+
+        return $this->projectRoleType->all();
+    }
+
     public function findByName($name) {
 
         return $this->projectRoleType->where('name', '=', $name)->first();

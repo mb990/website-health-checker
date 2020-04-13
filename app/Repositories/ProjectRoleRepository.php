@@ -14,6 +14,13 @@ class ProjectRoleRepository
         $this->projectRole = $projectRole;
     }
 
+    public function find($user, $project) {
+
+        return $this->projectRole->where('user_id', '=', $user->id)
+            ->where('project_id', '=', $project->id)
+            ->first();
+    }
+
     public function store($user, $project, $type) {
 
         $this->projectRole->create([
@@ -21,5 +28,13 @@ class ProjectRoleRepository
            'project_id' => $project->id,
            'project_role_type_id' => $type->id
         ]);
+    }
+
+    public function hasRole($user, $project, $role) {
+
+        return $this->projectRole->where('user_id', '=', $user->id)
+            ->where('project_id', '=', $project->id)
+            ->where('project_role_type_id', '=', $role->id)
+            ->first();
     }
 }
