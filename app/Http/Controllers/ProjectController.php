@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ManageProjectRequest;
+use App\Http\Requests\ViewProjectRequest;
 use App\Services\ProjectService;
 use App\Services\UserService;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Route;
+
 class ProjectController extends Controller
 {
 
@@ -19,11 +21,6 @@ class ProjectController extends Controller
     {
         $this->projectService = $projectService;
         $this->userService = $userService;
-
-        $slug = Route::current()->parameter('slug');
-
-        $this->middleware('projectRole:' . $slug . ',creator')->except('all', 'show');
-        $this->middleware('checkIfInProject:' . $slug)->only('show');
     }
 
     public function all() {
@@ -33,14 +30,14 @@ class ProjectController extends Controller
         return view('projects.show-all')->with('projects', $projects);
     }
 
-    public function show($slug) {
+    public function show(ViewProjectRequest $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
 
         return view('projects.show-single')->with('project', $project);
     }
 
-    public function create() {
+    public function create(ManageProjectRequest $request) {
 
         return view('projects.create');
     }
@@ -54,7 +51,7 @@ class ProjectController extends Controller
         return redirect('/');
     }
 
-    public function edit($slug) {
+    public function edit(ManageProjectRequest $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
 
@@ -70,14 +67,14 @@ class ProjectController extends Controller
         return redirect('/projects');
     }
 
-    public function delete($slug) {
+    public function delete(ManageProjectRequest $request, $slug) {
 
         $this->projectService->delete($slug);
 
         return redirect('/projects');
     }
 
-    public function members($slug) {
+    public function members(ManageProjectRequest $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
 
@@ -88,7 +85,7 @@ class ProjectController extends Controller
             ->with('members', $members);
     }
 
-    public function removeMember($projectSlug, $userSlug) {
+    public function removeMember(ManageProjectRequest $request, $projectSlug, $userSlug) {
 
         $project = $this->projectService->readBySlug($projectSlug);
 

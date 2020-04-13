@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ManageProjectRequest;
 use Illuminate\Http\Request;
 use App\Services\ProjectService;
 use App\Services\InviteService;
@@ -21,7 +22,7 @@ class InviteController extends Controller
         $this->userService = $userService;
     }
 
-    public function invite($slug) {
+    public function invite(ManageProjectRequest $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
 
