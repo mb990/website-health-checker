@@ -36,6 +36,28 @@
 
         </div>
 
-    </div>
+    </div><br><hr>
+
+    <div class="row text-center">
+
+        <div class="col-md-8">
+
+            <h2>Projects i joined</h2>
+
+            @if(count($joinedProjects))
+
+                @foreach($joinedProjects as $joinedProject)
+
+                    <a href="/projects/{{$joinedProject->slug}}"><p class="lead">{{$joinedProject->name}}</p></a>
+
+                @endforeach
+
+            @else
+
+                You dont have projects.
+
+            @endif
+
+        </div>
 
 @endsection

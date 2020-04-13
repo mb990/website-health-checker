@@ -46,8 +46,12 @@ class PageController extends Controller
     public function dashboard() {
 
         $projects = auth()->user()->createdProjects;
-//        dd($projects);
-        return view('dashboard')->with('projects', $projects);
+
+        $joinedProjects = auth()->user()->memberInProjects;
+
+        return view('dashboard')
+            ->with('projects', $projects)
+            ->with('joinedProjects', $joinedProjects);
     }
 
     public function test() {
