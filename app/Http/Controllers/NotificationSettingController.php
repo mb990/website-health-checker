@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SingleProjectNotificationSettingRequest;
 use App\NotificationType;
 use App\Services\NotificationSettingService;
 use App\Services\UserService;
@@ -48,7 +49,7 @@ class NotificationSettingController extends Controller
             ->with('project', $project);
     }
 
-    public function updateSingleProject (NotificationSettingRequest $request, $slug) {
+    public function updateSingleProject (SingleProjectNotificationSettingRequest $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
 
@@ -59,7 +60,7 @@ class NotificationSettingController extends Controller
         return redirect('/projects/' . $slug . '/settings');
     }
 
-    public function editGlobal($slug) {
+    public function editGlobal(NotificationSettingRequest $request, $slug) {
 
         $user = $this->userService->findBySlug($slug);
 

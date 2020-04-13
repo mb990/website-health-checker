@@ -79,7 +79,7 @@ class NotificationSettingRepository
         $user->notificationTypes()->attach($type);
     }
 
-    public function updateSetting($checked, NotificationSetting $setting) {
+    public function updateSetting($checked, $setting) {
 
         $setting->update(['active' => $checked]);
     }

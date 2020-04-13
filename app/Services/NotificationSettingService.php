@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Http\Requests\NotificationSettingRequest;
+use App\Http\Requests\SingleProjectNotificationSettingRequest;
 use App\Repositories\NotificationSettingRepository;
 use App\Services\NotificationTypeService;
 
@@ -115,7 +116,7 @@ class NotificationSettingService
         return false;
     }
 
-public function isSettingChecked(NotificationSettingRequest $request, $id) {
+public function isSettingChecked(SingleProjectNotificationSettingRequest $request, $id) {
 
     if (!$request->input('active-' . $id) == null) {
 
@@ -129,7 +130,21 @@ public function isSettingChecked(NotificationSettingRequest $request, $id) {
     return $checked;
 }
 
-    public function updateSingleProject(NotificationSettingRequest $request, $settings)
+    public function isGlobalSettingChecked(NotificationSettingRequest $request, $id) {
+
+        if (!$request->input('active-' . $id) == null) {
+
+            $checked = 1;
+
+        } else {
+
+            $checked = 0;
+        }
+
+        return $checked;
+    }
+
+    public function updateSingleProject(SingleProjectNotificationSettingRequest $request, $settings)
     {
         foreach ($settings as $setting) {
 
@@ -156,7 +171,7 @@ public function isSettingChecked(NotificationSettingRequest $request, $id) {
 
         foreach ($settings as $setting) {
 
-            $checked = $this->isSettingChecked($request, $setting->notification_type_id);
+            $checked = $this->isGlobalSettingChecked($request, $setting->notification_type_id);
 
             $this->notificationSetting->updateSetting($checked, $setting);
         }
@@ -166,7 +181,7 @@ public function isSettingChecked(NotificationSettingRequest $request, $id) {
 
         foreach ($types as $type) {
 
-            $checked = $this->isSettingChecked($request, $type->id);
+            $checked = $this->isGlobalSettingChecked($request, $type->id);
 
             $this->notificationSetting->updateSetting($checked, $type->pivot);
         }
