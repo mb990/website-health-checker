@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CreatedInvite extends Notification
+class CreatedGuestInvite extends Notification
 {
     use Queueable;
 
@@ -45,8 +45,8 @@ class CreatedInvite extends Notification
         return (new MailMessage)
             ->error()
             ->subject('Project invite')
-            ->greeting('Hello ' . $this->data['recipientName'] . '!')
-            ->line($this->data['senderName'] . ' invited you to join his project ' . $this->data['projectName'])
+            ->greeting('Hello!')
+            ->line($this->data['senderName'] . ' invited you to register and join his project ' . $this->data['projectName'])
             ->action('See invitation', url('http://website-health-checker.test/invitation/' . $this->data['projectSlug'] . '/' . $this->data['recipientSlug'] . '/' . $this->data['token']))
             ->line('Thank you for using our application!')
             ->from($this->data['senderEmail'], $this->data['senderName']);

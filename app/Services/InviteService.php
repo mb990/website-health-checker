@@ -7,13 +7,15 @@ use App\Repositories\InviteRepository;
 use App\Services\ProjectService;
 use App\Services\UserService;
 use App\Services\NotificationSettingService;
-use App\Mail\InviteCreated;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\CreatedInvite;
+use App\Notifications\CreatedGuestInvite;
+use Illuminate\Support\Facades\Notification;
 
 class InviteService
 {
@@ -56,6 +58,11 @@ class InviteService
     public function findByProject($project) {
 
         return $this->invite->findByProject($project);
+    }
+
+    public function findByEmail($email) {
+
+        return $this->invite->findByEmail($email);
     }
 
     public function deleteExpired() {
@@ -110,20 +117,56 @@ class InviteService
     public function process(Request $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
-dd($request->input('user'));
 
-        if ($userId = $request->input('user') != null) {
+        if (!$this->checkIfGuest($request)) {
+
+            $userId = $request->input('user');
 
             $user = $this->userService->findById($userId);
+
+            $projectInvitationData = $this->defineData($project, $user);
+
+            $this->store($user->email, $project, $projectInvitationData['token']);
+
+            $user->notify(new CreatedInvite($projectInvitationData));
+
+            return $projectInvitationData;
         }
 
-        $projectInvitationData = $this->defineData($project, $user);
+        $email = $request->input('guest');
 
-        $this->store($user, $project, $projectInvitationData['token']);
+        if (!$this->checkIfGuestInvited($email)) {
 
-        $user->notify(new CreatedInvite($projectInvitationData));
+            $projectInvitationData = $this->defineData($project, $email);
 
-        return $projectInvitationData;
+            $this->store($email, $project, $projectInvitationData['token']);
+
+            Notification::route('mail', $email)->notify(new CreatedGuestInvite($projectInvitationData));
+
+            return $projectInvitationData;
+        }
+
+        return false;
+    }
+
+    public function checkIfGuest(Request $request) {
+
+        if ($request->input('user') == null) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function checkIfGuestInvited($email) {
+
+        if ($invite = $this->findByEmail($email)) {
+
+            return true;
+        }
+
+        return false;
     }
 
     public function generateToken() {
@@ -145,12 +188,20 @@ dd($request->input('user'));
             'senderName' => ucfirst($project->creator->first_name) . ' ' . ucfirst($project->creator->last_name),
             'projectName' => $project->name,
             'projectSlug' => $project->slug,
-            'recipientEmail' => $user->email,
-            'recipientName' => ucfirst($user->first_name) . ' ' . ucfirst($user->last_name),
-            'recipientSlug' => $user->slug,
-            'recipientId' => $user->id,
             'token' => $token
         ];
+
+        if ($user instanceof User) {
+
+            $data['recipientEmail'] = $user->email;
+            $data['recipientName'] = ucfirst($user->first_name) . ' ' . ucfirst($user->last_name);
+            $data['recipientSlug'] = $user->slug;
+            $data['recipientId'] = $user->id;
+        }
+        else {
+
+            $data['recipientEmail'] = $user;
+        }
 
         return $data;
     }

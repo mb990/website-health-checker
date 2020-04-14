@@ -30,7 +30,7 @@
 
                 <h3>Invite guest</h3>
 
-                <input class="form-control" type="text" name="email" placeholder="Enter email"><br>
+                <input class="form-control" type="text" name="guest" placeholder="Enter email"><br>
 
                 <button class="btn btn-success" type="submit" value="Submit">Submit</button>
 

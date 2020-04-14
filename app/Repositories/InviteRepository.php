@@ -19,10 +19,10 @@ class InviteRepository
         return $this->invite->all();
     }
 
-    public function store($user, $project, $token) {
+    public function store($email, $project, $token) {
 
         return $this->invite->create([
-            'user_id' => $user->id,
+            'email' => $email,
             'project_id' => $project->id,
             'token' => $token
         ]);
@@ -41,6 +41,11 @@ class InviteRepository
     public function findByToken($token) {
 
         return $this->invite->where('token', '=', $token)->first();
+    }
+
+    public function findByEmail($email) {
+
+        return $this->invite->where('email', '=', $email)->first();
     }
 
     public function deleteExpired($time) {
