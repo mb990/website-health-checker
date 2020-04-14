@@ -61,6 +61,9 @@ Route::get('/', 'PageController@index');
 
 Auth::routes();
 
+Route::get('/register/{token}', 'Auth\RegisterController@showInvitedRegistrationForm');
+Route::post('/register/{token}/submit', 'Auth\RegisterController@createInvited')->name('register.invited');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('send', 'UserController@email');

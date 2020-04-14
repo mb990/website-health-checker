@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InvitedUserRequest;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Services\InviteService;
+use App\Services\ProjectService;
+use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     /*
@@ -31,14 +34,20 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $projectService;
+    protected $inviteService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ProjectService $projectService, InviteService $inviteService)
     {
         $this->middleware('guest');
+
+        $this->projectService = $projectService;
+        $this->inviteService = $inviteService;
     }
 
     /**
@@ -72,5 +81,38 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function showInvitedRegistrationForm($token) {
+
+        $invite = $this->inviteService->findByToken($token);
+
+        $email = $invite->email;
+
+        return view('auth.register-invited')
+            ->with('email', $email)
+            ->with('token', $token);
+    }
+
+    protected function createInvited(InvitedUserRequest $request, $token) {
+
+        $invite = $this->inviteService->findByToken($token);
+
+        $email = $invite->email;
+
+        $project = $this->projectService->readById($invite->project_id);
+
+        $user = User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $email,
+            'password' => Hash::make($request->input('password')),
+        ]);
+
+        $this->projectService->addUserToProject($project, $user);
+
+        $this->inviteService->delete($token);
+
+        return redirect('/dashboard');
     }
 }

@@ -45,6 +45,11 @@ class ProjectRepository
         return $this->project->where('slug', '=', $slug)->first();
     }
 
+    public function findById($id) {
+
+        return $this->project->find($id);
+    }
+
     public function update($slug, array $attributes) {
 
         $project = $this->project->where('slug', '=', $slug)->first();

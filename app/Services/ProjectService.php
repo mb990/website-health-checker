@@ -57,6 +57,11 @@ class ProjectService
         return $this->project->findBySlug($slug);
     }
 
+    public function readById($id) {
+
+        return $this->project->findById($id);
+    }
+
     public function update($attributes, $slug) {
 
         return $this->project->update($slug, $attributes);
