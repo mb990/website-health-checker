@@ -18,13 +18,19 @@
                 @csrf
                 <select id="user" name="user">
 
+                    <option disabled selected value> -- choose user -- </option>
+
                     @foreach($users as $user)
 {{--                        @dd($users)--}}
-                        <option class="form-control" name="user" value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
+                        <option class="form-control" name="user" value="{{$user->id}}">{{ucfirst($user->first_name)}} {{ucfirst($user->last_name)}}</option>
 
                     @endforeach
 
                 </select><br><br>
+
+                <h3>Invite guest</h3>
+
+                <input class="form-control" type="text" name="email" placeholder="Enter email"><br>
 
                 <button class="btn btn-success" type="submit" value="Submit">Submit</button>
 

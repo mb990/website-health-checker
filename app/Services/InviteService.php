@@ -19,6 +19,7 @@ class InviteService
 {
     use Notifiable;
 
+    protected $invite;
     protected $projectService;
     protected $userService;
     protected $notificationSettingService;
@@ -109,18 +110,16 @@ class InviteService
     public function process(Request $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
+dd($request->input('user'));
 
-        $userId = $request->input('user');
+        if ($userId = $request->input('user') != null) {
 
-        $user = $this->userService->findById($userId);
+            $user = $this->userService->findById($userId);
+        }
 
         $projectInvitationData = $this->defineData($project, $user);
 
-        $token = $this->generateToken();
-
-        $projectInvitationData['token'] = $token;
-
-        $this->store($user, $project, $token);
+        $this->store($user, $project, $projectInvitationData['token']);
 
         $user->notify(new CreatedInvite($projectInvitationData));
 
@@ -139,6 +138,8 @@ class InviteService
 
     public function defineData($project, $user) {
 
+        $token = $this->generateToken();
+
         $data = [
             'senderEmail' => $project->creator->email,
             'senderName' => ucfirst($project->creator->first_name) . ' ' . ucfirst($project->creator->last_name),
@@ -147,7 +148,8 @@ class InviteService
             'recipientEmail' => $user->email,
             'recipientName' => ucfirst($user->first_name) . ' ' . ucfirst($user->last_name),
             'recipientSlug' => $user->slug,
-            'recipientId' => $user->id
+            'recipientId' => $user->id,
+            'token' => $token
         ];
 
         return $data;

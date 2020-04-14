@@ -34,7 +34,7 @@ class InviteController extends Controller
             ->with('users', $users);
     }
 
-    public function process(Request $request, $slug) {
+    public function process(ManageProjectRequest $request, $slug) {
 
         $this->inviteService->process($request, $slug);
 

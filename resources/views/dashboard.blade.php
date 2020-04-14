@@ -54,7 +54,7 @@
 
             @else
 
-                You dont have projects.
+                You didn't join any project.
 
             @endif
 
