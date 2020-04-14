@@ -130,20 +130,24 @@ class InviteService
 
             $user->notify(new CreatedInvite($projectInvitationData));
 
-            return $projectInvitationData;
+            return true;
         }
 
         $email = $request->input('guest');
 
-        if (!$this->checkIfGuestInvited($email)) {
+        if (!$this->userService->findByEmail($email)) { // check if there is already user with given email
 
-            $projectInvitationData = $this->defineData($project, $email);
+            if (!$this->checkIfGuestInvited($email)) {
 
-            $this->store($email, $project, $projectInvitationData['token']);
+                $projectInvitationData = $this->defineData($project, $email);
 
-            Notification::route('mail', $email)->notify(new CreatedGuestInvite($projectInvitationData));
+                $this->store($email, $project, $projectInvitationData['token']);
 
-            return $projectInvitationData;
+                Notification::route('mail', $email)->notify(new CreatedGuestInvite($projectInvitationData));
+
+                return true;
+            }
+
         }
 
         return false;

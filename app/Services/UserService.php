@@ -72,7 +72,7 @@ class UserService
 
     public function findByEmail($email) {
 
-        return $this->findByEmail($email);
+        return $this->user->findByEmail($email);
     }
 
     public function activate($user) {

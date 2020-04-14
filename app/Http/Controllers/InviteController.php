@@ -8,6 +8,7 @@ use App\Services\ProjectService;
 use App\Services\InviteService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class InviteController extends Controller
 {
@@ -36,9 +37,13 @@ class InviteController extends Controller
 
     public function process(ManageProjectRequest $request, $slug) {
 
-        $this->inviteService->process($request, $slug);
+        if ($this->inviteService->process($request, $slug)) {
 
-        return redirect('/projects/' . $slug);
+            return redirect('/projects/' . $slug);
+        }
+
+        return Redirect::back()
+            ->withErrors(['Something went wrong.', 'The Message']);
     }
 
     public function view($token) {
