@@ -8,14 +8,14 @@
     <div class="row justify-content-center">
 
         <h3 class="text-info">View project</h3>
-<!--        --><?php //use Illuminate\Support\Facades\Http; ?>
-{{--        {{$response = Http::get('www.gaghajkfhajkhfggjkahgf.com')}}--}}
-{{--        {{dd($response->status())}}--}}
+        <!--        --><?php //use Illuminate\Support\Facades\Http; ?>
+    {{--        {{$response = Http::get('www.gaghajkfhajkhfggjkahgf.com')}}--}}
+    {{--        {{dd($response->status())}}--}}
 
-<!--        --><?php //$urls = \App\ProjectUrl::all(); dd($urls); ?>
+    <!--        --><?php //$urls = \App\ProjectUrl::all(); dd($urls); ?>
 
     </div>
-{{--@dd($project->members)--}}
+    {{--@dd($project->members)--}}
     <br>
 
     <div class="row text-center">
@@ -84,13 +84,13 @@
 
     </div>
 
-    @auth
+    <div class="row text-center">
 
-        @if(auth()->user()->id === $project->user_id)
+        <div class="col-md-12">
 
-            <div class="row text-center">
+            @auth
 
-                <div class="col-md-12">
+                @if(auth()->user()->id === $project->user_id)
 
                     <form action="{{route('store.projectUrl', $project->slug)}}" method="POST"
                           xmlns="http://www.w3.org/1999/html">
@@ -110,17 +110,26 @@
 
                         <button class="btn btn-danger" type="submit">Delete project</button>
                     </form>
-                    <a href="/projects/{{$project->slug}}/settings"><button class="btn btn-primary">Project settings</button></a>
+                    <a href="/projects/{{$project->slug}}/edit">
+                        <button class="btn btn-info">Edit project</button>
+                    </a>
                     <br>
-                    <a href="/projects/{{$project->slug}}/invite"><button class="btn btn-success">Invite</button></a>
+                    <a href="/projects/{{$project->slug}}/invite">
+                        <button class="btn btn-success">Invite</button>
+                    </a>
                     <br>
-                    <a href="/projects/{{$project->slug}}/members"><button class="btn btn-dark">Members</button></a>
+                    <a href="/projects/{{$project->slug}}/members">
+                        <button class="btn btn-dark">Members</button>
+                    </a>
+                    <br>
+                @endif
+                <a href="/projects/{{$project->slug}}/settings">
+                    <button class="btn btn-primary">Project settings</button>
+                </a>
 
-                </div>
+        </div>
 
-            </div>
-
-        @endif
+    </div>
 
     @endauth
 

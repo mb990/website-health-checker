@@ -5,35 +5,38 @@
 @endsection
 
 @section('content')
-    <div class="row text-center">
 
-        <div class="col-md-12">
+    <h1 class="text-center">Project members</h1><br>
 
-            <h1>Project members</h1>
+    @if(count($members))
 
-            <ul>
+        @foreach($members as $member)
 
-                @foreach($members as $member)
+            <div class="row text-center">
 
-                    <li>{{ucfirst($member->first_name)}} {{ucfirst($member->last_name)}}
+                <div class="col-md-4">
 
-                        @if($member->id != $project->creator->id)
+                    {{ucfirst($member->first_name)}} {{ucfirst($member->last_name)}}
 
-                            <form action="{{route('remove.member', [$project->slug, $member->slug])}}">
+                </div>
 
-                                <button class="btn btn-danger">Remove</button>
+                @if($member->id != $project->creator->id)
 
-                            </form>
+                    <div class="col-md-4">
 
-                        @endif
+                        <form action="{{route('remove.member', [$project->slug, $member->slug])}}">
 
-                    </li>
+                            <button class="btn btn-danger">Remove</button>
 
-                @endforeach
+                        </form>
 
-            </ul>
+                    </div>
 
-        </div>
+                @endif
 
-    </div>
+            </div><hr>
+
+        @endforeach
+
+    @endif
 @endsection

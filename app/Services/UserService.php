@@ -70,6 +70,11 @@ class UserService
         return $this->user->findBySlug($slug);
     }
 
+    public function findByEmail($email) {
+
+        return $this->findByEmail($email);
+    }
+
     public function activate($user) {
 
         return $this->user->activate($user);

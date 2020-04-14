@@ -47,7 +47,7 @@ class CreatedInvite extends Notification
             ->subject('Project invite')
             ->greeting('Hello ' . $this->data['recipientName'] . '!')
             ->line($this->data['senderName'] . ' invited you to join his project ' . $this->data['projectName'])
-            ->action('See invitation', url('http://website-health-checker.test/invitation/' . $this->data['projectSlug'] . '/' . $this->data['recipientSlug'] . '/' . $this->data['token']))
+            ->action('See invitation', url('http://website-health-checker.test/invitation/' . $this->data['token']))
             ->line('Thank you for using our application!')
             ->from($this->data['senderEmail'], $this->data['senderName']);
     }

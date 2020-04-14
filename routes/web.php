@@ -52,17 +52,22 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/projects/{slug}/invite', 'InviteController@invite')->name('invite');
     Route::post('/projects/{slug}/process', 'InviteController@process')->name('process');
-    Route::get('/invitation/{projectSlug}/{userSlug}/{token}', 'InviteController@view')->name('view.invitation');
-    Route::delete('/invitation/{projectSlug}/{userSlug}/{token}/accepted', 'InviteController@accept')->name('accept');
-    Route::delete('/invitation/{token}/rejected', 'InviteController@reject')->name('reject');
+    Route::get('/invitation/{token}', 'InviteController@view')->name('view.invitation');
+    Route::delete('/invitation/{token}/accepted', 'InviteController@accept')->name('accept');
 });
+
+Route::middleware('guest')->group(function() {
+    Route::get('/register/{token}', 'Auth\RegisterController@showInvitedRegistrationForm');
+    Route::post('/register/{token}/submit', 'Auth\RegisterController@createInvited')->name('register.invited');
+    Route::get('/invitation/guest/{token}', 'InviteController@viewGuest')->name('view.invitation.guest');
+    Route::delete('/invitation/guest/{token}/accepted', 'InviteController@acceptGuest')->name('accept.guest');
+});
+
+Route::delete('/invitation/{token}/rejected', 'InviteController@reject')->name('reject');
 
 Route::get('/', 'PageController@index');
 
 Auth::routes();
-
-Route::get('/register/{token}', 'Auth\RegisterController@showInvitedRegistrationForm');
-Route::post('/register/{token}/submit', 'Auth\RegisterController@createInvited')->name('register.invited');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

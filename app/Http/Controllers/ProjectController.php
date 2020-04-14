@@ -37,7 +37,7 @@ class ProjectController extends Controller
         return view('projects.show-single')->with('project', $project);
     }
 
-    public function create(ManageProjectRequest $request) {
+    public function create(ProjectRequest $request) {
 
         return view('projects.create');
     }
@@ -58,7 +58,7 @@ class ProjectController extends Controller
         return view('projects.edit')->with('project', $project);
     }
 
-    public function update(ProjectRequest $request, $slug) {
+    public function update(ManageProjectRequest $request, $slug) {
 
         $attributes = $request->except('_method', '_token');
 

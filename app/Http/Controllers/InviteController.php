@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\ProjectService;
 use App\Services\InviteService;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Auth;
 
 class InviteController extends Controller
 {
@@ -40,13 +41,15 @@ class InviteController extends Controller
         return redirect('/projects/' . $slug);
     }
 
-    public function view($projectSlug, $userSlug, $token) {
-
-        $project = $this->projectService->readBySlug($projectSlug);
-
-        $user = $this->userService->findBySlug($userSlug);
+    public function view($token) {
 
         $this->inviteService->ifTokenExists($token);
+
+        $invite = $this->inviteService->findByToken($token);
+
+        $project = $this->projectService->readById($invite->project_id);
+
+        $user = $this->userService->findByEmail($invite->email);
 
         return view('teams.view-invitation')
             ->with('token', $token)
@@ -54,11 +57,13 @@ class InviteController extends Controller
             ->with('project', $project);
     }
 
-    public function accept($projectSlug, $userSlug, $token) {
+    public function accept($token) {
 
-        $project = $this->projectService->readBySlug($projectSlug);
+        $invite = $this->inviteService->findByToken($token);
 
-        $user = $this->userService->findBySlug($userSlug);
+        $project = $this->projectService->readById($invite->project_id);
+
+        $user = $this->userService->findByEmail($invite->email);
 
         $this->inviteService->accept($project, $user, $token);
 
@@ -70,6 +75,29 @@ class InviteController extends Controller
 
         $this->inviteService->reject($token);
 
-        return redirect('/dashboard');
+        if (Auth::check()) {
+
+            return redirect('/dashboard');
+        }
+
+        return redirect('/');
+    }
+
+    public function viewGuest($token) {
+
+        $this->inviteService->ifTokenExists($token);
+
+        $invite = $this->inviteService->findByToken($token);
+
+        $project = $this->projectService->readById($invite->project_id);
+
+        return view('teams.view-invitation')
+            ->with('token', $token)
+            ->with('project', $project);
+    }
+
+    public function acceptGuest($token) {
+
+        return redirect('/register/' . $token);
     }
 }

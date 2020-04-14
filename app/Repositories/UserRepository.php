@@ -54,6 +54,11 @@ class UserRepository
         return $this->user->where('slug', '=', $slug)->first();
     }
 
+    public function findByEmail($email) {
+
+        return $this->user->where('email', '=', $email)->first();
+    }
+
     public function activate(User $user) {
 
         $user->update(['active' => true]);
