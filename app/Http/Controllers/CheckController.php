@@ -20,12 +20,15 @@ class CheckController extends Controller
 
     public function all($slug, $url) {
 //dd($url);
-        $chart = $this->projectUrlService->createUrlChart($url);
+        $chart = $this->projectUrlService->createUrlChart($url, 'response_time');
 //dd($chart);
+        $chart2 = $this->projectUrlService->createUrlChart($url, 'response_code');
+
         $url = $this->projectUrlService->read($url);
 
         return view('projects.url-checks')
             ->with('url', $url)
-            ->with('chart', $chart);
+            ->with('chart', $chart)
+            ->with('chart2', $chart2);
     }
 }

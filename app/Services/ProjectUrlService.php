@@ -50,19 +50,51 @@ class ProjectUrlService
         return $this->projectUrl->delete($id);
     }
 
-    public function createUrlChart($url) {
+    public function createUrlChart($url, $value) {
 
-        $checks = $this->checkService->allByTime($url)->pluck('response_time', 'created_at');
+        $checks = $this->checkService->allByTime($url)->pluck($value, 'created_at');
 
-        $response_times = $checks->values();
-//dd($response_times);
         $timestamps = $checks->keys();
 
         $chart = new ProjectUrlCheckChart();
 
         $chart->labels($timestamps);
 
-        $chart->dataset('URL response times in seconds', 'bar', $response_times);
+        if ($value == 'response_code') {
+
+            $values = $checks->values();
+
+            $chart->labels(['success', 'error']);
+
+            $success = [];
+
+            $error = [];
+
+            foreach ($values as $value) {
+
+                if (in_array($value, range(200, 299))) {
+
+                    $success[] = $value;
+                }
+
+                else {
+
+                    $error[] = $value;
+                }
+            }
+
+            $success = count($success);
+
+            $error = count($error);
+
+            $chart->dataset('URL health', 'pie', [$success, $error])->backgroundColor(['red', 'blue']);
+
+            return $chart;
+        }
+
+        $values = $checks->values();
+
+        $chart->dataset('URL response times in seconds', 'line', $values);
 
         return $chart;
     }

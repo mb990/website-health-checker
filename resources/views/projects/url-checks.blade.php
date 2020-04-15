@@ -10,11 +10,19 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-md-6">
 
             {!! $chart->container() !!}
 
             {!! $chart->script() !!}
+
+        </div>
+
+        <div class="col-md-6">
+
+            {!! $chart2->container() !!}
+
+            {!! $chart2->script() !!}
 
         </div>
 
