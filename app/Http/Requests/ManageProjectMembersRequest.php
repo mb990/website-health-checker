@@ -3,21 +3,21 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Services\ProjectRoleService;
-use App\Services\ProjectService;
 use Illuminate\Support\Facades\Route;
+use App\Services\ProjectService;
+use App\Services\ProjectRoleService;
 
-class ManageProjectRequest extends FormRequest
+class ManageProjectMembersRequest extends FormRequest
 {
-    protected $projectRoleService;
     protected $projectService;
+    protected $projectRoleService;
 
-    public function __construct(ProjectRoleService $projectRoleService, ProjectService $projectService, array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    public function __construct(ProjectService $projectService, ProjectRoleService $projectRoleService, array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
     {
         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
 
-        $this->projectRoleService = $projectRoleService;
         $this->projectService = $projectService;
+        $this->projectRoleService = $projectRoleService;
     }
 
     /**
@@ -27,8 +27,8 @@ class ManageProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        $slug = Route::current()->parameter('slug');
-
+        $slug = Route::current()->parameter('projectSlug');
+//dd($slug);
         $user = auth()->user();
 
         $project = $this->projectService->readBySlug($slug);

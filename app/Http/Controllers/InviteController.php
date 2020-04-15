@@ -39,7 +39,8 @@ class InviteController extends Controller
 
         if ($this->inviteService->process($request, $slug)) {
 
-            return redirect('/projects/' . $slug);
+            return redirect('/projects/' . $slug)
+                ->with('success', 'User is invited to your team. Please wait for response.');
         }
 
         return Redirect::back()

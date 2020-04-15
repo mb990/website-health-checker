@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/{slug}/settings', 'NotificationSettingController@editSingleProject');
     Route::put('/projects/{slug}/settings/update', 'NotificationSettingController@updateSingleProject')->name('update.singleProject.notificationSettings');
     Route::get('/projects', 'ProjectController@all');
-    Route::get('/projects/{slug}', 'ProjectController@show');
+    Route::get('/projects/{slug}', 'ProjectController@show')->name('show.project');
     Route::get('/projects/{slug}/members', 'ProjectController@members');
     Route::get('/projects/{projectSlug}/members/{userSlug}/remove', 'ProjectController@removeMember')->name('remove.member');
     Route::get('/projects/{slug}/{url}/checks', 'CheckController@all');

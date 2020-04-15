@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ManageProjectRequest;
 use App\Http\Requests\ViewProjectRequest;
+use App\Http\Requests\ManageProjectMembersRequest;
 use App\Services\ProjectService;
 use App\Services\UserService;
 use App\Http\Requests\ProjectRequest;
@@ -85,7 +86,7 @@ class ProjectController extends Controller
             ->with('members', $members);
     }
 
-    public function removeMember(ManageProjectRequest $request, $projectSlug, $userSlug) {
+    public function removeMember(ManageProjectMembersRequest $request, $projectSlug, $userSlug) {
 
         $project = $this->projectService->readBySlug($projectSlug);
 
