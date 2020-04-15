@@ -92,6 +92,18 @@ class ProjectService
         return $this->project->destroy($project);
     }
 
+    public function isUserInProject($user, $project) {
+
+        $users = $project->members;
+
+        if(in_array($user, $users)) {
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function projectUsers($project)
     {
 

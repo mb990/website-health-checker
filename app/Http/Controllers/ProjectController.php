@@ -30,7 +30,8 @@ class ProjectController extends Controller
 
         $projects = $this->projectService->allPaginated(10);
 
-        return view('projects.show-all')->with('projects', $projects);
+        return view('projects.show-all')
+            ->with('projects', $projects);
     }
 
     public function show(ViewProjectRequest $request, $slug) {

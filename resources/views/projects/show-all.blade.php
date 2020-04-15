@@ -48,6 +48,16 @@
 
                                 @endif
 
+                                @foreach($project->members as $member)
+
+                                    @if(auth()->user()->id === $member->pivot->user_id)
+
+                                            <br><label class="btn btn-primary">on</label>
+
+                                    @endif
+
+                                @endforeach
+
                             </div>
 
                         @endauth
