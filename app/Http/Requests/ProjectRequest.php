@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Services\ProjectService;
 use App\Services\ProjectRoleService;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectRequest extends FormRequest
 {
@@ -26,19 +27,12 @@ class ProjectRequest extends FormRequest
      */
     public function authorize()
     {
-//        $slug = Route::current()->parameter('slug');
-//
-//        $user = auth()->user();
-//
-//        $project = $this->projectService->readBySlug($slug);
-//
-//        if ($this->projectRoleService->hasRole($user, $project ,'creator')) {
-//
-//            return true;
-//        }
-//        return false;
+        if (Auth::check()) {
 
-        return true;
+            return true;
+        }
+
+        return false;
     }
 
     /**

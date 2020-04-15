@@ -38,11 +38,7 @@ class ProjectController extends Controller
 
         $project = $this->projectService->readBySlug($slug);
 
-
-//        dd($publicLink);
-
-        return view('projects.show-single')
-            ->with('project', $project);
+        return view('projects.show-single')->with('project', $project);
     }
 
     public function shareProject(ViewProjectRequest $request, $slug) {
@@ -66,7 +62,7 @@ class ProjectController extends Controller
             ->with('project', $project);
     }
 
-    public function create(ProjectRequest $request) {
+    public function create() {
 
         return view('projects.create');
     }
@@ -77,7 +73,7 @@ class ProjectController extends Controller
 
         $this->projectService->store($attributes);
 
-        return redirect('/');
+        return redirect('/dashboard');
     }
 
     public function edit(ManageProjectRequest $request, $slug) {
