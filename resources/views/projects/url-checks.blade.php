@@ -6,12 +6,18 @@
 
 @section('content')
 
-    @foreach($checks as $check)
+    <h3 class="text-center">{{$url->url}}</h3>
 
-        <p class="lead">Time: {{$check->created_at}}</p>
-        <p class="lead">Response status: {{$check->response_code}}</p>
-        <p class="lead">Response time: {{$check->response_time / 1000}} seconds</p><hr>
+    <div class="row">
 
-    @endforeach
+        <div class="col-md-12">
+
+            {!! $chart->container() !!}
+
+            {!! $chart->script() !!}
+
+        </div>
+
+    </div>
 
 @endsection

@@ -16,7 +16,7 @@ class CheckRepository
 
     public function allByTime($url) {
 
-        return $this->check->latest()
+        return $this->check->oldest()
             ->where('url_id', '=', $url)
             ->get();
     }

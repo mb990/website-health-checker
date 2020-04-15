@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Charts\ProjectUrlCheckChart;
 use App\Repositories\ProjectUrlRepository;
 use App\Services\HttpService;
 use App\Services\CheckService;
@@ -47,6 +48,23 @@ class ProjectUrlService
     public function delete($id) {
 //dd($id);
         return $this->projectUrl->delete($id);
+    }
+
+    public function createUrlChart($url) {
+
+        $checks = $this->checkService->allByTime($url)->pluck('response_time', 'created_at');
+
+        $response_times = $checks->values();
+//dd($response_times);
+        $timestamps = $checks->keys();
+
+        $chart = new ProjectUrlCheckChart();
+
+        $chart->labels($timestamps);
+
+        $chart->dataset('URL response times in seconds', 'bar', $response_times);
+
+        return $chart;
     }
 
     public function shouldCheck($url) {

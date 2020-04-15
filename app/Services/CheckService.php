@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Repositories\CheckRepository;
+use App\Charts\ProjectUrlCheckChart;
 use Exception;
 
 class CheckService
@@ -22,6 +23,12 @@ class CheckService
     public function read($id) {
 
         return $this->check->find($id);
+    }
+
+    public function makeChart() {
+
+        $chart = new ProjectUrlCheckChart();
+
     }
 
     public function getResponseCode($response) {
@@ -44,7 +51,7 @@ class CheckService
 
     public function measureResponseTime($requestStart, $requestEnd) {
 
-        $responseTime = $requestEnd->diffInMilliseconds($requestStart);
+        $responseTime = $requestEnd->diffInMilliseconds($requestStart) / 1000;
 
         return $responseTime;
     }
