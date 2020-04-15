@@ -8,7 +8,9 @@ use App\Http\Requests\ManageProjectMembersRequest;
 use App\Services\ProjectService;
 use App\Services\UserService;
 use App\Http\Requests\ProjectRequest;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Crypt;
 
 class ProjectController extends Controller
 {
@@ -35,7 +37,32 @@ class ProjectController extends Controller
 
         $project = $this->projectService->readBySlug($slug);
 
-        return view('projects.show-single')->with('project', $project);
+
+//        dd($publicLink);
+
+        return view('projects.show-single')
+            ->with('project', $project);
+    }
+
+    public function shareProject(ViewProjectRequest $request, $slug) {
+
+        $project = $this->projectService->readBySlug($slug);
+
+        $email = $request['email'];
+
+        $this->projectService->shareProject($project, $email);
+
+        return redirect('/projects/' . $slug);
+    }
+
+    public function showPublic($hash) {
+
+        $slug = Crypt::decrypt($hash);
+
+        $project= $this->projectService->readBySlug($slug);
+
+        return view('projects.show-single')
+            ->with('project', $project);
     }
 
     public function create(ProjectRequest $request) {

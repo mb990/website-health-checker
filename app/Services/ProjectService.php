@@ -5,13 +5,18 @@ namespace App\Services;
 
 use App\Notifications\projectDownEmail;
 use App\Notifications\projectUpEmail;
+use App\Notifications\ShareProject;
 use App\Repositories\ProjectRepository;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\NotificationSettingService;
 use App\Services\ProjectRoleService;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use phpDocumentor\Reflection\Types\Collection;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Crypt;
 
 class ProjectService
 {
@@ -192,5 +197,21 @@ class ProjectService
         }
 
         return false;
+    }
+
+    public function generatePublicLink($project) {
+
+        $hash = Crypt::encrypt($project->slug);
+
+        $publicLink = \url('/projects/public/' . $hash);
+
+        return $publicLink;
+    }
+
+    public function shareProject($project, $email) {
+
+        $publicLink = $this->generatePublicLink($project);
+
+        Notification::route('mail', $email)->notify(new ShareProject($publicLink));
     }
 }

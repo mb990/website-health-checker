@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/projects/{slug}/settings/update', 'NotificationSettingController@updateSingleProject')->name('update.singleProject.notificationSettings');
     Route::get('/projects', 'ProjectController@all');
     Route::get('/projects/{slug}', 'ProjectController@show')->name('show.project');
+    Route::get('/projects/{slug}/share', 'ProjectController@shareProject')->name('share.project');
     Route::get('/projects/{slug}/members', 'ProjectController@members');
     Route::get('/projects/{projectSlug}/members/{userSlug}/remove', 'ProjectController@removeMember')->name('remove.member');
     Route::get('/projects/{slug}/{url}/checks', 'CheckController@all');
@@ -62,6 +63,8 @@ Route::middleware('guest')->group(function() {
     Route::get('/invitation/guest/{token}', 'InviteController@viewGuest')->name('view.invitation.guest');
     Route::delete('/invitation/guest/{token}/accepted', 'InviteController@acceptGuest')->name('accept.guest');
 });
+
+Route::get('/projects/public/{hash}', 'ProjectController@showPublic')->name('show.project.public');
 
 Route::delete('/invitation/{token}/rejected', 'InviteController@reject')->name('reject');
 

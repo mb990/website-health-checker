@@ -8,14 +8,9 @@
     <div class="row justify-content-center">
 
         <h3 class="text-info">View project</h3>
-        <!--        --><?php //use Illuminate\Support\Facades\Http; ?>
-    {{--        {{$response = Http::get('www.gaghajkfhajkhfggjkahgf.com')}}--}}
-    {{--        {{dd($response->status())}}--}}
-
-    <!--        --><?php //$urls = \App\ProjectUrl::all(); dd($urls); ?>
 
     </div>
-    {{--@dd($project->members)--}}
+
     <br>
 
     <div class="row text-center">
@@ -23,9 +18,6 @@
         <div class="col-md-12">
 
             <p class="lead">Name: {{$project->name}}</p>
-
-            {{--            <?php use Carbon\Carbon; ?>--}}
-            {{--            {{Carbon::now()->diffInSeconds($project->created_at)}}--}}
 
             <p class="lead">URLS:</p>
 
@@ -133,7 +125,17 @@
                 @endif
                 <a href="/projects/{{$project->slug}}/settings">
                     <button class="btn btn-primary">Project settings</button>
-                </a>
+                </a><br><br>
+
+                <h4>Share project</h4>
+
+                <form action="{{route('share.project', $project->slug)}}">
+
+                <input type="email" placeholder="Email" name="email">
+
+                <button class="btn btn-primary" type="submit">Send</button>
+
+                </form>
 
         </div>
 
