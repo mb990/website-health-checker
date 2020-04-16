@@ -31,14 +31,13 @@ class ProjectUrlController extends Controller
         $url = $this->projectUrlService->read($id);
 
         $frequencies = $this->frequencyService->all();
-//dd($url);
+
         return view('projects.edit-url')
             ->with('url', $url)
             ->with('frequencies', $frequencies);
     }
 
     public function update(ProjectUrlRequest $request, $id) {
-//        {{dd($request);}}
 
         $this->projectUrlService->update($request, $id);
 
@@ -47,7 +46,6 @@ class ProjectUrlController extends Controller
 
     public function delete($id)
     {
-//dd($id);
         $this->projectUrlService->delete($id);
 
         return redirect()->back();

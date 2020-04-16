@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SingleProjectNotificationSettingRequest;
-use App\NotificationType;
 use App\Services\NotificationSettingService;
 use App\Services\UserService;
 use App\Services\ProjectService;
 use App\Services\NotificationTypeService;
 use App\Http\Requests\NotificationSettingRequest;
-use App\User;
 
 class NotificationSettingController extends Controller
 {

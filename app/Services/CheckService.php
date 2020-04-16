@@ -3,10 +3,7 @@
 
 namespace App\Services;
 
-
 use App\Repositories\CheckRepository;
-use App\Charts\ProjectUrlCheckChart;
-use Exception;
 
 class CheckService
 {
@@ -25,19 +22,7 @@ class CheckService
         return $this->check->find($id);
     }
 
-    public function makeChart() {
-
-        $chart = new ProjectUrlCheckChart();
-
-    }
-
     public function getResponseCode($response) {
-
-//        try {
-//            $responseCode = $response->status();
-//        } catch (Exception $e) {
-//            $responseCode = 0;
-//        }
 
         if ($response) {
             $responseCode = $response->status();

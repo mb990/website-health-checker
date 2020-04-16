@@ -43,14 +43,8 @@ class ProjectUrlRepository
     }
 
     public function update($attributes, $id) {
-//        {{dd($attributes);}}
-        $url = $this->find($id);
-//        dd($url);
-//        $arrAttributes = $attributes->toArray();
-//        dd($arrAttributes['check_frequency_id']);
-//        $url->check_frequency = $attributes['check_frequency'];
 
-//        $url->save();
+        $url = $this->find($id);
 
         return $url->update(['check_frequency_id' => intval($attributes['check_frequency_id'])]);
     }

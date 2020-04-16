@@ -4,7 +4,6 @@
 @endsection
 
 @section('content')
-    {{--    {{dd($courses)}}--}}
 
     <div class="jumbotron">
         <h1 class="text-center">Projects</h1>

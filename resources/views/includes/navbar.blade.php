@@ -9,8 +9,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                {{--                <li><a class="nav-link" href="/admin/">Admin panel</a></li>--}}
-                {{--                &nbsp | &nbsp--}}
+
                 @auth
 
                     @if(auth()->user()->hasRole('admin'))
@@ -62,24 +61,6 @@
                             </form>
                         </div>
 
-{{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-{{--                            @if(auth()->user()->hasRole('educator'))--}}
-{{--                                <a class="dropdown-item" href="/profiles/{{auth()->user()->slug}}">Moj profil</a>--}}
-{{--                                <a class="dropdown-item" href="/my-courses">Moji kursevi</a>--}}
-{{--                            @endif--}}
-{{--                            @if(auth()->user()->hasRole('student'))--}}
-{{--                                <a class="dropdown-item" href="/my-courses">Moji kursevi</a>--}}
-{{--                            @endif--}}
-{{--                            <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                               onclick="event.preventDefault();--}}
-{{--                                                             document.getElementById('logout-form').submit();">--}}
-{{--                                {{ __('Odjava') }}--}}
-{{--                            </a>--}}
-
-{{--                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-{{--                                @csrf--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
                     </li>
                 @endguest
             </ul>

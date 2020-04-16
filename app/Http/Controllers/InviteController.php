@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ManageProjectRequest;
-use Illuminate\Http\Request;
 use App\Services\ProjectService;
 use App\Services\InviteService;
 use App\Services\UserService;

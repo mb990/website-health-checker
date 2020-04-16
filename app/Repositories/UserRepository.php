@@ -45,7 +45,7 @@ class UserRepository
     }
 
     public function findById($id) {
-//dd($id);
+
         return $this->user->find($id);
     }
 

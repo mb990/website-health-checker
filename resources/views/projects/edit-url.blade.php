@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-{{--    @dd(auth()->user()->id)--}}
-{{--{{dd($url->project->user_id)}}--}}
+
     @auth
 
         @if(auth()->user()->id != $url->project->user_id)
@@ -26,16 +25,17 @@
             </div>
 
             <div class="row text-center">
-        {{--@dd($url->id)--}}
                 <div class="offset-4 col-md-4">
-                    <form action="{{route('update.projectUrl', $url->id)}}" method="POST" xmlns="http://www.w3.org/1999/html">
+                    <form action="{{route('update.projectUrl', $url->id)}}" method="POST"
+                          xmlns="http://www.w3.org/1999/html">
                         @method('PUT')
                         @csrf
 
                         <label class="form-control" for="check_frequency_id">Change check frequency</label>
                         <select class="form-control" name="check_frequency_id" id="check_frequency_id">
                             @foreach($frequencies as $frequency)
-                                <option @if ($frequency->id === $url->check_frequency_id) selected @endif value={{$frequency->id}}>{{$frequency->name}}</option>
+                                <option @if ($frequency->id === $url->check_frequency_id) selected
+                                        @endif value={{$frequency->id}}>{{$frequency->name}}</option>
                             @endforeach
                         </select><br>
 

@@ -9,7 +9,6 @@ use App\Services\UserService;
 use App\Services\NotificationSettingService;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
@@ -74,18 +73,16 @@ class InviteService
 
     public function invitedUsers($project) {
 
-        $invites = $this->findByProject($project)->pluck('user_id')->toArray();
+        $invites = $this->findByProject($project)->pluck('email')->toArray();
 
         $users = [];
 
         foreach ($invites as $invite) {
 
-            $user = $this->userService->findById($invite);
+            $user = $this->userService->findByEmail($invite);
 
             $users[] = $user;
         }
-
-//        $users = collect($users);
 
         return $users;
     }

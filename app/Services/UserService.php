@@ -102,7 +102,6 @@ class UserService
     {
 
         $notification = $this->notificationSettingService->findByUserTypeAndProject($user, $typeName, $project);
-//        dd($notification);
 
         if (isset($notification)) {
             if ($notification->active) {

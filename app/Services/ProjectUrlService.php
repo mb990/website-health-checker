@@ -46,7 +46,7 @@ class ProjectUrlService
     }
 
     public function delete($id) {
-//dd($id);
+
         return $this->projectUrl->delete($id);
     }
 
@@ -87,14 +87,14 @@ class ProjectUrlService
 
             $error = count($error);
 
-            $chart->dataset('URL health', 'pie', [$success, $error])->backgroundColor(['red', 'blue']);
+            $chart->dataset('URL health', 'pie', [$success, $error])->backgroundColor(['green', 'grey']);
 
             return $chart;
         }
 
         $values = $checks->values();
 
-        $chart->dataset('URL response times in seconds', 'line', $values);
+        $chart->dataset('URL response times in seconds', 'line', $values)->backgroundColor('red');
 
         return $chart;
     }
@@ -156,7 +156,7 @@ class ProjectUrlService
         }
     }
 
-    public function setProjectDown($id) {
+    public function setProjectDown($id) {   // this and the below method is here because of services collision, better place for it is projectService
 
         $url = $this->read($id);
 

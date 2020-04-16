@@ -10,19 +10,17 @@
         <div class="col-md-12">
 
             <h1>Invite member to your team</h1>
-{{--            @foreach($users as $user)--}}
-{{--                @dd($user)--}}
-{{--            @endforeach--}}
-{{--            @dd($users)--}}
+
             <form action="{{route('process', $project->slug)}}" method="POST">
                 @csrf
                 <select id="user" name="user">
 
-                    <option disabled selected value> -- choose user -- </option>
+                    <option disabled selected value> -- choose user --</option>
 
                     @foreach($users as $user)
-{{--                        @dd($users)--}}
-                        <option class="form-control" name="user" value="{{$user->id}}">{{ucfirst($user->first_name)}} {{ucfirst($user->last_name)}}</option>
+
+                        <option class="form-control" name="user"
+                                value="{{$user->id}}">{{ucfirst($user->first_name)}} {{ucfirst($user->last_name)}}</option>
 
                     @endforeach
 

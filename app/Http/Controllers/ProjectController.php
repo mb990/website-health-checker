@@ -8,7 +8,6 @@ use App\Http\Requests\ManageProjectMembersRequest;
 use App\Services\ProjectService;
 use App\Services\UserService;
 use App\Http\Requests\ProjectRequest;
-use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Crypt;
 

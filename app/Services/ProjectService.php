@@ -7,7 +7,6 @@ use App\Notifications\projectDownEmail;
 use App\Notifications\projectUpEmail;
 use App\Notifications\ShareProject;
 use App\Repositories\ProjectRepository;
-use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\NotificationSettingService;
 use App\Services\ProjectRoleService;
@@ -141,8 +140,6 @@ class ProjectService
 
             $users[] = $user;
         }
-
-//        $users = collect($users);
 
         return $users;
     }
