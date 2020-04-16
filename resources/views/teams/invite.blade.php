@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="row text-center">
+    <div class="row text-center justify-content-center">
 
-        <div class="col-md-12">
+        <div class="col-md-6">
 
             <h1>Invite member to your team</h1>
 
