@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAdminRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 
@@ -53,7 +54,7 @@ class AdminUserController extends Controller
         return view('admin.users.create-admin');
     }
 
-    public function storeAdmin(Request $request) {
+    public function storeAdmin(CreateAdminRequest $request) {
 
         $admin = $this->userService->storeAdmin($request);
 
