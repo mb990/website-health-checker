@@ -175,27 +175,27 @@ class ProjectService
         $user->notify(new ProjectUpEmail());
     }
 
-    public function notifyMembersProjectDown($url) {
+    public function notifyMembers($url, $type) {
 
         foreach ($this->usersToNotify($url->project) as $user) {
 
-            if ($this->userService->hasNotificationActive($user, 'url_down', $url->project)) {
+            if ($type == 'url_down') {
 
-                $this->notificationDown($user);
+                if ($this->userService->hasNotificationActive($user, $type, $url->project)) {
 
+                    $this->notificationDown($user);
+
+                }
             }
-        }
-    }
 
-    public function notifyMembersProjectUp($url) {
+            else if ($type == 'url_up') {
 
-        foreach ($this->usersToNotify($url->project) as $user) {
+                if ($this->userService->hasNotificationActive($user, $type, $url->project)) {
 
-            if ($this->userService->hasNotificationActive($user, 'url_up', $url->project)) {
-
-                $this->notificationUp($user);
-
+                    $this->notificationUp($user);
+                }
             }
+
         }
     }
 

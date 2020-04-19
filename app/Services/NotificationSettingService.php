@@ -111,8 +111,10 @@ class NotificationSettingService
         $diff = $types->diff($pivotTypes);
 
         if ($diff->isEmpty()) {
+
             return true;
         }
+
         return false;
     }
 

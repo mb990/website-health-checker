@@ -118,11 +118,11 @@
                         <button class="btn btn-success">Invite</button>
                     </a>
                     <br>
-                    <a href="/projects/{{$project->slug}}/members">
-                        <button class="btn btn-dark">Members</button>
-                    </a>
-                    <br>
                 @endif
+                <a href="/projects/{{$project->slug}}/members">
+                    <button class="btn btn-dark">Members</button>
+                </a>
+                <br>
                 <a href="/projects/{{$project->slug}}/settings">
                     <button class="btn btn-primary">Project settings</button>
                 </a><br><br>

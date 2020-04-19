@@ -14,23 +14,27 @@
 
             <div class="row text-center">
 
-                <div class="col-md-4">
+                <div class="col-md-4 @if($project->creator->id == $member->id) lead @endif">
 
                     {{ucfirst($member->first_name)}} {{ucfirst($member->last_name)}}
 
                 </div>
 
-                @if($member->id != $project->creator->id)
+                @if($project->creator->id == auth()->user()->id)
 
-                    <div class="col-md-4">
+                    @if($member->id != $project->creator->id)
 
-                        <form action="{{route('remove.member', [$project->slug, $member->slug])}}">
+                        <div class="col-md-4">
 
-                            <button class="btn btn-danger">Remove</button>
+                            <form action="{{route('remove.member', [$project->slug, $member->slug])}}">
 
-                        </form>
+                                <button class="btn btn-danger">Remove</button>
 
-                    </div>
+                            </form>
+
+                        </div>
+
+                    @endif
 
                 @endif
 

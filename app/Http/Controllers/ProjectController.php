@@ -98,7 +98,7 @@ class ProjectController extends Controller
         return redirect('/projects');
     }
 
-    public function members(ManageProjectRequest $request, $slug) {
+    public function members(ViewProjectRequest $request, $slug) {
 
         $project = $this->projectService->readBySlug($slug);
 

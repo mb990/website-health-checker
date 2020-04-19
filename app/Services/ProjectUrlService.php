@@ -143,14 +143,14 @@ class ProjectUrlService
 
             if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url)) {
 
-                $this->projectService->notifyMembersProjectDown($url);
+                $this->projectService->notifyMembers($url, 'url_down');
                 $this->setProjectDown($url->id);
 
             }
 
             else if(!$this->projectService->isActive($url) && $this->httpService->requestSuccessful($check)) {
 
-                $this->projectService->notifyMembersProjectUp($url);
+                $this->projectService->notifyMembers($url, 'url_up');
                 $this->setProjectUp($url->id);
             }
         }
