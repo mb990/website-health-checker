@@ -33,7 +33,7 @@ class ManageProjectRequest extends FormRequest
 
         $project = $this->projectService->readBySlug($slug);
 
-        if ($this->projectRoleService->hasRole($user, $project ,'creator')) {
+        if ($this->projectRoleService->hasRole($user, $project ,'creator') && $project->active == 1) {
 
             return true;
         }
