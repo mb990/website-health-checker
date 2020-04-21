@@ -5,7 +5,11 @@ namespace App\Services;
 
 use App\Notifications\projectDownEmail;
 use App\Notifications\projectUpEmail;
+use App\Notifications\MemberJoinedProject;
+use App\Notifications\MemberLeftProject;
 use App\Notifications\ShareProject;
+use App\Project;
+use App\ProjectUrl;
 use App\Repositories\ProjectRepository;
 use App\Services\UserService;
 use App\Services\NotificationSettingService;
@@ -156,6 +160,8 @@ class ProjectService
         $this->projectRole->assignProjectRole($user, $project, 'viewer');
 
         $this->project->addUserToProject($project, $user);
+
+        $this->notifyMembers($project, 'member_joined_team');
     }
 
     public function removeUserFromProject($project, $user) {
@@ -163,6 +169,8 @@ class ProjectService
         $this->project->removeUserFromProject($project, $user);
 
         $this->notificationSettingService->unsubscribeUserFromNotifications($user, $project);
+
+        $this->notifyMembers($project, 'member_left_team');
     }
 
     public function notificationDown($user) {
@@ -175,29 +183,63 @@ class ProjectService
         $user->notify(new ProjectUpEmail());
     }
 
-    public function notifyMembers($url, $type) {
+    public function notificationJoinedTeam($user, $project) {
 
-        foreach ($this->usersToNotify($url->project) as $user) {
+        $user->notify(new MemberJoinedProject($project));
+    }
 
-            if ($type == 'url_down') {
+    public function notificationLeftTeam($user, $project) {
 
-                if ($this->userService->hasNotificationActive($user, $type, $url->project)) {
+        $user->notify(new MemberLeftProject($project));
+    }
 
-                    $this->notificationDown($user);
+    public function notifyMembers($data, $type)
+    {
 
+        if ($data instanceof ProjectUrl) {
+
+            foreach ($this->usersToNotify($data->project) as $user) {
+
+                if ($type == 'url_down') {
+
+                    if ($this->userService->hasNotificationActive($user, $type, $data->project)) {
+
+                        $this->notificationDown($user);
+
+                    }
+                } else if ($type == 'url_up') {
+
+                    if ($this->userService->hasNotificationActive($user, $type, $data->project)) {
+
+                        $this->notificationUp($user);
+                    }
                 }
             }
+        }
 
-            else if ($type == 'url_up') {
+        if ($data instanceof Project) {
 
-                if ($this->userService->hasNotificationActive($user, $type, $url->project)) {
+            foreach ($this->usersToNotify($data) as $user) {
 
-                    $this->notificationUp($user);
+                if ($type == 'member_joined_team') {
+
+                    if ($this->userService->hasNotificationActive($user, $type, $data)) {
+
+                        $this->notificationJoinedTeam($user, $data);
+                    }
+                }
+
+                else if ($type == 'member_left_team') {
+
+                    if ($this->userService->hasNotificationActive($user, $type, $data)) {
+
+                        $this->notificationLeftTeam($user, $data);
+                    }
                 }
             }
+        }
 
         }
-    }
 
     public function isActive($url) {
 
