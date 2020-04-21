@@ -7,9 +7,15 @@
 
     <div class="row justify-content-center">
 
-        <h3 class="text-info">View project</h3>
+        <h3 class="text-info">View project</h3><br>
 
     </div>
+
+    @if($project->active == 0)
+
+        <p class="text-danger">Your project is currently inactive</p>
+
+    @endif
 
     <br>
 
@@ -90,7 +96,7 @@
 
             @auth
 
-                @if(auth()->user()->id === $project->user_id)
+                @if(auth()->user()->id === $project->user_id && $project->active == 1)
 
                     <form action="{{route('store.projectUrl', $project->slug)}}" method="POST"
                           xmlns="http://www.w3.org/1999/html">
