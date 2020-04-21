@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserRequest extends FormRequest
 {
@@ -13,6 +14,14 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
+        if (Auth::check()) {
+
+            if (!auth()->user()->hasRole('admin')) {
+
+                return true;
+            }
+        }
+
         return false;
     }
 

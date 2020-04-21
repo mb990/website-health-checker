@@ -17,12 +17,12 @@
 
                 <div class="col-md-4">
 
-                    <a href="/projects/{{$project->slug}}">
+{{--                    <a href="/projects/{{$project->slug}}">--}}
                         <p class="text-secondary"><strong>Name:</strong> {{ucfirst($project->name)}}</p>
-                    </a>
-                    <a href="/admin/users/{{$project->creator->slug}}">
+{{--                    </a>--}}
+{{--                    <a href="/admin/users/{{$project->creator->slug}}">--}}
                         <p class="text-secondary"><strong>Creator:</strong> {{$project->creator->first_name}} {{$project->creator->last_name}}</p>
-                    </a>
+{{--                    </a>--}}
 
                 </div>
 

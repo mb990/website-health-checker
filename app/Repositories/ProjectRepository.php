@@ -25,6 +25,11 @@ class ProjectRepository
 
     public function allPaginated($perPage) {
 
+        return $this->project->paginate($perPage);
+    }
+
+    public function activePaginated($perPage) {
+
         return $this->project->where('active', '=', 1)
             ->paginate($perPage);
     }

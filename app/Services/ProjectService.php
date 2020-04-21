@@ -49,6 +49,11 @@ class ProjectService
         return $this->project->allPaginated($perPage);
     }
 
+    public function activePaginated($perPage) {
+
+        return $this->project->activePaginated($perPage);
+    }
+
     public function store($attributes) {
 
         $project = $this->project->store($attributes);

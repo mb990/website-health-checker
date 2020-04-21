@@ -13,7 +13,7 @@
 
     @if($project->active == 0)
 
-        <p class="text-danger">Your project is currently inactive</p>
+        <p class="text-danger">Project is currently inactive</p>
 
     @endif
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Services\NotificationTypeService;
 use App\Services\UserService;
 use App\Services\ProjectService;
@@ -43,7 +44,7 @@ class PageController extends Controller
         return view('welcome');
     }
 
-    public function dashboard() {
+    public function dashboard(UserRequest $request) {
 
         $projects = auth()->user()->createdProjects;
 

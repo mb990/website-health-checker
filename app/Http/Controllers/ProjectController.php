@@ -27,7 +27,7 @@ class ProjectController extends Controller
 
     public function all() {
 
-        $projects = $this->projectService->allPaginated(10);
+        $projects = $this->projectService->activePaginated(10);
 
         return view('projects.show-all')
             ->with('projects', $projects);
