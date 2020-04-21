@@ -29,6 +29,11 @@ class ProjectRoleService
         return $this->projectRole->store($user, $project, $projectRole);
     }
 
+    public function removeProjectRole($user, $project) {
+
+        return $this->projectRole->delete($user, $project);
+    }
+
     public function hasRole($user, $project, $role) {
 
         $projectRole = $this->projectRoleType->findByName($role);

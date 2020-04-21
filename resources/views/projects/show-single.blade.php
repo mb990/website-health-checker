@@ -119,6 +119,7 @@
                     </a>
                     <br>
                 @endif
+
                 <a href="/projects/{{$project->slug}}/members">
                     <button class="btn btn-dark">Members</button>
                 </a>
@@ -127,6 +128,16 @@
                     <button class="btn btn-primary">Project settings</button>
                 </a><br><br>
 
+                @if(auth()->user()->id !== $project->user_id)
+
+                    <a href="/projects/{{$project->slug}}/members/{{auth()->user()->slug}}/remove">
+                        <button class="btn btn-danger">Leave project</button>
+                    </a>
+                    <br>
+
+                @endif
+
+                <br>
                 <h4>Share project</h4>
 
                 <form action="{{route('share.project', $project->slug)}}">

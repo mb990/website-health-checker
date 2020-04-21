@@ -27,16 +27,24 @@ class ManageProjectMembersRequest extends FormRequest
      */
     public function authorize()
     {
-        $slug = Route::current()->parameter('projectSlug');
-//dd($slug);
+        $projectSlug = Route::current()->parameter('projectSlug');
+
+        $userSlug = Route::current()->parameter('userSlug');
+
         $user = auth()->user();
 
-        $project = $this->projectService->readBySlug($slug);
+        $project = $this->projectService->readBySlug($projectSlug);
 
         if ($this->projectRoleService->hasRole($user, $project ,'creator')) {
 
             return true;
         }
+
+        else if (auth()->user()->slug == $userSlug) {  // so member can leave project
+
+            return true;
+        }
+
         return false;
     }
 

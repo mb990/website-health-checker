@@ -170,6 +170,8 @@ class ProjectService
 
         $this->notificationSettingService->unsubscribeUserFromNotifications($user, $project);
 
+        $this->projectRole->removeProjectRole($user, $project);
+
         $this->notifyMembers($project, 'member_left_team');
     }
 
