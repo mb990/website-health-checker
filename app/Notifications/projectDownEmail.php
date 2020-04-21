@@ -16,9 +16,11 @@ class projectDownEmail extends Notification
      *
      * @return void
      */
-    public function __construct()
+    protected $url;
+
+    public function __construct($url)
     {
-        //
+        $this->url = $url;
     }
 
     /**
@@ -44,7 +46,7 @@ class projectDownEmail extends Notification
             ->error()
             ->subject('Your project is down')
             ->greeting('Hello!')
-            ->line('Something went wrong and your project is down.')
+            ->line('Something went wrong and your project is down. ' . $this->url->url . ' is not responding.')
             ->action('See project', url('http://website-health-checker.test/dashboard'))
             ->line('Thank you for using our application!')
             ->from('admin@website-health-checker.com', 'Admin');

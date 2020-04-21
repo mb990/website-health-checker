@@ -160,13 +160,13 @@ class ProjectService
 
     public function addUserToProject($project, $user) {
 
+        $this->notifyMembers($project, 'member_joined_team');
+
         $this->notificationSettingService->subscribeUserToNotifications($user, $project);
 
         $this->projectRole->assignProjectRole($user, $project, 'viewer');
 
         $this->project->addUserToProject($project, $user);
-
-        $this->notifyMembers($project, 'member_joined_team');
     }
 
     public function removeUserFromProject($project, $user) {
@@ -180,14 +180,14 @@ class ProjectService
         $this->notifyMembers($project, 'member_left_team');
     }
 
-    public function notificationDown($user) {
+    public function notificationDown($user, $url) {
 
-        $user->notify(new ProjectDownEmail());
+        $user->notify(new ProjectDownEmail($url));
     }
 
-    public function notificationUp($user) {
+    public function notificationUp($user, $url) {
 
-        $user->notify(new ProjectUpEmail());
+        $user->notify(new ProjectUpEmail($url));
     }
 
     public function notificationJoinedTeam($user, $project) {
@@ -211,14 +211,14 @@ class ProjectService
 
                     if ($this->userService->hasNotificationActive($user, $type, $data->project)) {
 
-                        $this->notificationDown($user);
+                        $this->notificationDown($user, $data);
 
                     }
                 } else if ($type == 'url_up') {
 
                     if ($this->userService->hasNotificationActive($user, $type, $data->project)) {
 
-                        $this->notificationUp($user);
+                        $this->notificationUp($user, $data);
                     }
                 }
             }

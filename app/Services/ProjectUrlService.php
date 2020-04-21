@@ -135,23 +135,57 @@ class ProjectUrlService
 
     public function checkUrl() {
 
-        $urls = $this->all();
+        $projects = $this->projectService->all();
 
-        foreach ($urls as $url) {
+        $lastChecks = [];
 
-            $check = $this->createCheck($url);
+        $array = [];
 
-            if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url)) {
+        if (!empty($projects)) {
 
-                $this->projectService->notifyMembers($url, 'url_down');
-                $this->setProjectDown($url->id);
+            foreach ($projects as $project) {
 
-            }
+                if (!empty($project->urls)) {
 
-            else if(!$this->projectService->isActive($url) && $this->httpService->requestSuccessful($check)) {
+                    foreach ($project->urls as $url) {
 
-                $this->projectService->notifyMembers($url, 'url_up');
-                $this->setProjectUp($url->id);
+                        $check = $this->createCheck($url);
+
+                        $lastCheck = $this->checkService->lastForUrl($url);
+
+                        if (!empty($lastCheck)) {
+
+                            $lastChecks[$project->slug][] = $lastCheck;
+                        }
+                    }
+
+                    if (!empty($lastChecks[$project->slug])) {
+
+                        foreach ($lastChecks[$project->slug] as $check) {
+
+                            if (!empty($check)) {
+
+                                if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url)) {
+
+                                    $this->projectService->notifyMembers($url, 'url_down');
+                                    $this->setProjectDown($url->id);
+
+                                    break;
+
+                                } else if (!$this->projectService->isActive($url) && $this->httpService->requestSuccessful($check)) {
+
+                                    $array[$project->slug][] = $lastCheck;
+
+                                    if (count($array[$project->slug]) == count($lastChecks[$project->slug])) {
+
+                                        $this->projectService->notifyMembers($url, 'url_up');
+                                        $this->setProjectUp($url->id);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

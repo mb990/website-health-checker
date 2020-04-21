@@ -25,4 +25,13 @@ class CheckRepository
 
         return $this->check->find($id);
     }
+
+    public function lastForUrl($url) {
+
+        $check = $this->check->where('url_id', '=', $url->id)
+            ->latest()
+            ->first();
+
+        return $check;
+    }
 }

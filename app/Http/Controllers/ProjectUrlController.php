@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProjectUrlRequest;
 use App\Services\ProjectUrlService;
 use App\Services\FrequencyService;
+use Illuminate\Support\Facades\Redirect;
 
 class ProjectUrlController extends Controller
 {
@@ -41,7 +42,7 @@ class ProjectUrlController extends Controller
 
         $this->projectUrlService->update($request, $id);
 
-        return redirect('/');
+        return Redirect::back();
     }
 
     public function delete($id)

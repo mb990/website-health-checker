@@ -16,9 +16,11 @@ class projectUpEmail extends Notification
      *
      * @return void
      */
-    public function __construct()
+    protected $url;
+
+    public function __construct($url)
     {
-        //
+        $this->url = $url;
     }
 
     /**
@@ -43,7 +45,7 @@ class projectUpEmail extends Notification
         return (new MailMessage)
             ->subject('Your project is up')
             ->greeting('Hello!')
-            ->line('Your project is up again!')
+            ->line('Your project is up again! ' . $this->url->url . ' is up.')
             ->action('See project', url('http://website-health-checker.test/dashboard'))
             ->line('Thank you for using our application!')
             ->from('admin@website-health-checker.com', 'Admin');

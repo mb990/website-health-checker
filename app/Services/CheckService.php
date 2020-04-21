@@ -22,6 +22,11 @@ class CheckService
         return $this->check->find($id);
     }
 
+    public function lastForUrl($url) {
+
+        return $this->check->lastForUrl($url);
+    }
+
     public function getResponseCode($response) {
 
         if ($response) {

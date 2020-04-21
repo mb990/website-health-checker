@@ -58,8 +58,53 @@ class PageController extends Controller
     // this method serves as a test method for various things
     public function test() {
 
-//        if (auth()->user()->hasRole('admin')) {
-//            echo 'ima role';
+//        $projects = $this->projectService->all();
+//
+//        $lastChecks = [];
+//
+//        $array = [];
+//
+//        foreach ($projects as $project) {
+//
+//            if (!$project->urls->isEmpty()) {
+//
+//                foreach ($project->urls as $url) {
+//
+////                    $check = $this->projectUrlService->createCheck($url);
+//
+//                    $lastCheck = $this->checkService->lastForUrl($url);
+//
+//                    if (!empty($lastCheck)) {
+//
+//                        $lastChecks[$project->slug][] = $lastCheck;
+//                    }
+//                }
+//
+//                if (!empty($lastChecks[$project->slug])) {
+//
+//                    foreach ($lastChecks[$project->slug] as $check) {
+//
+//                        if (!empty($check)) {
+//
+//                            if (!$this->httpService->requestSuccessful($check) && $this->projectService->isActive($url)) {
+//
+//                                $this->projectService->notifyMembers($url, 'url_down');
+//                                $this->projectUrlService->setProjectDown($url->id);
+//
+//                            } else if (!$this->projectService->isActive($url) && $this->httpService->requestSuccessful($check)) {
+//
+//                                $array[] = $lastCheck;
+//
+//                                if (count($array) == count($lastChecks)) {
+//
+//                                    $this->projectService->notifyMembers($url, 'url_up');
+//                                    $this->projectUrlService->setProjectUp($url->id);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 //        }
 
         return view('test');
