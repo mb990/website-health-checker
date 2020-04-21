@@ -54,11 +54,12 @@ class PageController extends Controller
             ->with('joinedProjects', $joinedProjects);
     }
 
+    // this method serves as a test method for various things
     public function test() {
 
-        if (auth()->user()->hasRole('admin')) {
-            echo 'ima role';
-        }
+//        if (auth()->user()->hasRole('admin')) {
+//            echo 'ima role';
+//        }
 
         return view('test');
     }

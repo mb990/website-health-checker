@@ -119,8 +119,6 @@ class UserService
 
     public function storeAdmin($request) {
 
-//        $this->registerService->validateRegistration($request);
-
         $password = $this->registerService->hashPassword($request['password']);
 
         return $this->user->storeAdmin($request, $password);

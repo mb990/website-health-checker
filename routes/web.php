@@ -15,18 +15,16 @@ use App\Mail\MailtrapExample;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware(['role:admin'])->group(function () {
-    Route::get('/admin/projects', 'AdminProjectController@all');
-    Route::put('/admin/projects/{slug}/deactivate', 'AdminProjectController@deactivate')->name('deactivate.project');
-    Route::put('/admin/projects/{slug}/activate', 'AdminProjectController@activate')->name('activate.project');
-    Route::delete('/admin/projects/{slug}/delete', 'AdminProjectController@destroy')->name('destroy.project');
-    Route::get('/admin/users', 'AdminUserController@all');
-    Route::get('/admin/new', 'AdminUserController@createAdmin');
-    Route::post('/admin/new/submit', 'AdminUserController@storeAdmin')->name('create.admin');
-    Route::put('/admin/users/{slug}/deactivate', 'AdminUserController@deactivate')->name('deactivate.user');
-    Route::put('/admin/users/{slug}/activate', 'AdminUserController@activate')->name('activate.user');
-    Route::delete('/admin/users/{slug}/delete', 'AdminUserController@destroy')->name('destroy.user');
-});
+Route::get('/admin/projects', 'AdminProjectController@all');
+Route::put('/admin/projects/{slug}/deactivate', 'AdminProjectController@deactivate')->name('deactivate.project');
+Route::put('/admin/projects/{slug}/activate', 'AdminProjectController@activate')->name('activate.project');
+Route::delete('/admin/projects/{slug}/delete', 'AdminProjectController@destroy')->name('destroy.project');
+Route::get('/admin/users', 'AdminUserController@all');
+Route::get('/admin/new', 'AdminUserController@createAdmin');
+Route::post('/admin/new/submit', 'AdminUserController@storeAdmin')->name('create.admin');
+Route::put('/admin/users/{slug}/deactivate', 'AdminUserController@deactivate')->name('deactivate.user');
+Route::put('/admin/users/{slug}/activate', 'AdminUserController@activate')->name('activate.user');
+Route::delete('/admin/users/{slug}/delete', 'AdminUserController@destroy')->name('destroy.user');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'PageController@dashboard');

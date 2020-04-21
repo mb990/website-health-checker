@@ -17,11 +17,11 @@
 
                 <div class="col-md-4">
 
-                    <a href="/admin/users/{{$user->slug}}">
+{{--                    <a href="/admin/users/{{$user->slug}}">--}}
 
                         <p class="text-secondary"><strong>User:</strong> {{$user->first_name}} {{$user->last_name}}</p>
 
-                    </a>
+{{--                    </a>--}}
 
                 </div>
 

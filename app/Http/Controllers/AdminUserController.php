@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminRequest;
 use App\Http\Requests\CreateAdminRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
@@ -15,14 +16,14 @@ class AdminUserController extends Controller
         $this->userService = $userService;
     }
 
-    public function all() {
+    public function all(AdminRequest $request) {
 
         $users = $this->userService->allPaginated(10);
 
         return view('admin.users.all')->with('users', $users);
     }
 
-    public function activate($slug) {
+    public function activate(AdminRequest $request, $slug) {
 
         $user = $this->userService->findBySlug($slug);
 
@@ -31,7 +32,7 @@ class AdminUserController extends Controller
         return redirect('/admin/users');
     }
 
-    public function deactivate($slug) {
+    public function deactivate(AdminRequest $request, $slug) {
 
         $user = $this->userService->findBySlug($slug);
 
@@ -40,7 +41,7 @@ class AdminUserController extends Controller
         return redirect('/admin/users');
     }
 
-    public function destroy($slug) {
+    public function destroy(AdminRequest $request, $slug) {
 
         $user = $this->userService->findBySlug($slug);
 
@@ -49,7 +50,7 @@ class AdminUserController extends Controller
         return redirect('/admin/users');
     }
 
-    public function createAdmin() {
+    public function createAdmin(AdminRequest $request) {
 
         return view('admin.users.create-admin');
     }

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CreateAdminRequest extends FormRequest
+class AdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,6 +14,7 @@ class CreateAdminRequest extends FormRequest
      */
     public function authorize()
     {
+
         if (Auth::check()) {
 
             if (auth()->user()->hasRole('admin')) {
@@ -33,10 +34,7 @@ class CreateAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => 'string|required|min:8|confirmed',
+            //
         ];
     }
 }
