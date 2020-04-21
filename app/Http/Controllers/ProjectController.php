@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\ManageProjectRequest;
 use App\Http\Requests\ViewProjectRequest;
 use App\Http\Requests\ManageProjectMembersRequest;
@@ -61,7 +62,7 @@ class ProjectController extends Controller
             ->with('project', $project);
     }
 
-    public function create() {
+    public function create(CreateProjectRequest $request) {
 
         return view('projects.create');
     }
