@@ -47,7 +47,7 @@ class projectDownEmail extends Notification
             ->subject('Your project is down')
             ->greeting('Hello!')
             ->line('Something went wrong and your project is down. ' . $this->url->url . ' is not responding.')
-            ->action('See project', url('http://website-health-checker.test/dashboard'))
+            ->action('See project', url('/dashboard'))
             ->line('Thank you for using our application!')
             ->from('admin@website-health-checker.com', 'Admin');
     }

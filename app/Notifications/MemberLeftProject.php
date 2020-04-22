@@ -48,7 +48,7 @@ class MemberLeftProject extends Notification
             ->subject('Someone left your project')
             ->greeting('Hello!')
             ->line('Member left your project ' . $this->project->name)
-            ->action('See members', url('http://website-health-checker.test/projects/' . $this->project->slug . '/members'))
+            ->action('See members', url('/projects/' . $this->project->slug . '/members'))
             ->line('Thank you for using our application!')
             ->from('admin@website-health-checker.com', 'Admin');
     }

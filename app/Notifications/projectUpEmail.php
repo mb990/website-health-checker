@@ -46,7 +46,7 @@ class projectUpEmail extends Notification
             ->subject('Your project is up')
             ->greeting('Hello!')
             ->line('Your project is up again! ' . $this->url->url . ' is up.')
-            ->action('See project', url('http://website-health-checker.test/dashboard'))
+            ->action('See project', url('/dashboard'))
             ->line('Thank you for using our application!')
             ->from('admin@website-health-checker.com', 'Admin');
     }
