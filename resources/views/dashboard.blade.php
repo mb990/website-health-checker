@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
-
+    @if($errors->any())
+        <h4>{{$errors->first()}}</h4>
+    @endif
     <div class="row text-center">
 
         <div class="col-md-8">

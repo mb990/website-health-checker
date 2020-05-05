@@ -46,4 +46,10 @@ class ProjectRequest extends FormRequest
             'name' => 'required',
         ];
     }
+
+//    public function messages()
+//    {
+//        return[
+//        ];
+//    }
 }
